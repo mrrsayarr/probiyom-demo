@@ -1,0 +1,161 @@
+/* ===== Contact Info ===== */
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.contact-info-label {
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-baltic-blue); /* Bilgi başlıkları marka renginize eşitlendi */
+}
+
+.contact-info a {
+  display: inline-block;
+  font-weight: 600;
+  color: var(--color-text);
+  font-size: 1.05rem;
+  transition: color 0.2s ease, transform 0.2s ease;
+  margin-top: 0.15rem;
+}
+
+.contact-info a:hover {
+  color: var(--color-tropical-teal);
+  transform: translateX(3px); /* İletişim adreslerinin üzerine gelince zarifçe sağa süzülür */
+}
+
+/* ===== Map (Premium Monochromatic Map) ===== */
+.map-container {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 1.25rem; /* Kenarlar daha modern ve yuvarlak hale getirildi */
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.05);
+}
+
+.map-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 20rem; /* Harita yüksekliği biraz artırılarak görünürlük güçlendirildi */
+}
+
+.map-inner > div {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+  width: 100%;
+}
+
+/* 
+   Harita Filtresi: Standart parlak haritayı kurumsal tasarımla uyumlu monokrom griye çevirir.
+   Fare ile üzerine gelindiğinde yumuşak bir geçişle renkler canlanır.
+*/
+
+#ol-map {
+  filter: grayscale(0.0) contrast(1.0) brightness(1.0); /* Başlangıçta gri tonlama yok */
+  transition: filter 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+#ol-map:hover {
+  filter: grayscale(0.0) contrast(1.1) brightness(1.1); /* Hafifçe daha canlı ve parlak hale gelir */
+}
+
+/* ===== Contact Form (Modern Form Elements) ===== */
+.contact-form {
+  margin-top: 1.5rem;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-field span {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: rgba(15, 23, 42, 0.8);
+}
+
+/* Giriş Alanlarının Modernizasyonu */
+.form-field input,
+.form-field select,
+.form-field textarea {
+  border-radius: 0.75rem;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  padding: 0.85rem 1.15rem;
+  font-size: 0.95rem;
+  background-color: #fafbfc;
+  color: var(--color-text);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Focus anındaki yeşil ışıltılı ve keskin modern sınır çizgisi */
+.form-field input:focus,
+.form-field select:focus,
+.form-field textarea:focus {
+  border-color: var(--color-tropical-teal);
+  background-color: #ffffff;
+  box-shadow: 0 0 0 4px rgba(56, 163, 165, 0.15); /* Yumuşak yeşil odaklanma halkası */
+}
+
+.form-field textarea {
+  min-height: 150px;
+  resize: vertical;
+  line-height: 1.6;
+}
+
+/* Gönder Butonu (Mikro etkileşimli ve gölgeli) */
+.btn-submit {
+  border-radius: 0.75rem;
+  padding: 0.85rem 1.75rem;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: #fff;
+  background: var(--color-baltic-blue);
+  box-shadow: 0 4px 12px rgba(34, 87, 122, 0.15);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  border: none;
+  cursor: pointer;
+}
+
+.btn-submit:not(:disabled):hover {
+  background: var(--color-tropical-teal);
+  box-shadow: 0 6px 16px rgba(56, 163, 165, 0.25);
+  transform: translateY(-1px);
+}
+
+.btn-submit:not(:disabled):active {
+  transform: translateY(1px) scale(0.97); /* Tıklama anındaki fiziksel yay etkisi */
+}
+
+.btn-submit:disabled {
+  cursor: not-allowed;
+  background-color: #e2e8f0;
+  color: #94a3b8;
+  box-shadow: none;
+}
+
+/* Başarılı Gönderim Kutusu (Nane Yeşili Temalı) */
+.form-success {
+  border-radius: 0.75rem;
+  border: 1px solid rgba(87, 204, 153, 0.22);
+  background: rgba(87, 204, 153, 0.08);
+  padding: 1.25rem;
+  transition: all 0.3s ease;
+}
+
+.form-success p {
+  font-weight: 600;
+  color: var(--color-mint-leaf);
+  font-size: 0.95rem;
+  margin-bottom: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}

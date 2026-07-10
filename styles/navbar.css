@@ -1,0 +1,201 @@
+/* ===== Navbar Custom Extensions ===== */
+
+/* 
+   DÜZELTİLDİ: Sadece ana header sarmalayıcısını sticky yapıyoruz.
+   Geniş seçiciler (örn: [id*="header"]) sayfa içerisindeki diğer başlık metinlerini 
+   etkileyip düzeni bozduğu için tamamen kaldırılmıştır.
+*/
+
+header.app-header, .app-header {
+  position: sticky !important;
+  top: 0 !important;
+  width: 100% !important;
+  z-index: 10000 !important; /* Diğer tüm sayfa elemanlarının (slider vb.) üstünde kalmasını sağlar */
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+#navbar-container {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  width: 100% !important;
+}
+
+.navbar {
+  position: relative; /* Sticky yerine relative yapılarak layout bozulması engellendi */
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 10000 !important;
+  padding: 0.85rem 0; 
+  background: var(--color-baltic-blue); /* İlk açılıştaki tam genişlik rengi */
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* 
+   Aşağı kaydırıldığında devreye giren yüzen kapsül tasarımı.
+*/
+.navbar.is-scrolled {
+  position: relative;
+  top: 1rem; /* Sticky kapsayıcı içinde 1rem aşağıya pürüzsüzce süzülür */
+  width: 92%;
+  max-width: 1200px;
+  margin: 0 auto;
+  border-radius: 50px;
+  background: rgba(34, 87, 122, 0.92) !important;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  padding-left: 1rem !important;
+  padding-right: 1rem !important;
+  /* transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); */
+}
+
+.navbar-brand {
+  color: #fff;
+  transition: opacity 0.2s ease;
+  z-index: 10000 !important;
+}
+
+.navbar-brand:hover {
+  opacity: 0.9;
+}
+
+/* Masaüstü Navigasyon Linkleri */
+.navbar-links a {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.92);
+  transition: color 0.2s ease, opacity 0.2s ease;
+}
+
+.navbar-links a:hover {
+  color: var(--color-mint-leaf) !important;
+  opacity: 1;
+}
+
+/* Masaüstü Ürünler Açılır Menü (Dropdown) */
+.nav-dropdown-trigger {
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.nav-dropdown-arrow {
+  font-size: 0.75rem;
+  transition: transform 0.25s ease;
+}
+
+.nav-dropdown:hover .nav-dropdown-arrow {
+  transform: rotate(180deg);
+}
+
+/* Açılır Menü Süzülme Animasyonu */
+.nav-dropdown-menu {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(8px);
+  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
+  z-index: 10001 !important; 
+}
+
+.nav-dropdown:hover .nav-dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/* Tematik Koyu Cam Efektli Dropdown Panel */
+.nav-dropdown-panel {
+  min-width: 320px;
+  width: max-content;
+  max-width: 420px;
+  background: rgba(34, 87, 122, 0.96) !important;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  white-space: nowrap;
+  z-index: 10002 !important;
+}
+
+.nav-dropdown-panel a {
+  color: rgba(255, 255, 255, 0.9) !important;
+  transition: background-color 0.15s ease, color 0.15s ease, padding-left 0.2s ease;
+  z-index: 10003 !important;
+}
+
+.nav-dropdown-panel a:hover {
+  background-color: rgba(255, 255, 255, 0.06) !important;
+  color: var(--color-mint-leaf) !important;
+  padding-left: 1.5rem !important; 
+}
+
+/* Mobil Menü Paneli */
+.mobile-menu-panel {
+  background: rgba(34, 87, 122, 0.96) !important;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  z-index: 10002 !important;
+}
+
+.mobile-menu-panel a {
+  color: rgba(255, 255, 255, 0.9) !important;
+  transition: background-color 0.15s ease, color 0.15s ease, padding-left 0.2s ease;
+}
+
+.mobile-menu-panel a:hover {
+  background-color: rgba(255, 255, 255, 0.06) !important;
+  color: var(--color-mint-leaf) !important;
+  padding-left: 1.5rem !important;
+}
+
+/* Mobil Menü Butonu */
+.navbar-mobile-btn {
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  transition: background-color 0.2s ease, transform 0.1s active;
+}
+
+.navbar-mobile-btn:hover {
+  background: rgba(255, 255, 255, 0.15) !important;
+}
+
+.navbar-mobile-btn:active {
+  transform: scale(0.96);
+}
+
+/* Mobil Menü Görünürlük Durumu */
+.mobile-menu.is-open {
+  display: block !important;
+  z-index: 10001 !important;
+}
+
+/* Mobil Alt Linkler */
+.mobile-menu-panel .sub-links a {
+  border-left: 2px solid rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+
+.mobile-menu-panel .sub-links a:hover {
+  color: var(--color-mint-leaf) !important;
+  padding-left: 1.75rem !important;
+}
+
+
+/* ===== SPA Sticky Hover Fix ===== */
+/* 
+   Dropdown içindeki bir menüye tıklandığında, tarayıcının hover kilitlenmesini 
+   engellemek amacıyla menüyü anında kapatmaya zorlayan yardımcı sınıf.
+*/
+.nav-dropdown-menu.force-hide {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  transform: translateY(8px) !important;
+  display: none !important;
+}

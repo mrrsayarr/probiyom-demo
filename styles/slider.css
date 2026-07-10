@@ -1,0 +1,208 @@
+/* ===== Image Slider (Premium High-Contrast Edition) ===== */
+.slider-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.slider-frame {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 1.25rem;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+}
+
+/* Slayt Geçiş Alanı */
+.slider-slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
+  z-index: 1;
+}
+
+.slider-slide.is-active {
+  position: relative; /* Kapsayıcının yüksekliğini korur */
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  z-index: 2;
+}
+
+/* Statik Görsel */
+.slider-image-container img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.slider-frame a {
+  display: block;
+}
+
+/* 
+   GÜNCELLENDİ: Yüksek Kontrastlı Koyu Cam Efektli Pause Butonu
+   Görsel ne renk olursa olsun kesinlikle fark edilir.
+*/
+.slider-pause {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  z-index: 10;
+  pointer-events: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 50%;
+  background: rgba(15, 23, 42, 0.65); /* Yüksek kontrast için koyu cam tonu */
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25); /* Butonu görselden ayıran gölge */
+  cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.1s active;
+}
+
+.slider-pause:hover {
+  background: var(--color-baltic-blue);
+  border-color: var(--color-baltic-blue);
+}
+
+.slider-pause:active {
+  transform: scale(0.95);
+}
+
+.slider-pause svg {
+  fill: currentColor;
+}
+
+/* 
+   GÜNCELLENDİ: Yüksek Kontrastlı Koyu Cam Efektli Oklar 
+*/
+.slider-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  pointer-events: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: rgba(15, 23, 42, 0.65); /* Yüksek kontrast için koyu cam tonu */
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.3s ease, background-color 0.2s ease, border-color 0.2s ease, transform 0.1s active;
+}
+
+.slider-frame:hover .slider-arrow {
+  opacity: 1;
+}
+
+.slider-arrow-prev { left: 1.25rem; }
+.slider-arrow-next { right: 1.25rem; }
+
+.slider-arrow:hover {
+  background: var(--color-baltic-blue);
+  border-color: var(--color-baltic-blue);
+}
+
+.slider-arrow:active {
+  transform: translateY(-50%) scale(0.92);
+}
+
+/* 1200×600 standart en-boy oranı */
+.slider-image-container {
+  position: relative;
+  width: 100%;
+  padding-top: 50%; 
+  overflow: hidden;
+}
+
+/* Görsel Üzerinde Süzülen Slayt Başlığı */
+.slider-title {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.4) 60%, rgba(0, 0, 0, 0) 100%);
+  padding: 4rem 1.5rem 1.5rem;
+  z-index: 3;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(15px);
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.slider-slide.is-active .slider-title {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.slider-title p {
+  font-weight: 600;
+  font-size: 1.35rem;
+  color: #ffffff !important;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+/* Dış-Orta Alt Taraf Noktalı Navigasyon */
+.slider-dots {
+  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.slider-dot {
+  height: 8px;
+  border-radius: 9999px;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.slider-dot.is-active {
+  width: 24px;
+  background: var(--color-baltic-blue);
+}
+
+.slider-dot:not(.is-active) {
+  width: 8px;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+/* Mobil İyileştirmeleri */
+@media (max-width: 768px) {
+  .slider-arrow {
+    opacity: 0.9; /* Mobilde görünürlük oranı artırıldı */
+    width: 2.25rem;
+    height: 2.25rem;
+  }
+  .slider-arrow-prev { left: 0.5rem; }
+  .slider-arrow-next { right: 0.5rem; }
+  
+  .slider-title p {
+    font-size: 1.1rem;
+  }
+}

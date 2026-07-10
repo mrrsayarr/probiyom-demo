@@ -1,0 +1,95 @@
+/* ===== Blog List & Dedicated Reading View ===== */
+
+/* Özet Listesi Kart Tasarımı */
+.blog-post {
+  cursor: pointer;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.blog-post:hover {
+  transform: translateY(-6px); /* Üzerine gelince çok hafif yukarı süzülme */
+  border-color: rgba(34, 87, 122, 0.2) !important;
+  box-shadow: 0 12px 24px -10px rgba(34, 87, 122, 0.15) !important;
+}
+
+.blog-post-image {
+  width: 100%;
+  aspect-ratio: 16 / 10; /* Kartlarda modern geniş ekran (crop) yapısı */
+  background-color: #f8f9fa;
+}
+
+.blog-post-image img {
+  transition: transform 0.5s ease;
+}
+
+.blog-post:hover .blog-post-image img {
+  transform: scale(1.03); /* Çok hafif görsel derinlik animasyonu */
+}
+
+.blog-post-title {
+  transition: color 0.2s ease;
+}
+
+.blog-post:hover .blog-post-title {
+  color: var(--color-tropical-teal) !important;
+}
+
+/* Devamını Oku Linki Hover Efektleri */
+.read-more-link {
+  transition: color 0.2s ease;
+}
+
+.read-more-link svg {
+  transition: transform 0.2s ease;
+}
+
+.blog-post:hover .read-more-link {
+  color: var(--color-tropical-teal) !important;
+}
+
+.blog-post:hover .read-more-link svg {
+  transform: translateX(3px); /* Ok sağa doğru hafifçe kayar */
+}
+
+/* ===== Tekil Okuma Sayfası (Detay Görünümü) ===== */
+.blog-detail-container {
+  max-width: 800px; /* Okuma genişliği için evrensel altın standart */
+  margin: 0 auto;
+}
+
+.back-to-blog-btn {
+  cursor: pointer;
+  transition: color 0.2s ease;
+  color: var(--color-baltic-blue);
+}
+
+.back-to-blog-btn svg {
+  transition: transform 0.2s ease;
+}
+
+.back-to-blog-btn:hover {
+  color: var(--color-tropical-teal);
+}
+
+.back-to-blog-btn:hover svg {
+  transform: translateX(-4px); /* Geri oku sola doğru kayar */
+}
+
+.blog-detail-title {
+  line-height: 1.35;
+  letter-spacing: -0.015em;
+  color: var(--color-baltic-blue);
+}
+
+/* Okumayı kolaylaştıran, gözü yormayan geniş satır boşluklu paragraf yapısı */
+.blog-detail-text p {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #334155; /* Slate-700 göz yormayan kurumsal metin rengi */
+  margin-bottom: 1.75rem;
+}
+
+.blog-detail-text strong {
+  color: var(--color-text);
+  font-weight: 700;
+}

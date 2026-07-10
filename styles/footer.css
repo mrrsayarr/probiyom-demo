@@ -1,0 +1,86 @@
+/* ===== Footer Custom Extensions ===== */
+.footer {
+  width: 100%;
+  background-color: var(--color-baltic-blue); /* Footer rengini markanızın rengiyle senkronize ettik */
+}
+
+/* Marka başlığının harf genişliği */
+.footer-brand {
+  letter-spacing: -0.02em;
+}
+
+/* Sütun Başlıkları */
+.footer-label {
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  opacity: 0.9;
+}
+
+/* 
+   Modern Mikro Etkileşimli Linkler
+   Genişletilmiş padding değeri ile mobil tıklama alanı (tap target) standartlara uyarlandı.
+*/
+.footer-link {
+  color: rgba(255, 255, 255, 0.75) !important;
+  transition: color 0.2s ease, padding-left 0.2s ease;
+  display: inline-block;
+  padding: 0.25rem 0; /* Mobil dokunma yüksekliği iyileştirildi */
+}
+
+/* 
+   Masaüstü için hover efekti 
+   (Mobil cihazlarda hover efektinin takılı kalmasını önlemek için medya sorgusuna alındı)
+*/
+@media (hover: hover) {
+  .footer-link:hover {
+    color: #ffffff !important;
+    padding-left: 0.25rem; /* Sağa zarif bir kayma hareketi */
+  }
+}
+
+/* Mobil cihazlarda dokunulduğunda anlık basılma geri bildirimi */
+.footer-link:active {
+  opacity: 0.6;
+}
+
+/* Telif Hakkı Çizgisi */
+.footer-copy {
+  border-top: 1px solid rgba(255, 255, 255, 0.12) !important;
+}
+
+.footer-copy small {
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+/* ===================================================================
+   RESPONSIVE (MOBİL & TABLET) DÜZENLEMELERİ
+   =================================================================== */
+
+/* Tablet ve Küçük Ekranlar için Dikey Boşluk Dengesi */
+@media (max-width: 768px) {
+  .footer {
+    padding-top: 3.5rem !important;
+    padding-bottom: 2.5rem !important;
+  }
+}
+
+/* Akıllı Telefon Ekranları için Simetrik Tasarım (576px ve altı) */
+@media (max-width: 576px) {
+  /* Tüm sütun içeriklerini mobil ekran ortasına hizalar */
+  .footer .text-start,
+  .footer .text-center {
+    text-align: center !important;
+  }
+  
+  /* Logoyu mobil ekranda ortalar */
+  .footer .footer-brand {
+    justify-content: center !important;
+    width: 100%;
+  }
+
+  /* Küçük ekranlarda parmakla kolay tıklama için alanı biraz daha açar */
+  .footer-link {
+    padding: 0.4rem 0;
+  }
+}

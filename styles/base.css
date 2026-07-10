@@ -1,0 +1,130 @@
+/* ===== Reset & Base ===== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --color-baltic-blue: #22577a;
+  --color-tropical-teal: #38a3a5;
+  --color-mint-leaf: #57cc99;
+  --color-light-green: #80ed99;
+  --color-tea-green: #c7f9cc;
+  --color-background: #ffffff;
+  --color-text: #0f172a;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  background-color: var(--color-background);
+  color: var(--color-text);
+  line-height: 1.7; /* Daha rahat bir okuma deneyimi için artırıldı */
+  -webkit-font-smoothing: antialiased; /* Yazı tiplerinin tarayıcılarda daha pürüzsüz görünmesini sağlar */
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  list-style: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-family: inherit;
+}
+
+input,
+select,
+textarea {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+/* ===== Typography (Daha dengeli satır ve harf boşlukları) ===== */
+h1 {
+  font-size: 2.25rem;
+  line-height: 1.2;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+h2 {
+  font-size: 1.875rem;
+  line-height: 1.25;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+}
+
+h3 {
+  font-size: 1.5rem;
+  line-height: 1.3;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+h4 {
+  font-size: 1.25rem;
+  line-height: 1.4;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+p {
+  font-size: 1.05rem; /* 1.1rem Inter için bazen hantal durabilir, 1.05rem daha zariftir */
+  line-height: 1.75;  /* Satırlar arasındaki sıkışıklık tamamen çözüldü */
+  font-weight: 400;
+}
+
+/* ===== Product Tag Hover Animation ===== */
+.product-pill {
+  display: inline-block;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.product-pill:hover {
+  background-color: var(--color-baltic-blue) !important;
+  color: #ffffff !important;
+  border-color: var(--color-baltic-blue) !important;
+  transform: translateY(-2px); /* Hafifçe yukarı kalkma efekti */
+  box-shadow: 0 4px 12px rgba(34, 87, 122, 0.15); /* Baltic blue renginde yumuşak gölge */
+}
+
+
+/* ===== 404 Page Home Button Custom Interactions ===== */
+.btn-404-home {
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.btn-404-home .btn-404-arrow {
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-404-home:hover {
+  background-color: var(--color-tropical-teal) !important;
+  transform: translateY(-2px); /* Buton hafifçe yukarı kalkar */
+  box-shadow: 0 8px 20px rgba(56, 163, 165, 0.2) !important; /* Yumuşak bir yeşil gölge yayar */
+}
+
+.btn-404-home:hover .btn-404-arrow {
+  transform: translateX(4px); /* Butonun içindeki ok sağa doğru kayar */
+}
+
+.btn-404-home:active {
+  transform: translateY(1px) scale(0.98); /* Tıklama anındaki fiziksel yay etkisi */
+}
+
+/* ===== SONU 404 Page Home Button Custom Interactions ===== */
