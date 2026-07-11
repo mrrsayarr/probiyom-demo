@@ -1,19 +1,19 @@
 /* ===================================================================
-   ImageSlider – GPU-Accelerated Fluid Carousel (Fixed controls & Outside dots)
+   ImageSlider – GPU-Accelerated Dynamic Sliding Carousel
    =================================================================== */
 
 function ImageSlider(container, slides, durationMs) {
   if (!slides || slides.length === 0) return;
-  durationMs = durationMs || 5000;
+  durationMs = durationMs || 7000; // Slayt geçiş hızı 7 saniye olarak yavaşlatıldı
 
   var activeIndex = 0;
   var timer = null;
   var isPaused = false;
   var slideElements = [];
-  var dotElements = [];
   var pauseBtn = null;
+  var counterSpan = null;
+  var progressBar = null;
 
-  // DOM yapısını sadece BİR KEZ oluşturuyoruz
   function init() {
     var wrapper = document.createElement('div');
     wrapper.className = 'slider-wrapper';
@@ -21,19 +21,21 @@ function ImageSlider(container, slides, durationMs) {
     var frame = document.createElement('div');
     frame.className = 'slider-frame';
 
+    var track = document.createElement('div');
+    track.className = 'slider-track';
+
     slides.forEach(function (slide, index) {
       var slideDiv = document.createElement('div');
       slideDiv.className = 'slider-slide' + (index === 0 ? ' is-active' : '');
 
-      // Performans Optimizasyonu: 
-      // İlk görseli anında (eager), diğerlerini sayfa hızı için gecikmeli (lazy) yüklüyoruz.
       var imgLoading = index === 0 ? 'eager' : 'lazy';
 
       var imageContainer = '<div class="slider-image-container">' +
-        '<img src="' + slide.src + '" alt="' + slide.alt + '" loading="l' + imgLoading + '">' +
+        '<img src="' + slide.src + '" alt="' + slide.alt + '" loading="' + imgLoading + '">' +
         '</div>';
 
-      var titleHtml = slide.title
+      // AKILLI KONTROL: Sadece başlık verisi (title) dolu olan slaytlara metin kutusu ekler
+      var titleHtml = (slide.title && slide.title.trim().length > 0)
         ? '<div class="slider-title"><p>' + slide.title + '</p></div>'
         : '';
 
@@ -45,87 +47,94 @@ function ImageSlider(container, slides, durationMs) {
         slideDiv.innerHTML = innerContent;
       }
 
-      frame.appendChild(slideDiv);
+      track.appendChild(slideDiv);
       slideElements.push(slideDiv);
     });
 
-    // Duraklat / Devam et butonu
+    frame.appendChild(track);
+
+    // Otomatik Slayt Geçiş Çizgisi (Progress Bar)
     if (slides.length > 1) {
-      pauseBtn = document.createElement('button');
-      pauseBtn.type = 'button';
-      pauseBtn.className = 'slider-pause';
-      updatePauseButton();
-      pauseBtn.addEventListener('click', function (e) {
-        e.preventDefault();
-        e.stopPropagation();
-        togglePause();
-      });
-      frame.appendChild(pauseBtn);
+      progressBar = document.createElement('div');
+      progressBar.className = 'slider-progress-bar';
+      frame.appendChild(progressBar);
     }
 
-    // Sağa-Sola Kaydırma Okları
+    wrapper.appendChild(frame);
+
+    // Birleşik Cam Kontrol Paneli (Control Dock)
     if (slides.length > 1) {
+      var dockContainer = document.createElement('div');
+      dockContainer.className = 'slider-dock-container d-flex justify-content-center mt-3';
+
+      var controlDock = document.createElement('div');
+      controlDock.className = 'slider-control-dock';
+
+      // Önceki Butonu
       var prevBtn = document.createElement('button');
       prevBtn.type = 'button';
-      prevBtn.className = 'slider-arrow slider-arrow-prev';
+      prevBtn.className = 'dock-btn dock-btn-prev';
       prevBtn.setAttribute('aria-label', 'Önceki slayt');
-      prevBtn.innerHTML = '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>';
+      prevBtn.innerHTML = '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>';
       prevBtn.addEventListener('click', function (e) {
         e.preventDefault();
         e.stopPropagation();
         goTo((activeIndex - 1 + slides.length) % slides.length);
       });
 
+      // Dinamik Sayfa Numarası
+      counterSpan = document.createElement('span');
+      counterSpan.className = 'dock-counter';
+
+      // Sonraki Butonu
       var nextBtn = document.createElement('button');
       nextBtn.type = 'button';
-      nextBtn.className = 'slider-arrow slider-arrow-next';
+      nextBtn.className = 'dock-btn dock-btn-next';
       nextBtn.setAttribute('aria-label', 'Sonraki slayt');
-      nextBtn.innerHTML = '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>';
+      nextBtn.innerHTML = '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>';
       nextBtn.addEventListener('click', function (e) {
         e.preventDefault();
         e.stopPropagation();
         goTo((activeIndex + 1) % slides.length);
       });
 
-      frame.appendChild(prevBtn);
-      frame.appendChild(nextBtn);
-    }
-
-    wrapper.appendChild(frame);
-
-    // Noktalı Navigasyon (YENİ: Slider çerçevesinin DIŞINA eklendi)
-    if (slides.length > 1) {
-      var dotsContainer = document.createElement('div');
-      dotsContainer.className = 'slider-dots';
-
-      slides.forEach(function (_, index) {
-        var dot = document.createElement('button');
-        dot.type = 'button';
-        dot.className = 'slider-dot' + (index === 0 ? ' is-active' : '');
-        dot.setAttribute('aria-label', 'Slayt ' + (index + 1));
-        dot.addEventListener('click', function (e) {
-          e.preventDefault();
-          e.stopPropagation();
-          goTo(index);
-        });
-        dotsContainer.appendChild(dot);
-        dotElements.push(dot);
+      // Duraklat / Başlat Butonu
+      pauseBtn = document.createElement('button');
+      pauseBtn.type = 'button';
+      pauseBtn.className = 'dock-btn dock-btn-pause';
+      updatePauseButton();
+      pauseBtn.addEventListener('click', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        togglePause();
       });
 
-      wrapper.appendChild(dotsContainer); // frame yerine wrapper altına (dışarıya) eklendi
+      controlDock.appendChild(prevBtn);
+      controlDock.appendChild(counterSpan);
+      controlDock.appendChild(nextBtn);
+      controlDock.appendChild(pauseBtn);
+
+      dockContainer.appendChild(controlDock);
+      wrapper.appendChild(dockContainer);
     }
 
     container.innerHTML = '';
     container.appendChild(wrapper);
+    
+    updateDOM();
   }
 
   function updatePauseButton() {
     if (!pauseBtn) return;
-    var pauseIcon = '<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1"></rect><rect x="14" y="5" width="4" height="14" rx="1"></rect></svg>';
-    var playIcon = '<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M7 5.5v13a1 1 0 0 0 1.5.87l11-6.5a1 1 0 0 0 0-1.74l-11-6.5A1 1 0 0 0 7 5.5z"></path></svg>';
+    var pauseIcon = '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="4" width="4" height="16" rx="1"></rect><rect x="14" y="4" width="4" height="16" rx="1"></rect></svg>';
+    var playIcon = '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3l14 9-14 9V3z"></path></svg>';
     
     pauseBtn.setAttribute('aria-label', isPaused ? 'Slaytı devam ettir' : 'Slaytı duraklat');
     pauseBtn.innerHTML = isPaused ? playIcon : pauseIcon;
+  }
+
+  function padZero(num) {
+    return num < 10 ? '0' + num : num;
   }
 
   function updateDOM() {
@@ -137,13 +146,27 @@ function ImageSlider(container, slides, durationMs) {
       }
     });
 
-    dotElements.forEach(function (dot, idx) {
-      if (idx === activeIndex) {
-        dot.classList.add('is-active');
+    var track = container.querySelector('.slider-track');
+    if (track) {
+      track.style.transform = 'translateX(-' + (activeIndex * 100) + '%)';
+    }
+
+    if (counterSpan) {
+      counterSpan.textContent = padZero(activeIndex + 1) + ' / ' + padZero(slides.length);
+    }
+
+    if (progressBar) {
+      progressBar.style.animationDuration = durationMs + 'ms';
+      progressBar.classList.remove('is-animating');
+      void progressBar.offsetWidth; // Reflow
+      
+      if (!isPaused) {
+        progressBar.classList.add('is-animating');
+        progressBar.style.animationPlayState = 'running';
       } else {
-        dot.classList.remove('is-active');
+        progressBar.style.animationPlayState = 'paused';
       }
-    });
+    }
   }
 
   function togglePause() {
@@ -151,8 +174,15 @@ function ImageSlider(container, slides, durationMs) {
     if (isPaused) {
       clearTimeout(timer);
       timer = null;
+      if (progressBar) {
+        progressBar.style.animationPlayState = 'paused';
+      }
     } else {
       scheduleNext();
+      if (progressBar) {
+        progressBar.classList.add('is-animating');
+        progressBar.style.animationPlayState = 'running';
+      }
     }
     updatePauseButton();
   }
@@ -169,7 +199,7 @@ function ImageSlider(container, slides, durationMs) {
 
   function scheduleNext() {
     if (slides.length <= 1) return;
-    if (isPaused) return; // Güvenlik Kontrolü: Duraklatılmışsa yeni zamanlayıcı kurmayı engeller
+    if (isPaused) return;
     
     timer = setTimeout(function () {
       activeIndex = (activeIndex + 1) % slides.length;
