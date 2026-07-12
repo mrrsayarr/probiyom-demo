@@ -1,37 +1,57 @@
 var SLIDER_DURATION_MS = 3500;
 
 var homeSlides = [
-  {
+  { // 10
+    src: "images/homepage_sliders/hp_10.webp",
+    alt: "Probiyom, probiyotik bazlı ürünlerin çalışma şekli, mekanizması, probiyotikler nasıl çalışır, nası temzilik yapar, 72 saat canlı kalırlar",
+    title: "",
+  },
+  { // 11
+    src: "images/homepage_sliders/hp_11.webp",
+    alt: "Probiyom, probiyotik bazlı ürünlerin çalışma şekli, mekanizması, probiyotikler nasıl çalışır, nası temzilik yapar, 72 saat canlı kalırlar",
+    title: "",
+  },
+  { // 8
+    src: "images/homepage_sliders/hp_8.webp",
+    alt: "Probiyom, probiyotik bazlı ürünlerin çalışma şekli, mekanizması, probiyotikler nasıl çalışır, nası temzilik yapar, 72 saat canlı kalırlar",
+    title: "",
+  },
+  { // 9
+    src: "images/homepage_sliders/hp_9.webp",
+    alt: "Probiyom, probiyotik bazlı ürünlerin çalışma şekli, mekanizması, probiyotikler nasıl çalışır, nası temzilik yapar, 72 saat canlı kalırlar",
+    title: "",
+  },
+  { // 1
     src: "images/homepage_sliders/hp_1.webp",
     alt: "Probiyom, probiyotik bazlı ürünlerin çalışma şekli, mekanizması, probiyotikler nasıl çalışır, nası temzilik yapar, 72 saat canlı kalırlar",
     title: "",
   },
-  {
+  { // 2
     src: "images/homepage_sliders/hp_2.webp",
     alt: "Probiyom, probiyotik bazlı ürünlerin çalışma şekli, mekanizması, probiyotikler nasıl çalışır, nası temzilik yapar, 72 saat canlı kalırlar",
     title: "",
   },
-  {
+  { // 3
     src: "images/homepage_sliders/hp_3.webp",
     alt: "Probiyom, probiyotik bazlı ürünlerin çalışma şekli, mekanizması, probiyotikler nasıl çalışır, nası temzilik yapar, 72 saat canlı kalırlar",
     title: "",
   },
-  {
+  { // 4
     src: "images/homepage_sliders/hp_4.webp",
     alt: "Probiyom, probiyotik bazlı ürünlerin çalışma şekli, mekanizması, probiyotikler nasıl çalışır, nası temzilik yapar, 72 saat canlı kalırlar",
     title: "",
   },
-  {
+  { // 5
     src: "images/homepage_sliders/hp_5.webp",
     alt: "Probiyom, probiyotik bazlı ürünlerin çalışma şekli, mekanizması, probiyotikler nasıl çalışır, nası temzilik yapar, 72 saat canlı kalırlar",
     title: "",
   },
-  {
+  { // 6
     src: "images/homepage_sliders/hp_6.webp",
     alt: "Probiyom, probiyotik bazlı ürünlerin çalışma şekli, mekanizması, probiyotikler nasıl çalışır, nası temzilik yapar, 72 saat canlı kalırlar",
     title: "",
   },
-  {
+  { // 7
     src: "images/homepage_sliders/hp_7.webp",
     alt: "Probiyom, probiyotik bazlı ürünlerin çalışma şekli, mekanizması, probiyotikler nasıl çalışır, nası temzilik yapar, 72 saat canlı kalırlar",
     title: "",

@@ -208,7 +208,8 @@
             </div>
         </div>
 
-        <div class="row justify-content-center">
+        <!-- 1. MASAÜSTÜ TABLO GÖRÜNÜMÜ: Bilgisayar ekranlarında şık ve nizamidir (768px ve üzeri) -->
+        <div class="row justify-content-center d-none d-md-flex">
             <div class="col-lg-10">
                 <div class="table-responsive rounded-4 border border-light-subtle shadow-sm bg-white overflow-hidden">
                     <table class="table table-borderless m-0 align-middle">
@@ -251,24 +252,116 @@
                 </div>
             </div>
         </div>
+
+        <!-- 2. MOBİL KART GÖRÜNÜMÜ: Küçük ekranlarda dikey, son derece okunaklı kart akışı (768px altı) -->
+        <div class="row justify-content-center d-flex d-md-none px-2">
+            <div class="col-12">
+                <div class="d-flex flex-column gap-3">
+                    
+                    <!-- Kart 1: Etki Süresi -->
+                    <div class="bg-white rounded-4 border border-light-subtle p-4 shadow-sm">
+                        <h4 class="fs-6 fw-bold text-dark mb-3 border-bottom border-light-subtle pb-2">Etki Süresi</h4>
+                        <div class="d-flex flex-column gap-3">
+                            <div>
+                                <span class="d-block small text-muted mb-1 text-uppercase tracking-wider fw-bold">Kimyasal / Dezenfektan</span>
+                                <p class="small text-danger-emphasis mb-0 d-flex align-items-start gap-2">
+                                    <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round" class="text-danger flex-shrink-0 mt-1"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                                    Sadece saniyeler sürer. Kuruduktan sonra koruma biter.
+                                </p>
+                            </div>
+                            <div class="border-top border-light-subtle pt-3">
+                                <span class="d-block small text-muted mb-1 text-uppercase tracking-wider fw-bold" style="color: var(--color-tropical-teal) !important;">Probiyom Teknolojisi</span>
+                                <p class="small text-success-emphasis mb-0 d-flex align-items-start gap-2 fw-semibold">
+                                    <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round" class="text-success flex-shrink-0 mt-1"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                    72 saate kadar kesintisiz, aktif koruma sağlar.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Kart 2: Mikrobiyom Etkisi -->
+                    <div class="bg-white rounded-4 border border-light-subtle p-4 shadow-sm">
+                        <h4 class="fs-6 fw-bold text-dark mb-3 border-bottom border-light-subtle pb-2">Mikrobiyom Etkisi</h4>
+                        <div class="d-flex flex-column gap-3">
+                            <div>
+                                <span class="d-block small text-muted mb-1 text-uppercase tracking-wider fw-bold">Kimyasal / Dezenfektan</span>
+                                <p class="small text-danger-emphasis mb-0 d-flex align-items-start gap-2">
+                                    <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round" class="text-danger flex-shrink-0 mt-1"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                                    Zararlı bakterilerle birlikte tüm yararlı koruyucu florayı da öldürür.
+                                </p>
+                            </div>
+                            <div class="border-top border-light-subtle pt-3">
+                                <span class="d-block small text-muted mb-1 text-uppercase tracking-wider fw-bold" style="color: var(--color-tropical-teal) !important;">Probiyom Teknolojisi</span>
+                                <p class="small text-success-emphasis mb-0 d-flex align-items-start gap-2 fw-semibold">
+                                    <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round" class="text-success flex-shrink-0 mt-1"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                    Faydalı bakterileri çoğaltarak ciltte ve yüzeyde dengeli bir mikroflora kurur.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Kart 3: Direnç Gelişimi (AMR) -->
+                    <div class="bg-white rounded-4 border border-light-subtle p-4 shadow-sm">
+                        <h4 class="fs-6 fw-bold text-dark mb-3 border-bottom border-light-subtle pb-2">Direnç Gelişimi (AMR)</h4>
+                        <div class="d-flex flex-column gap-3">
+                            <div>
+                                <span class="d-block small text-muted mb-1 text-uppercase tracking-wider fw-bold">Kimyasal / Dezenfektan</span>
+                                <p class="small text-danger-emphasis mb-0 d-flex align-items-start gap-2">
+                                    <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round" class="text-danger flex-shrink-0 mt-1"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                                    Süper bakterilerin direnç kazanmasını (AMR) tetikler.
+                                </p>
+                            </div>
+                            <div class="border-top border-light-subtle pt-3">
+                                <span class="d-block small text-muted mb-1 text-uppercase tracking-wider fw-bold" style="color: var(--color-tropical-teal) !important;">Probiyom Teknolojisi</span>
+                                <p class="small text-success-emphasis mb-0 d-flex align-items-start gap-2 fw-semibold">
+                                    <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round" class="text-success flex-shrink-0 mt-1"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                    Direnç mekanizmasını kırar, patojenleri biyolojik olarak baskılar.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Kart 4: Toksik Kalıntı -->
+                    <div class="bg-white rounded-4 border border-light-subtle p-4 shadow-sm">
+                        <h4 class="fs-6 fw-bold text-dark mb-3 border-bottom border-light-subtle pb-2">Toksik Kalıntı</h4>
+                        <div class="d-flex flex-column gap-3">
+                            <div>
+                                <span class="d-block small text-muted mb-1 text-uppercase tracking-wider fw-bold">Kimyasal / Dezenfektan</span>
+                                <p class="small text-danger-emphasis mb-0 d-flex align-items-start gap-2">
+                                    <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round" class="text-danger flex-shrink-0 mt-1"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                                    Solunum yollarını ve cildi tahriş eden kimyasal tabaka bırakır.
+                                </p>
+                            </div>
+                            <div class="border-top border-light-subtle pt-3">
+                                <span class="d-block small text-muted mb-1 text-uppercase tracking-wider fw-bold" style="color: var(--color-tropical-teal) !important;">Probiyom Teknolojisi</span>
+                                <p class="small text-success-emphasis mb-0 d-flex align-items-start gap-2 fw-semibold">
+                                    <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round" class="text-success flex-shrink-0 mt-1"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                    %100 doğal, biyo-bozunur, kalıntısız ve güvenlidir.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
     </div>
 </section>
 
-<!-- SLOGAN BANTI (Sınırsız ve pürüzsüz yatay taşma) -->
+<!-- SLOGAN BANTI (Sıfır hata ve scrollbarsız yatay taşma + Premium Temizlik & Parlama Animasyonu) -->
 <div class="field__item"
     style="width: 100vw; position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw; margin-bottom: 70px;">
-    <section class="position-relative d-flex align-items-center justify-content-center text-center w-100 m-0"
+    <section class="slogan-section position-relative d-flex align-items-center justify-content-center text-center w-100 m-0 overflow-hidden"
         style="background-image: url('images/image-backround.jpg'); background-size: cover; background-position: center; min-height: 320px;">
 
-        <!-- Yüksek kontrast sağlamak için hafif karartma overlay'i -->
-        <div class="position-absolute inset-0 bg-dark bg-opacity-40" style="pointer-events: none; z-index: 1;">
-        </div>
+        <!-- Yüksek kontrast ve aktif probiyotik temizleme efekti için overlay -->
+        <div class="slogan-overlay"></div>
 
-        <div class="position-relative w-100" style="z-index: 2;">
+        <div class="position-relative w-100" style="z-index: 3;">
             <div class="px-3">
-                <h2 class="text-white m-0 tracking-tight"
-                    style="font-size: clamp(2.5rem, 6vw, 4.2rem); letter-spacing: -0.02em; line-height: 1.1; font-weight: 900;">
-                    Dengele. Dönüştür.
+                <h2 class="m-0 tracking-tight" style="font-size: clamp(2.5rem, 6vw, 4.2rem); line-height: 1.1; font-weight: 900;">
+                    <!-- Işıltı efekti için sınıf tanımlandı -->
+                    <span class="shimmer-text">Dengele. Dönüştür.</span>
                 </h2>
             </div>
         </div>
@@ -424,98 +517,3 @@
         </div>
     </div>
 </section>
-
-<style>
-    /* ===== home.html Ekstra İnovasyon Sınıfları ===== */
-
-    /* İnovasyon Sütunları Hover Efekti */
-    .hover-translate-y {
-        transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
-    }
-
-    .hover-translate-y:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08) !important;
-    }
-
-    /* Nasıl Çalışır? Adım Simgesi Efekti */
-    .step-icon-wrapper {
-        transition: transform 0.3s ease, background-color 0.3s ease;
-    }
-
-    .col-md-4:hover .step-icon-wrapper {
-        transform: scale(1.08) rotate(5deg);
-        background-color: var(--color-tropical-teal) !important;
-    }
-
-    /* Kimyasal vs Probiyotikli Tablo Stilleri */
-    .table-responsive {
-        border-radius: 1rem;
-    }
-
-    .table thead th {
-        font-weight: 700;
-        letter-spacing: 0.02em;
-    }
-
-    .table tbody tr {
-        transition: background-color 0.2s ease;
-    }
-
-    .table tbody tr:hover {
-        background-color: rgba(34, 87, 122, 0.02);
-    }
-
-    /* Küresel Güven Logoları Geçişleri */
-    .brand-logo-bar {
-        opacity: 0.75;
-        transition: opacity 0.3s ease;
-    }
-
-    .brand-logo-bar:hover {
-        opacity: 1;
-    }
-
-    .brand-logo-item {
-        padding: 1rem 0;
-        border: 1px dashed rgba(0, 0, 0, 0.08);
-        border-radius: 0.5rem;
-        transition: background-color 0.2s, border-color 0.2s;
-        background-color: rgba(0, 0, 0, 0.01);
-    }
-
-    .brand-logo-item span {
-        font-size: 0.8rem;
-        letter-spacing: 0.05em;
-        text-transform: uppercase;
-        transition: color 0.2s;
-    }
-
-    .brand-logo-item:hover {
-        background-color: #ffffff;
-        border-color: rgba(56, 163, 165, 0.3);
-    }
-
-    .brand-logo-item:hover span {
-        color: var(--color-tropical-teal) !important;
-    }
-
-    /* ===== home.html Yeni Kategori Çipi İyileştirmeleri ===== */
-
-    .product-pill {
-        transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    /* Simgelerin başlangıç rengi (Hafif gri/mavi tonlu) */
-    .product-pill .pill-icon {
-        color: rgba(15, 23, 42, 0.45);
-        transition: color 0.25s ease, transform 0.25s ease;
-    }
-
-    /* Üzerine gelindiğinde simge de yazı gibi beyaz olur ve hafifçe büyür */
-    .product-pill:hover .pill-icon {
-        color: #ffffff !important;
-        transform: scale(1.12) rotate(-5deg);
-        /* Hafif bükülme hareketi */
-    }
-</style>

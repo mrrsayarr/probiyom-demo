@@ -100,22 +100,76 @@ Unutmayalım; bakteriler sessizce savaşı kazanıyor ve bizim kaybedecek zaman�
     imageDir: "images/blogs/blog_4_amr.webp",
     imageName: "antibiyotik direnci amr"
   },
-  
+
   {
     title: "Alerjinize karşı yeni nesil Sinbiyotik Güç",
-    text: "Alerjen Sprey ile rahat nefes, ferah ortamlar.",
+    text: `Evlerimizde çıplak gözle göremediğimiz ancak yaşam kalitemizi doğrudan düşüren görünmez bir tehdit var: <strong>Toz akarları (mitelar), polenler ve evcil hayvan alerjenleri.</strong> Bugün dünya nüfusunun yaklaşık %35'i bu görünmez tehditlerin tetiklediği alerjik reaksiyonlarla mücadele ediyor. Geleneksel temizlik yöntemleri ve kimyasal dezenfektanlar ise sadece geçici olarak kokuları maskeler; alerjiye yol açan organik yükü ve alerjenleri kaynağında yok edemez. Daha da kötüsü, bu agresif kimyasalların aşırı kullanımı dirençli patojenlerin oluşumunu hızlandırarak sağlığımızı dolaylı olarak tehlikeye atar.
+
+Probiyom, patentli probiyotik teknolojisi ile doğanın kendi kusursuz savunma mekanizmasını yaşam alanlarınıza taşır. Peki, yeni nesil <strong>Sinbiyotik Güç</strong> nedir? Probiyotikler (faydalı dost bakteriler) ile prebiyotiklerin (bu dost bakterileri besleyen doğal bileşenler) patentli ve sinerjik bir birleşimidir. Bu formül, yüzeylerde daha hızlı aktivasyon sağlayarak 72 saate kadar kesintisiz, biyolojik ve enzimatik bir temizlik kalkanı kurar.
+
+Doğal, toksik olmayan ve biyo-bozunur özellikteki Probiyom alerji çözümlerinin gücü bilimsel olarak kanıtlanmıştır. Bağımsız laboratuvar testleri (HeiQ Synbio verileri), sinbiyotiklerin yüzeylerdeki alerjen yükünü dramatik şekilde düşürdüğünü doğrulamaktadır (Kaynak: BMA Labor 2024, Bochum, Almanya Test Raporları):
+
+- Ev Tozu Akarı Alerjenleri: %96.6 düşüş
+- Polen Alerjenleri: %70.8 düşüş
+- Kedi Alerjenleri: %83.6 düşüş
+- Köpek Alerjenleri: %78.2 düşüş
+
+Vücut üzerindeki toksik yükü azaltan formülümüz, çevre ve insan sağlığı standartlarında en üst düzey uluslararası tescillere sahiptir:
+
+- Çevre ve Eko Uyumlu Yapı (EU Ecolabel tescilli)
+- İnsan Sağlığına Zararsız Kimya (REACH uyumlu)
+- Cilt ve Yüzey Dostu Dengeli Formül (~pH 6.5)
+
+Probiyom Alerji Spreyi ve temizlik çözümleri, hayatın her alanında güvenle kullanılmak üzere çok yönlü tasarlanmıştır:
+
+- Yatak, Koltuk, Halı ve Tüm Ev Tekstili
+- Otel ve Konaklama Alanları
+- Evcil Hayvan Yaşam Alanları ve Aksesuarları
+- Klinikler ve Sağlık Kuruluşları
+
+Geleneksel temizliğin asla ulaşamadığı mikroskobik çatlaklara ve gözeneklere nüfuz eden Probiyom, haftada sadece 1-2 kez uygulama ile sürekli koruma sağlar. Bebekler, evcil hayvanlar ve hassas ciltler için %100 güvenli olan formülümüz, organik kirliliği ve alerjenleri kaynağında biyolojik olarak yok ederek kötü kokuları da tamamen ortadan kaldırır.`,
     imageDir: "images/blogs/blog_1_alerji.webp",
-    imageName: "alerji spreyi"
+    imageName: "Alerji Spreyi ile rahat nefes, ferah ortamlar"
   },
   {
     title: "Bir çiftlikte hijyen sadece temizlik midir, yoksa hastalıkları önleyen görünmez bir savunma hattı mı? 🐄",
-    text: "Hayvancılıkta doğa dostu, doğal ve toksik olmayan uçtan uca çözümler. Tüm süreçlerde güvenle kullanabileceğiniz probiyotikli ürünler.",
+    text: `Ahır ve kümeslerdeki yoğun yaşam alanlarında, çıplak gözle göremediğimiz fakat hayvan sağlığını ve işletme verimliliğini doğrudan etkileyen kritik bir biyolojik dengesizlik yatmaktadır. Hayvan dışkısı, idrar, nem ve yem kalıntılarının birikmesi; ahır zemininde ve ekipmanlarda patojenlerin (zararlı bakterilerin) saklandığı dirençli bir "biyofilm" tabakası oluşturur. Geleneksel agresif kimyasal dezenfektanlar ise bu biyofilmi parçalayamadığı gibi, ortamdaki tüm yararlı koruyucu florayı da yok ederek zararlı bakterilerin çok daha güçlü ve dirençli (AMR) bir şekilde geri dönmesine (rebound etkisi) yol açar.
+
+Ayrıca, organik atıkların kontrolsüz birikimi ahır havasındaki amonyak (NH3) ve metan (CH4) gazı seviyelerini tehlikeli boyutlara ulaştırır. Yüksek amonyak gazı; sığır, koyun ve kanatlıların solunum yollarını tahriş ederek akciğer hastalıklarını tetikler, hayvanları yoğun strese sokar ve meme (mastitis) ile tırnak (pieten) enfeksiyonlarına zemin hazırlar. Bu durum hem hayvan refahını düşürür hem de veteriner, ilaç ve antibiyotik maliyetlerini taşınamaz boyutlara taşır.
+
+Probiyom, Belçika ve İsviçre biyoteknoloji laboratuvarlarında (HeiQ Chrisal) geliştirilen patentli sinbiyotik tarım teknolojisiyle bu kısır döngüyü kırıyor. Yararlı probiyotikler ve onları besleyen prebiyotiklerin sinerjik gücü, ahır zeminlerindeki, altlıklardaki ve ekipmanlardaki organik kalıntıları mikroskobik düzeyde derinlemesine parçalar. Kimyasal dezenfektanların aksine, yüzeylerde canlı ve dengeli bir koruyucu mikrobiyom tabakası oluşturarak patojenlerin üreyebileceği ortamı biyolojik olarak kurutur.
+
+Bağımsız bilimsel kuruluşlar ve üniversite testleri (SRUC - İskoçya Kraliyet Tarım Koleji 2024 ve Wern Layer Farm, Galler 2020), sinbiyotik çiftlik hijyeni çözümlerinin tarımsal verimlilik ve hayvan konforu üzerindeki somut etkilerini tescillemiştir:
+
+- Amonyak ve Metan Gazı Azalımı: Ahır havasındaki zararlı amonyak (NH3) gazında %8.4, metan (CH4) gazı salınımında ise %41'e varan tescilli düşüş.
+- Gübre ve Altlık Rutubeti Kontrolü: Altlık ve gübre bantlarında %50'nin üzerinde nem ve rutubet azalımı (bakteri ve sinek üremesini engeller).
+- İşletme Kolaylığı ve Konfor: Altlıkların kuru kalması sayesinde gübre temizleme sıklığında %75'in üzerinde iş gücü tasarrufu.
+- Biyolojik Korunma: Zararlı patojenlerin ve virüslerin saklandığı dirençli biyofilm tabakasının tamamen ortadan kaldırılması.
+
+Sadece zeminlerde değil, hayvanların içme suyu hatlarında (su tankları ve borular) oluşan biyofilm ve kireç kalıntılarını da doğal olarak parçalayan Probiyom, hayvanların uçtan uca temiz, taze ve sağlıklı suya ulaşmasını sağlar.
+
+%100 doğal, biyo-bozunur ve toksik kimyasal içermeyen yapısıyla Probiyom hayvancılık çözümleri; hayvan refahını ve verimini artırırken, antibiyotik bağımlılığını azaltır ve tarımsal atıkların su yollarına karışarak çevreyi kirletmesini engeller. Sürdürülebilir, kokusuz, sağlıklı ve kârlı bir hayvancılık için biyolojik çözüme geçmenin zamanı geldi.`,
     imageDir: "images/blogs/blog_3_ah.webp",
     imageName: "çiftlik hijyeni"
   },
   {
     title: "Endüstriyel Su sistemlerinde görünmeyen maliyet: Biyofilm",
-    text: "Endüstriyel su arıtma ve su soğutma kuleleri için doğa dostu, doğal ve toksik olmayan çözümler.",
+    text: `Endüstriyel su sistemlerinde, soğutma kulelerinde ve eşanjörlerde (ısı değiştiricilerinde) gözle görülmeyen fakat işletme bütçelerini sessizce kemiren devasa bir maliyet kalemi bulunur: <strong>Biyofilm tabakası.</strong> Islak yüzeylerde zamanla biriken organik atıklar, bakteriler ve salgılardan oluşan bu yapışkan katman, sadece basit bir kirlilik değildir. Kireçten (kalsiyum karbonat) bile daha güçlü bir ısı yalıtkanı (izolatör) olan biyofilm, sistemin ısı transfer verimliliğini dramatik şekilde düşürerek enerji tüketimini ve elektrik maliyetlerini gizlice tırmandırır.
+
+Bu kadarla da kalmaz; biyofilm tabakası, ölümcül Akut Solunum Yolu enfeksiyonlarına neden olan <i>Legionella pneumophila</i> (Lejyoner Hastalığı) gibi tehlikeli patojenler için mükemmel bir sığınak ve üreme alanıdır. Aynı zamanda, bu yapışkan tabakanın altında üreyen anaerobik bakteriler, metal boruları ve eşanjör duvarlarını içten içe yiyerek <strong>Mikrobiyolojik Korozyona (MIC)</strong> yol açar. Boruların delinmesi ve ekipmanların erken yıpranması, işletmelere her yıl binlerce liralık beklenmedik duruş ve bakım maliyeti çıkarır.
+
+Geleneksel su arıtma yöntemlerinde kullanılan agresif kimyasal biyositler (klor, brom vb.) biyofilmin kalın dış zırhını aşmakta genellikle yetersiz kalır. Üstelik bu kimyasallar borularda aşınmayı (korozyonu) hızlandırır, çevreye ve su kaynaklarına ciddi zararlar verir ve bakterilerin bu ilaçlara karşı direnç (AMR) kazanmasını tetikler.
+
+Probiyom, endüstriyel su ve soğutma kuleleri için İsviçreli <strong>HeiQ VivoTech Biyoteknolojisi</strong> tarafından geliştirilen patentli probiyotik su arıtma çözümlerini sunar. Bu teknoloji, su hatlarında zararlı biyosidal kimyasallar yerine, faydalı mikroorganizmaların ürettiği doğal enzimleri ve biyo-sürfaktanları kullanır. Probiyotikler, biyofilmi yüzeye bağlayan organik "tutkalı" moleküler düzeyde parçalayarak biyofilmin çözünmesini ve boru çeperlerinden kendiliğinden dökülerek uzaklaşmasını sağlar.
+
+Bağımsız endüstriyel testler ve küresel uygulamalar (HeiQ Chrisal & Waropure endüstriyel kule verileri), sinbiyotik su arıtma teknolojisinin işletmelere sağladığı faydaları doğrulamaktadır:
+
+- Maksimum Isı Transfer Verimliliği: Boru ve eşanjör çeperlerinin biyofilmden arındırılması sayesinde enerji tüketiminde %10 ila %15'e varan tasarruf.
+- Lejyoner Hastalığı (Legionella) Koruması: Patojenlerin saklandığı koruyucu biyofilm zırhının yok edilmesiyle Legionella riskinin ortadan kaldırılması.
+- Korozyon (Aşınma) Önleme: Mikrobiyolojik Korozyonun (MIC) engellenmesiyle metal boruların ve sistem ekipmanlarının ömrünün uzatılması.
+- Su ve Kimyasal Tasarrufu: Agresif biyosit kullanımının azaltılması, blöf (blowdown) miktarının düşürülmesi ve ciddi oranda su tasarrufu.
+
+%100 biyo-bozunur, toksik olmayan ve aşındırıcı içermeyen yapısıyla Probiyom endüstriyel su arıtma çözümleri; tesis içi iş güvenliğini artırırken, atık suların doğaya zarar vermeden tahliye edilmesini sağlar. Tesisinizi korozyondan korumak, enerji faturalarını düşürmek ve doğa dostu bir işletme vizyonuna geçmek için biyolojik su yönetimini bugün keşfedin.`,
     imageDir: "images/blogs/blog_2_wtx.webp",
     imageName: "endüstriyel su arıtma"
   }

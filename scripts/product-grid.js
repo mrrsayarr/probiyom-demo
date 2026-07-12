@@ -3,6 +3,12 @@
    =================================================================== */
 
 function ProductGrid(container, groupProducts) {
+  // GÜVENLİK KONTROLÜ: Router yüklenirken oluşabilecek çökme hatalarını önler.
+  if (!container) {
+    console.warn("ProductGrid konteyneri DOM üzerinde bulunamadı.");
+    return;
+  }
+
   if (!groupProducts || groupProducts.length === 0) {
     container.innerHTML = '<div class="empty-state">Bu grupta henüz ürün eklenmedi.</div>';
     return;
@@ -16,7 +22,7 @@ function ProductGrid(container, groupProducts) {
 
     var bulletsHtml = '';
     if (p.bullets && p.bullets.length > 0) {
-      bulletsHtml = '<ul>';
+      bulletsHtml = '<ul class="product-bullets">';
       for (var j = 0; j < p.bullets.length; j++) {
         bulletsHtml += '<li>' + escapeHtml(p.bullets[j]) + '</li>';
       }
@@ -26,16 +32,18 @@ function ProductGrid(container, groupProducts) {
     var imageHtml = '';
     if (p.imageDir) {
       var src = p.imageDir.indexOf('/') === 0 ? p.imageDir : p.imageDir;
-      imageHtml = '<div class="product-card-image"><img src="' + src + '" alt="' + escapeAttr(p.name) + '"></div>';
+      imageHtml = '<div class="product-card-image overflow-hidden position-relative">' +
+                    '<img src="' + src + '" alt="' + escapeAttr(p.name) + '" class="w-100 h-100 transition-all">' +
+                  '</div>';
     }
 
     html +=
-      '<article class="product-card">' +
-        '<div class="product-card-header">' +
-          '<h3>' + escapeHtml(p.name) + '</h3>' +
-          '<span class="product-badge ' + badgeClass + '">' + badgeText + '</span>' +
+      '<article class="product-card bg-white">' +
+        '<div class="product-card-header d-flex align-items-start justify-content-between gap-3">' +
+          '<h3 class="fs-5 fw-bold text-brand m-0">' + escapeHtml(p.name) + '</h3>' +
+          '<span class="product-badge px-3 py-1 rounded-pill small fw-semibold ' + badgeClass + '">' + badgeText + '</span>' +
         '</div>' +
-        '<p>' + escapeHtml(p.description) + '</p>' +
+        '<p class="product-description">' + escapeHtml(p.description) + '</p>' +
         bulletsHtml +
         imageHtml +
       '</article>';
