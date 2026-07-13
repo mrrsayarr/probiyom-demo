@@ -12,18 +12,22 @@
   box-shadow: 0 12px 24px -10px rgba(34, 87, 122, 0.15) !important;
 }
 
+/* Slayt listesinde görsellerin kırpılmasını önleyen yapı */
 .blog-post-image {
   width: 100%;
-  aspect-ratio: 16 / 10; /* Kartlarda modern geniş ekran (crop) yapısı */
-  background-color: #f8f9fa;
+  aspect-ratio: 16 / 10; /* Kart yapısı için modern oran */
+  background-color: #ffffff; /* Boşlukların sırıtmaması için beyaz zemin */
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .blog-post-image img {
+  object-fit: contain !important; /* Görselin asla kırpılmamasını sağlar */
+  padding: 0.75rem; /* Çerçeveye yapışmayı önleyen kibar iç boşluk */
   transition: transform 0.5s ease;
 }
 
 .blog-post:hover .blog-post-image img {
-  transform: scale(1.03); /* Çok hafif görsel derinlik animasyonu */
+  transform: scale(1.03); /* Hafif görsel derinlik animasyonu */
 }
 
 .blog-post-title {
@@ -57,6 +61,59 @@
   margin: 0 auto;
 }
 
+/* Detay Görselinin Kırpılmasını Önleyen CSS */
+.blog-detail-image {
+  background-color: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  width: 100%;
+}
+
+.blog-detail-image img {
+  transition: transform 0.3s ease;
+}
+
+.blog-detail-image img:hover {
+  transform: scale(1.01); /* Tıklanabilir olduğunu hissettiren çok hafif esneme */
+}
+
+/* 
+   YENİ: Tıklayınca Açılan Görsel Büyütme (Lightbox) Efekti
+   Sitenizin floating/sticky navbar (9999) değerinin de üstünde durması garanti edildi.
+*/
+.blog-lightbox {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(15, 23, 42, 0.95); /* Koyu Baltic Slate tonunda lüks karartma */
+  z-index: 100000; /* Katman sırası en üst düzeye çekildi */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  cursor: zoom-out;
+  padding: 1.5rem;
+}
+
+.blog-lightbox.is-active {
+  opacity: 1;
+}
+
+.blog-lightbox img {
+  max-width: 100%;
+  max-height: 90vh;
+  object-fit: contain;
+  border-radius: 0.75rem;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  
+  /* Yumuşak açılma ölçeklendirmesi */
+  transform: scale(0.95);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.blog-lightbox.is-active img {
+  transform: scale(1);
+}
+
 .back-to-blog-btn {
   cursor: pointer;
   transition: color 0.2s ease;
@@ -81,11 +138,11 @@
   color: var(--color-baltic-blue);
 }
 
-/* Okumayı kolaylaştıran, gözü yormayan geniş satır boşluklu paragraf yapısı */
+/* Okumayı kolaylaştıran geniş satır boşluklu paragraf yapısı */
 .blog-detail-text p {
   font-size: 1.1rem;
   line-height: 1.8;
-  color: #334155; /* Slate-700 göz yormayan kurumsal metin rengi */
+  color: #334155; /* Slate-700 göz yormayan metin rengi */
   margin-bottom: 1.75rem;
 }
 

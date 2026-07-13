@@ -1,5 +1,5 @@
 /* ===================================================================
-   BlogList – Switches between list overview and dedicated reading view
+   BlogList – Switches between list overview and dedicated reading view (Lightbox Update)
    =================================================================== */
 
 function BlogList(container, posts) {
@@ -25,8 +25,8 @@ function BlogList(container, posts) {
       var imageHtml = '';
       if (post.imageDir) {
         imageHtml =
-          '<div class="blog-post-image position-relative overflow-hidden">' +
-          '<img src="' + escapeAttr(post.imageDir) + '" alt="' + escapeAttr(imageAlt) + '" class="w-100 h-100 object-fit-cover transition-all">' +
+          '<div class="blog-post-image position-relative overflow-hidden bg-white">' +
+          '<img src="' + escapeAttr(post.imageDir) + '" alt="' + escapeAttr(imageAlt) + '" class="w-100 h-100 object-fit-contain p-2 transition-all">' +
           '</div>';
       }
 
@@ -63,7 +63,7 @@ function BlogList(container, posts) {
     });
   }
 
-  // 2. TEKİL BLOG YAZISI OKUMA GÖRÜNÜMÜ
+  // 2. TEKİL BLOG YAZISI OKUMA GÖRÜNÜMÜ (Düzeltildi & Zoom Eklendi)
   function renderDetailView(index) {
     var post = posts[index];
     var imageAlt = post.imageName || post.title || '';
@@ -73,9 +73,10 @@ function BlogList(container, posts) {
 
     var imageHtml = '';
     if (post.imageDir) {
+      /* DÜZELTİLDİ: Sığdırma ve dikey oran çakışmasını gideren yeni temiz HTML yapısı */
       imageHtml =
-        '<div class="blog-detail-image rounded-3 overflow-hidden mb-4 shadow-sm" style="max-height: 480px; width: 100%;">' +
-        '<img src="' + escapeAttr(post.imageDir) + '" alt="' + escapeAttr(imageAlt) + '" class="w-100 h-100 object-fit-cover">' +
+        '<div class="blog-detail-image rounded-3 overflow-hidden mb-4 shadow-sm bg-white text-center">' +
+        '<img src="' + escapeAttr(post.imageDir) + '" alt="' + escapeAttr(imageAlt) + '" class="img-fluid object-fit-contain p-2" style="max-height: 480px; width: auto; margin: 0 auto;">' +
         '</div>';
     }
 
@@ -98,6 +99,33 @@ function BlogList(container, posts) {
       '</article>';
 
     container.innerHTML = detailHtml;
+
+    // YENİ: Tıklayınca Görseli Büyütme (Lightbox) Mekanizması
+    var detailImg = container.querySelector('.blog-detail-image img');
+    if (detailImg) {
+      detailImg.style.cursor = 'zoom-in';
+      detailImg.addEventListener('click', function () {
+        var lightbox = document.createElement('div');
+        lightbox.className = 'blog-lightbox';
+        lightbox.innerHTML = '<img src="' + escapeAttr(post.imageDir) + '" alt="' + escapeAttr(imageAlt) + '">';
+        document.body.appendChild(lightbox);
+        
+        // Pürüzsüz opaklık açılışı
+        requestAnimationFrame(function () {
+          lightbox.classList.add('is-active');
+        });
+
+        // Kapatma olayı
+        lightbox.addEventListener('click', function () {
+          lightbox.classList.remove('is-active');
+          setTimeout(function () {
+            if (lightbox.parentNode) {
+              lightbox.parentNode.removeChild(lightbox);
+            }
+          }, 300); // 300ms CSS transition süresiyle eşleşir
+        });
+      });
+    }
 
     // Geri Dön Butonu Olayı
     var backBtn = container.querySelector('.back-to-blog-btn');
