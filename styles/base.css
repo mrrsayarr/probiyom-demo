@@ -129,3 +129,31 @@ p {
 
 /* ===== SONU 404 Page Home Button Custom Interactions ===== */
 
+
+
+
+/* ===== Sertifika Logoları Minimal & Vektörel Geçiş Efektleri ===== */
+
+    /* Başlangıçta logoların rengini gri tonda tutuyoruz */
+    .cert-svg {
+        width: 100%;
+        max-width: 60px;
+        height: 60px;
+        color: rgba(15, 23, 42, 0.35); /* Çok şık ve göz yormayan soft gri ton */
+        transition: color 0.25s cubic-bezier(0.16, 1, 0.3, 1), transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* Üzerine gelindiğinde logolar büyür ve markanızın asil Baltic Blue rengini alır */
+    .brand-logo-item:hover .cert-svg {
+        color: var(--color-baltic-blue);
+        transform: scale(1.08) rotate(3deg); /* Çok hafif, lüks bir bükülme hareketi */
+    }
+
+    /* Logo altındaki metinlerin de hover durumunda renk değiştirmesini sağlar */
+    .brand-logo-item span {
+        transition: color 0.25s ease;
+    }
+
+    .brand-logo-item:hover span {
+        color: var(--color-tropical-teal) !important;
+    }
