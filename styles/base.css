@@ -54,6 +54,65 @@ textarea {
   font-size: inherit;
 }
 
+
+
+/* ===== Sayfaya Sabit Sol Sosyal Medya Menüsü (Premium Capsule) ===== */
+    .sticky-social-bar {
+      position: fixed;
+      left: 0;
+      top: 50%;
+      /* Başlangıçta ekran kenarına biraz gömülü durarak kibarlaşır */
+      transform: translateY(-50%) translateX(-15px); 
+      z-index: 10001; /* Sticky navbar (9999) değerinin de üstünde durur */
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      background: rgba(15, 23, 42, 0.55); /* Koyu lüks cam efekti */
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-left: none; /* Kenara yapışık olduğu için sol çizgiyi sildik */
+      padding: 1rem 0.65rem 1rem 1.15rem; /* Sağa kayarken oluşacak alan için dengeli padding */
+      border-radius: 0 1.25rem 1.25rem 0; /* Sağ köşeler yumuşak dairesel */
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+      /* Pürüzsüz kayarak açılma geçiş hızı */
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.3s ease;
+    }
+
+    /* Panele fareyle gelindiğinde ekran kenarından yumuşakça sağa doğru açılır (Slide-out) */
+    .sticky-social-bar:hover {
+      transform: translateY(-50%) translateX(0); /* Tamamen açığa çıkar */
+      background: rgba(15, 23, 42, 0.75);
+    }
+
+    .sticky-social-bar a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 38px;
+      height: 38px;
+      padding: 8px;
+      background: linear-gradient(135deg, #05e916 0%, #3d59e0 100%);
+      border-radius: 50%;
+      color: #ffffff !important;
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), filter 0.3s ease;
+    }
+
+    /* İkonların üzerine tek tek gelindiğinde ekstra sağa süzülme ve yeşil ışıltı */
+    .sticky-social-bar a:hover {
+      transform: translateX(6px) scale(1.08); /* İkon sağa kayarak hafifçe büyür */
+      filter: drop-shadow(0 0 10px rgba(5, 233, 22, 0.6)); /* Yeşil parıltı aurası */
+    }
+
+    /* Mobilde dikey kalabalık yaratmaması için otomatik gizlenir */
+    @media (max-width: 768px) {
+      .sticky-social-bar {
+        display: none !important;
+      }
+    }
+
+
+    
 /* ===== Typography (Daha dengeli satır ve harf boşlukları) ===== */
 h1 {
   font-size: 2.25rem;
