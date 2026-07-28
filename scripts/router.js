@@ -190,7 +190,7 @@ var Router = (function () {
     }
   }
 
-  function initProductGroupPage(slug) {
+function initProductGroupPage(slug) {
     var groupEnum = GroupSlugToEnum[slug];
     if (groupEnum === undefined) {
       mainContainer.innerHTML = pageCache['pages/not-found.html'] ||
@@ -205,7 +205,6 @@ var Router = (function () {
       return p.group === groupEnum;
     });
 
-    // Dinamik Ürün Grubu SEO Açıklaması ve Şema Enjeksiyonu
     var groupSeoDesc = (groupIntro && groupIntro.paragraph)
       ? groupIntro.paragraph
       : groupTitle + ' kategorisindeki patentli HeiQ Synbio probiyotik ve sinbiyotik temizlik ve bakım ürünlerimizi inceleyin.';
@@ -213,44 +212,50 @@ var Router = (function () {
     updateSEO(groupTitle, groupSeoDesc, '#products/' + slug);
     injectProductSchema(groupTitle, slug, groupSeoDesc);
 
-    /* Build header */
+    /* Header Alanını İnşa Etme */
     var headerEl = document.getElementById('group-header');
     if (headerEl) {
-      var headerHtml = '<h1 class="text-brand">' + escapeHtml(groupTitle) + '</h1>';
+      var headerHtml = '<h1 class="text-brand mb-4 fw-bold fs-2">' + escapeHtml(groupTitle) + '</h1>';
 
       if (groupIntro) {
         var introTextHtml =
-          '<div class="group-intro-text max-w-5xl">' +
-            '<p class="heading">' + escapeHtml(groupIntro.heading) + '</p>' +
-            '<ul>';
+          '<div class="group-intro-text">' +
+            '<p class="heading fs-5 fw-bold mb-3">' + escapeHtml(groupIntro.heading) + '</p>' +
+            '<ul class="mb-3">';
 
         for (var i = 0; i < groupIntro.bullets.length; i++) {
           introTextHtml += '<li>' + escapeHtml(groupIntro.bullets[i]) + '</li>';
         }
 
         introTextHtml += '</ul>' +
-          '<p>' + escapeHtml(groupIntro.paragraph) + '</p>';
+          '<p class="mb-3">' + escapeHtml(groupIntro.paragraph) + '</p>';
 
         if (groupIntro.warning) {
-          introTextHtml += '<p class="warning">' + escapeHtml(groupIntro.warning) + '</p>';
+          introTextHtml += '<p class="warning fw-semibold text-danger mb-0">' + escapeHtml(groupIntro.warning) + '</p>';
         }
 
         introTextHtml += '</div>';
 
-        var introImageHtml = '';
-        if (groupIntro.imageDir) {
+        // ÇOKLU GÖRSEL VARSA: Sağ tarafa Slider konteyneri yerleştirilir
+        if (groupIntro.images && groupIntro.images.length > 0) {
+          headerHtml +=
+            '<div class="row g-4 align-items-center mt-2">' +
+              '<div class="col-12 col-lg-7">' + introTextHtml + '</div>' +
+              '<div class="col-12 col-lg-5">' +
+                '<div id="group-intro-slider"></div>' +
+              '</div>' +
+            '</div>';
+        } else if (groupIntro.imageDir) { // TEK GÖRSEL VARSA
           var imgAlt = groupIntro.imageName || groupTitle;
-          introImageHtml =
+          var introImageHtml =
             '<div class="group-intro-image">' +
               '<div class="group-intro-image-inner">' +
                 '<img src="' + escapeAttr(groupIntro.imageDir) + '" alt="' + escapeAttr(imgAlt) + '">' +
               '</div>' +
             '</div>';
-        }
 
-        if (introImageHtml) {
           headerHtml +=
-            '<div class="row g-4 align-items-start">' +
+            '<div class="row g-4 align-items-start mt-2">' +
               '<div class="col-12 col-lg-7">' + introTextHtml + '</div>' +
               '<div class="col-12 col-lg-5">' + introImageHtml + '</div>' +
             '</div>';
@@ -260,6 +265,22 @@ var Router = (function () {
       }
 
       headerEl.innerHTML = headerHtml;
+
+      // YENİ: Çoklu görseller için Slider Bileşenini Tetikliyoruz
+      if (groupIntro && groupIntro.images && groupIntro.images.length > 0) {
+        var groupSliderEl = document.getElementById('group-intro-slider');
+        if (groupSliderEl && typeof ImageSlider === 'function') {
+          var groupSlides = groupIntro.images.map(function (src, idx) {
+            return {
+              src: src,
+              alt: groupTitle + ' Tanıtım Slaytı ' + (idx + 1),
+              title: ''
+            };
+          });
+          // 4 saniyede bir kayacak şekilde slider başlatılır
+          ImageSlider(groupSliderEl, groupSlides, 4000);
+        }
+      }
     }
 
     /* Build product grid */

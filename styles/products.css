@@ -213,3 +213,24 @@
     font-size: 0.95rem;
   }
 }
+
+/* ===== Group Intro Header Slider (Dikey & Yatay Görsel Uyumlu) ===== */
+#group-intro-slider .slider-frame {
+  border-radius: 1.25rem;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+  background-color: #ffffff;
+}
+
+#group-intro-slider .slider-image-container {
+  aspect-ratio: 3 / 4; /* Dikey 1086x1448 görsellere uygun orantılı yuva */
+  background-color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#group-intro-slider .slider-image-container img {
+  object-fit: contain !important; /* Hem 1200x600 hem de 1086x1448 görselleri kırpmadan sığdırır */
+  padding: 0.5rem;
+}

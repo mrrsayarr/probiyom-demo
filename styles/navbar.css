@@ -199,3 +199,103 @@ header.app-header, .app-header {
   transform: translateY(8px) !important;
   display: none !important;
 }
+
+/* ===== Navbar "Bize Ulaşın" CTA Butonu ===== */
+.nav-contact-btn {
+  background-color: var(--color-tropical-teal) !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 12px rgba(56, 163, 165, 0.25) !important;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  display: inline-block;
+}
+
+/* ===== Navbar "Bize Ulaşın" CTA Butonu Hover Çakışma Düzeltmesi ===== */
+.navbar-links a.nav-contact-btn:hover,
+#nav-contact-trigger:hover {
+  background-color: var(--color-mint-leaf) !important;
+  color: #0f172a !important; /* Yüksek ön özellikle yazıyı kesin olarak siyaha çevirir */
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(87, 204, 153, 0.35) !important;
+}
+
+/* ===== İletişim Pop-Up Modal Stilleri (Cam Efektli) ===== */
+.contact-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 20000 !important; /* Navbar (10000) değerinin de üstünde durur */
+  background: rgba(15, 23, 42, 0.65); /* Koyu cam tonu */
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.3s;
+}
+
+/* Modal Görünür Durumu */
+.contact-modal-overlay.is-visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Modal İç Penceresi */
+.contact-modal-dialog {
+  position: relative;
+  width: 100%;
+  max-width: 680px;
+  max-height: 90vh;
+  overflow-y: auto;
+  background: #ffffff;
+  border-radius: 1.5rem;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transform: translateY(20px) scale(0.95);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.contact-modal-overlay.is-visible .contact-modal-dialog {
+  transform: translateY(0) scale(1);
+}
+
+/* Modal Kapatma Çarpı (X) Butonu */
+.contact-modal-close {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.25rem;
+  z-index: 10;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 50%;
+  border: none;
+  background: rgba(15, 23, 42, 0.06);
+  color: var(--color-text);
+  font-size: 1.5rem;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.contact-modal-close:hover {
+  background: var(--color-baltic-blue);
+  color: #ffffff;
+}
+
+/* Mobilde Modal Yüksekliği Düzenlemesi */
+@media (max-width: 576px) {
+  .contact-modal-overlay {
+    padding: 0.75rem;
+  }
+  .contact-modal-dialog {
+    max-height: 95vh;
+    border-radius: 1rem;
+  }
+}

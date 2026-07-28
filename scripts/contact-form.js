@@ -1,9 +1,11 @@
 /* ===================================================================
-   ContactForm – mailto-based contact form with validation (Refined UI)
+   ContactForm – Direct Background Email Submission (No Mailto Redirect)
    =================================================================== */
 
+//  M-A-I-L-A-C-C-E-S-K-E-Y = "cd1de6a5-f130-408d-a7b8-a50729474881" 
+
 function ContactForm(container) {
-  // GÜVENLİK KONTROLÜ: Eğer konteyner DOM'da henüz oluşmadıysa çökme yaşanmasını engeller.
+  // GÜVENLİK KONTROLÜ: Konteyner DOM'da henüz oluşmadıysa çökme yaşanmasını engeller.
   if (!container) {
     console.warn("ContactForm konteyneri DOM üzerinde bulunamadı.");
     return;
@@ -18,7 +20,9 @@ function ContactForm(container) {
     message: '',
   };
 
-  var submitted = false;
+  // Form Durum Yönetimi: 'idle', 'submitting', 'success', 'error'
+  var submitStatus = 'idle';
+  var statusMessage = '';
 
   function formatPhoneInput(raw) {
     var digits = raw.replace(/\D/g, '');
@@ -50,7 +54,6 @@ function ContactForm(container) {
 
   function buildGroupOptions() {
     var opts = '<option value="" disabled selected>Seçiniz</option>';
-    // Küresel değişkenin tanımlı olduğundan emin oluyoruz
     var productGroupList = typeof ProductGroup !== 'undefined' ? Object.values(ProductGroup) : [];
     var productGroupLabels = typeof ProductGroupLabels !== 'undefined' ? ProductGroupLabels : {};
 
@@ -65,7 +68,6 @@ function ContactForm(container) {
 
   function buildSubjectOptions() {
     var opts = '<option value="" disabled selected>Seçiniz</option>';
-    // Küresel değişkenin tanımlı olduğundan emin oluyoruz
     var messageSubjectsList = typeof MessageSubjects !== 'undefined' ? MessageSubjects : [];
 
     for (var i = 0; i < messageSubjectsList.length; i++) {
@@ -76,9 +78,19 @@ function ContactForm(container) {
   }
 
   function render() {
-    var successHtml = submitted
-      ? '<div class="form-success mt-3"><p>E-mail uygulamanız açıldı. Mesajı göndererek bizimle iletişime geçebilirsiniz.</p></div>'
-      : '';
+    var buttonText = 'Gönder';
+    var isButtonDisabled = !isValid() || submitStatus === 'submitting';
+
+    if (submitStatus === 'submitting') {
+      buttonText = 'Gönderiliyor...';
+    }
+
+    var feedbackHtml = '';
+    if (submitStatus === 'success') {
+      feedbackHtml = '<div class="form-success mt-3"><p class="text-success fw-bold m-0">✓ Mesajınız başarıyla iletildi. En kısa sürede sizinle iletişime geçeceğiz.</p></div>';
+    } else if (submitStatus === 'error') {
+      feedbackHtml = '<div class="form-error mt-3 p-3 bg-danger bg-opacity-10 border border-danger-subtle rounded-3"><p class="text-danger fw-semibold m-0" style="font-size: 0.9rem;">' + statusMessage + '</p></div>';
+    }
 
     container.innerHTML =
       '<section class="p-4 p-md-5 bg-white rounded-4 border border-light-subtle shadow-sm">' +
@@ -125,9 +137,9 @@ function ContactForm(container) {
           '</div>' +
           '<div class="col-12 d-flex flex-column flex-sm-row justify-content-between align-items-sm-center gap-3 mt-4">' +
             '<p class="small text-muted mb-0"><span class="text-danger">*</span> ile işaretli alanlar zorunludur.</p>' +
-            '<button type="submit" class="btn-submit text-white border-0 transition-all"' + (isValid() ? '' : ' disabled') + '>E-mail Uygulamasında Aç</button>' +
+            '<button type="submit" class="btn-submit text-white border-0 transition-all"' + (isButtonDisabled ? ' disabled' : '') + '>' + buttonText + '</button>' +
           '</div>' +
-          (submitted ? '<div class="col-12">' + successHtml + '</div>' : '') +
+          '<div class="col-12">' + feedbackHtml + '</div>' +
         '</form>' +
       '</section>';
 
@@ -143,7 +155,9 @@ function ContactForm(container) {
 
       input.addEventListener('input', (function (f, el) {
         return function () {
-          submitted = false;
+          if (submitStatus === 'error' || submitStatus === 'success') {
+            submitStatus = 'idle';
+          }
           if (f === 'phone') {
             form[f] = formatPhoneInput(el.value);
             el.value = form[f];
@@ -157,7 +171,9 @@ function ContactForm(container) {
       if (input.tagName === 'SELECT') {
         input.addEventListener('change', (function (f, el) {
           return function () {
-            submitted = false;
+            if (submitStatus === 'error' || submitStatus === 'success') {
+              submitStatus = 'idle';
+            }
             form[f] = el.value;
             updateSubmitButton();
           };
@@ -169,49 +185,73 @@ function ContactForm(container) {
     if (formEl) {
       formEl.addEventListener('submit', function (e) {
         e.preventDefault();
-        if (!isValid()) return;
+        if (!isValid() || submitStatus === 'submitting') return;
 
-        var mailSubject = 'İletişim Formu: ' + form.subject;
-        var bodyLines = [
-          'Ad: ' + form.fullName,
-          'E-mail: ' + form.email,
-        ];
-        
-        var productGroupLabels = typeof ProductGroupLabels !== 'undefined' ? ProductGroupLabels : {};
-        
-        if (form.phone.trim().length > 0) bodyLines.push('İrtibat No: ' + form.phone);
-        bodyLines.push('Ürün grubu: ' + (productGroupLabels[form.productGroup] || form.productGroup));
-        bodyLines.push('Mesaj konusu: ' + form.subject);
-        bodyLines.push('');
-        bodyLines.push('Mesaj:');
-        bodyLines.push(form.message.trim().length > 0 ? form.message : '(Mesaj yok)');
-
-        var params = new URLSearchParams();
-        params.set('subject', mailSubject);
-        params.set('body', bodyLines.join('\n'));
-        
-        var siteEmail = (typeof SiteData !== 'undefined' && SiteData.email) ? SiteData.email : 'destek@probiyom.com';
-        var mailto = 'mailto:' + siteEmail + '?' + params.toString();
-
-        window.location.href = mailto;
-
-        submitted = true;
-        form = {
-          fullName: '',
-          email: '',
-          phone: '+90',
-          productGroup: '',
-          subject: '',
-          message: '',
-        };
+        submitStatus = 'submitting';
         render();
+
+        var productGroupLabels = typeof ProductGroupLabels !== 'undefined' ? ProductGroupLabels : {};
+        var selectedGroup = productGroupLabels[form.productGroup] || form.productGroup;
+
+        /* ===================================================================
+           GÖNDERİM SERVİSİ YAPILANDIRMASI (Örn: Web3Forms / Formspree)
+           =================================================================== */
+        
+        // ÖRNEK: Web3Forms (Ücretsiz & Kayıtsız 1 dakikada kurulur)
+        // https://web3forms.com adresinden mailinize gelen Key'i buraya yapıştırın:
+        var ACCESS_KEY = "cd1de6a5-f130-408d-a7b8-a50729474881"; 
+
+        var payload = {
+          access_key: ACCESS_KEY,
+          name: form.fullName,
+          email: form.email,
+          phone: form.phone,
+          product_group: selectedGroup,
+          subject: form.subject,
+          message: form.message,
+          from_name: "Probiyom Web İletişim Formu"
+        };
+
+        fetch("https://api.web3forms.com/submit", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+          },
+          body: JSON.stringify(payload)
+        })
+        .then(function (response) {
+          return response.json();
+        })
+        .then(function (data) {
+          if (data.success) {
+            submitStatus = 'success';
+            form = {
+              fullName: '',
+              email: '',
+              phone: '+90',
+              productGroup: '',
+              subject: '',
+              message: ''
+            };
+          } else {
+            submitStatus = 'error';
+            statusMessage = data.message || "Mesaj gönderilirken bir sorun oluştu. Lütfen tekrar deneyin.";
+          }
+          render();
+        })
+        .catch(function (error) {
+          submitStatus = 'error';
+          statusMessage = "İnternet bağlantısı kurulamadı. Lütfen bağlantınızı kontrol edip tekrar deneyin.";
+          render();
+        });
       });
     }
   }
 
   function updateSubmitButton() {
     var btn = container.querySelector('.btn-submit');
-    if (btn) btn.disabled = !isValid();
+    if (btn) btn.disabled = !isValid() || submitStatus === 'submitting';
   }
 
   render();

@@ -41,6 +41,19 @@ ProductGroupIntroText[ProductGroup.ProfessionalCleaning] = {
   warning: "Ürünlerimiz temizlik maddesidir ve biyosidal ürün olarak kullanılamaz.",
   imageDir: "images/products_pages/pp_1.webp",
   imageName: "Professional Cleaning Products",
+  
+  /* YENİ EK: Professional Cleaning için 1 adet 1200x600 ve 8 adet 1086x1448 dikey görsel dizisi */
+  images: [
+    "images/products_pages/pp_1.webp",
+    "images/products/pc-2.webp",
+    "images/products/pc-3.webp",
+    "images/products/pc-4.webp",
+    "images/products/pc-5.webp",
+    "images/products/pc-6.webp",
+    "images/products/pc-7.webp",
+    "images/products/pc-8.webp",
+    "images/products/pc-9.webp"
+  ]
 };
 
 ProductGroupIntroText[ProductGroup.HomeCleaning] = {
