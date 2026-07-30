@@ -216,3 +216,11 @@ p {
     .brand-logo-item:hover span {
         color: var(--color-tropical-teal) !important;
     }
+
+
+@media (max-width: 768px) {
+  /* Sol kenardaki eski bar mobilde gizlenir, yerini alt kapsüle bırakır */
+  .sticky-social-bar {
+    display: none !important;
+  }
+}

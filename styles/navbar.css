@@ -299,3 +299,117 @@ header.app-header, .app-header {
     border-radius: 1rem;
   }
 }
+
+/* ===== YENİ: Mobil Sol Alt Yüzen Buton (FAB) & Açılır Hızlı Erişim Paneli ===== */
+.mobile-fab-container {
+  position: fixed;
+  bottom: 1.25rem;
+  left: 1.25rem;
+  z-index: 9995 !important; /* DÜZELTİLDİ: Sticky Navbar'ın (10000) altında kalması sağlandı */
+  user-select: none;
+}
+
+/* Sol Alt Ana Dairesel Buton */
+.mobile-fab-trigger {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: linear-gradient(135deg, var(--color-baltic-blue) 0%, #0f172a 100%);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 25px rgba(15, 23, 42, 0.35);
+  cursor: pointer;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.mobile-fab-trigger:active {
+  transform: scale(0.92);
+}
+
+/* Tıklandığında Yukarı Süzülen Hızlı Erişim Paneli */
+.mobile-fab-menu {
+  position: absolute;
+  bottom: 62px; /* Butonun hemen üstünde konumlanır */
+  left: 0;
+  min-width: 210px;
+  background: rgba(15, 23, 42, 0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  padding: 0.85rem;
+  border-radius: 1.25rem;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.35);
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  
+  /* Süzülerek açılma animasyonu başlangıç değerleri */
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(12px) scale(0.95);
+  transform-origin: bottom left;
+  transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1), transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.25s;
+}
+
+/* Panel Açık Durumu */
+.mobile-fab-menu.is-open {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1);
+}
+
+/* Panel İçi Bize Ulaşın CTA Butonu */
+.mobile-fab-cta-btn {
+  width: 100%;
+  background: linear-gradient(135deg, var(--color-tropical-teal) 0%, var(--color-mint-leaf) 100%);
+  color: #0f172a !important; /* Yüksek kontrast */
+  border-radius: 50px;
+  padding: 0.55rem 0.85rem;
+  font-weight: 700;
+  font-size: 0.8rem !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  border: none;
+  box-shadow: 0 4px 12px rgba(87, 204, 153, 0.3);
+  cursor: pointer;
+}
+
+.mobile-fab-cta-btn:active {
+  transform: scale(0.96);
+}
+
+.mobile-fab-divider {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.15);
+  width: 100%;
+}
+
+.mobile-fab-socials {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 0.25rem;
+}
+
+.mobile-fab-socials a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  text-decoration: none;
+  transition: background-color 0.2s, transform 0.2s;
+}
+
+.mobile-fab-socials a:active {
+  transform: scale(0.9);
+  background: var(--color-baltic-blue);
+}
