@@ -5,7 +5,6 @@
    Geniş seçiciler (örn: [id*="header"]) sayfa içerisindeki diğer başlık metinlerini 
    etkileyip düzeni bozduğu için tamamen kaldırılmıştır.
 */
-
 header.app-header, .app-header {
   position: sticky !important;
   top: 0 !important;
@@ -52,7 +51,6 @@ header.app-header, .app-header {
   border: 1px solid rgba(255, 255, 255, 0.12);
   padding-left: 1rem !important;
   padding-right: 1rem !important;
-  /* transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); */
 }
 
 .navbar-brand {
@@ -105,6 +103,14 @@ header.app-header, .app-header {
   opacity: 1;
   visibility: visible;
   transform: translateY(0);
+}
+
+/* SPA Tıklama Anında Kapanma Yardımcısı */
+.nav-dropdown-menu.force-hide {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  transform: translateY(8px) !important;
+  display: none !important;
 }
 
 /* Tematik Koyu Cam Efektli Dropdown Panel */
@@ -187,19 +193,6 @@ header.app-header, .app-header {
   padding-left: 1.75rem !important;
 }
 
-
-/* ===== SPA Sticky Hover Fix ===== */
-/* 
-   Dropdown içindeki bir menüye tıklandığında, tarayıcının hover kilitlenmesini 
-   engellemek amacıyla menüyü anında kapatmaya zorlayan yardımcı sınıf.
-*/
-.nav-dropdown-menu.force-hide {
-  opacity: 0 !important;
-  visibility: hidden !important;
-  transform: translateY(8px) !important;
-  display: none !important;
-}
-
 /* ===== Navbar "Bize Ulaşın" CTA Butonu ===== */
 .nav-contact-btn {
   background-color: var(--color-tropical-teal) !important;
@@ -209,11 +202,12 @@ header.app-header, .app-header {
   display: inline-block;
 }
 
-/* ===== Navbar "Bize Ulaşın" CTA Butonu Hover Çakışma Düzeltmesi ===== */
+/* ===== DÜZELTİLDİ: Hover sırasında yazıyı siyah yapan yüksek öncelikli kural ===== */
+.navbar-links li a.nav-contact-btn:hover,
 .navbar-links a.nav-contact-btn:hover,
 #nav-contact-trigger:hover {
   background-color: var(--color-mint-leaf) !important;
-  color: #0f172a !important; /* Yüksek ön özellikle yazıyı kesin olarak siyaha çevirir */
+  color: #0f172a !important; /* Yüksek ön özellikle yazıyı net siyah yapar */
   transform: translateY(-2px);
   box-shadow: 0 6px 16px rgba(87, 204, 153, 0.35) !important;
 }
@@ -225,8 +219,8 @@ header.app-header, .app-header {
   left: 0;
   right: 0;
   bottom: 0;
-  z-index: 20000 !important; /* Navbar (10000) değerinin de üstünde durur */
-  background: rgba(15, 23, 42, 0.65); /* Koyu cam tonu */
+  z-index: 20000 !important;
+  background: rgba(15, 23, 42, 0.65);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   display: flex;
@@ -238,13 +232,11 @@ header.app-header, .app-header {
   transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.3s;
 }
 
-/* Modal Görünür Durumu */
 .contact-modal-overlay.is-visible {
   opacity: 1;
   visibility: visible;
 }
 
-/* Modal İç Penceresi */
 .contact-modal-dialog {
   position: relative;
   width: 100%;
@@ -263,7 +255,6 @@ header.app-header, .app-header {
   transform: translateY(0) scale(1);
 }
 
-/* Modal Kapatma Çarpı (X) Butonu */
 .contact-modal-close {
   position: absolute;
   top: 1.25rem;
@@ -289,7 +280,6 @@ header.app-header, .app-header {
   color: #ffffff;
 }
 
-/* Mobilde Modal Yüksekliği Düzenlemesi */
 @media (max-width: 576px) {
   .contact-modal-overlay {
     padding: 0.75rem;
@@ -309,7 +299,6 @@ header.app-header, .app-header {
   user-select: none;
 }
 
-/* Sol Alt Ana Dairesel Buton */
 .mobile-fab-trigger {
   width: 50px;
   height: 50px;
@@ -329,10 +318,9 @@ header.app-header, .app-header {
   transform: scale(0.92);
 }
 
-/* Tıklandığında Yukarı Süzülen Hızlı Erişim Paneli */
 .mobile-fab-menu {
   position: absolute;
-  bottom: 62px; /* Butonun hemen üstünde konumlanır */
+  bottom: 62px;
   left: 0;
   min-width: 210px;
   background: rgba(15, 23, 42, 0.88);
@@ -346,7 +334,6 @@ header.app-header, .app-header {
   flex-direction: column;
   gap: 0.65rem;
   
-  /* Süzülerek açılma animasyonu başlangıç değerleri */
   opacity: 0;
   visibility: hidden;
   transform: translateY(12px) scale(0.95);
@@ -354,18 +341,16 @@ header.app-header, .app-header {
   transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1), transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.25s;
 }
 
-/* Panel Açık Durumu */
 .mobile-fab-menu.is-open {
   opacity: 1;
   visibility: visible;
   transform: translateY(0) scale(1);
 }
 
-/* Panel İçi Bize Ulaşın CTA Butonu */
 .mobile-fab-cta-btn {
   width: 100%;
   background: linear-gradient(135deg, var(--color-tropical-teal) 0%, var(--color-mint-leaf) 100%);
-  color: #0f172a !important; /* Yüksek kontrast */
+  color: #0f172a !important;
   border-radius: 50px;
   padding: 0.55rem 0.85rem;
   font-weight: 700;
@@ -412,4 +397,24 @@ header.app-header, .app-header {
 .mobile-fab-socials a:active {
   transform: scale(0.9);
   background: var(--color-baltic-blue);
+}
+
+/* ===== YENİ: FAB İkon Geçiş Animasyonu ===== */
+.fab-icon-switcher {
+  width: 100%;
+  height: 100%;
+}
+
+.fab-rot-icon {
+  position: absolute;
+  opacity: 0;
+  transform: scale(0.65) rotate(-15deg);
+  transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+}
+
+.fab-rot-icon.is-active {
+  opacity: 1;
+  transform: scale(1) rotate(0deg);
+  pointer-events: auto;
 }

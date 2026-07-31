@@ -363,3 +363,22 @@
     .science-card-link:hover .science-card-action svg {
         transform: translateX(4px);
     }
+
+    /* ===== Gerçek Sertifika Logoları Görsel Stilleri ===== */
+    
+    .brand-logo-img {
+        max-width: 110px;
+        max-height: 52px;
+        width: auto;
+        height: auto;
+        object-fit: contain;
+        /* Başlangıçta sade kurumsal gri tonda durur */
+        filter: grayscale(100%) opacity(0.65);
+        transition: filter 0.35s ease, transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* Üzerine gelindiğinde amblemler gerçek orjinal renklerine bürünür */
+    .brand-logo-item:hover .brand-logo-img {
+        filter: grayscale(0%) opacity(1);
+        transform: scale(1.08);
+    }

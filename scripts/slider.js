@@ -4,7 +4,7 @@
 
 function ImageSlider(container, slides, durationMs) {
   if (!slides || slides.length === 0) return;
-  durationMs = durationMs || 7000; // Slayt geçiş hızı 7 saniye olarak yavaşlatıldı
+  durationMs = durationMs || 7000; // Slayt geçiş hızı 7 saniye
 
   var activeIndex = 0;
   var timer = null;
@@ -13,6 +13,18 @@ function ImageSlider(container, slides, durationMs) {
   var pauseBtn = null;
   var counterSpan = null;
   var progressBar = null;
+
+  // HIZ OPTİMİZASYONU: Görselleri sayfa yüklendikten sonra arka planda RAM belleğe çeker
+  function preloadImages() {
+    setTimeout(function () {
+      slides.forEach(function (slide, idx) {
+        if (idx > 0 && slide && slide.src) {
+          var img = new Image();
+          img.src = slide.src;
+        }
+      });
+    }, 1000); // 1 saniye sonra arka planda sessizce indirir
+  }
 
   function init() {
     var wrapper = document.createElement('div');
@@ -31,7 +43,7 @@ function ImageSlider(container, slides, durationMs) {
       var imgLoading = index === 0 ? 'eager' : 'lazy';
 
       var imageContainer = '<div class="slider-image-container">' +
-        '<img src="' + slide.src + '" alt="' + slide.alt + '" loading="' + imgLoading + '">' +
+        '<img src="' + slide.src + '" alt="' + (slide.alt || '') + '" loading="' + imgLoading + '">' +
         '</div>';
 
       // AKILLI KONTROL: Sadece başlık verisi (title) dolu olan slaytlara metin kutusu ekler
@@ -122,6 +134,7 @@ function ImageSlider(container, slides, durationMs) {
     container.appendChild(wrapper);
     
     updateDOM();
+    preloadImages(); // Slayt başlatılınca diğer resimleri arka planda indirir
   }
 
   function updatePauseButton() {

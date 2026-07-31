@@ -1,30 +1,41 @@
-/* ===== Contact Info ===== */
+/* ===== Contact Info Item Cards ===== */
 .contact-info {
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
+  gap: 0.85rem;
+}
+
+.contact-item {
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.25s ease;
+}
+
+.contact-item:hover {
+  transform: translateX(4px); /* Hover anında sağa hafif süzülme */
+  background-color: rgba(34, 87, 122, 0.05) !important;
+}
+
+.contact-icon-box {
+  transition: transform 0.25s ease, background-color 0.25s ease;
+}
+
+.contact-item:hover .contact-icon-box {
+  transform: scale(1.08);
+  background-color: var(--color-tropical-teal) !important; /* İkon rengi marka yeşiline döner */
 }
 
 .contact-info-label {
-  font-size: 0.85rem;
+  font-size: 0.72rem;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: var(--color-baltic-blue); /* Bilgi başlıkları marka renginize eşitlendi */
+  letter-spacing: 0.08em;
 }
 
 .contact-info a {
-  display: inline-block;
-  font-weight: 600;
-  color: var(--color-text);
-  font-size: 1.05rem;
-  transition: color 0.2s ease, transform 0.2s ease;
-  margin-top: 0.15rem;
+  transition: color 0.2s ease;
 }
 
 .contact-info a:hover {
-  color: var(--color-tropical-teal);
-  transform: translateX(3px); /* İletişim adreslerinin üzerine gelince zarifçe sağa süzülür */
+  color: var(--color-tropical-teal) !important;
 }
 
 /* ===== Map (Premium Monochromatic Map) ===== */
@@ -32,7 +43,7 @@
   width: 100%;
   height: 100%;
   overflow: hidden;
-  border-radius: 1.25rem; /* Kenarlar daha modern ve yuvarlak hale getirildi */
+  border-radius: 1.25rem;
   border: 1px solid rgba(0, 0, 0, 0.08);
   box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.05);
 }
@@ -41,7 +52,7 @@
   position: relative;
   width: 100%;
   height: 100%;
-  min-height: 20rem; /* Harita yüksekliği biraz artırılarak görünürlük güçlendirildi */
+  min-height: 22rem;
 }
 
 .map-inner > div {
@@ -51,18 +62,13 @@
   width: 100%;
 }
 
-/* 
-   Harita Filtresi: Standart parlak haritayı kurumsal tasarımla uyumlu monokrom griye çevirir.
-   Fare ile üzerine gelindiğinde yumuşak bir geçişle renkler canlanır.
-*/
-
 #ol-map {
-  filter: grayscale(0.0) contrast(1.0) brightness(1.0); /* Başlangıçta gri tonlama yok */
+  filter: grayscale(0.0) contrast(1.0) brightness(1.0);
   transition: filter 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 #ol-map:hover {
-  filter: grayscale(0.0) contrast(1.1) brightness(1.1); /* Hafifçe daha canlı ve parlak hale gelir */
+  filter: grayscale(0.0) contrast(1.1) brightness(1.1);
 }
 
 /* ===== Contact Form (Modern Form Elements) ===== */
@@ -82,7 +88,6 @@
   color: rgba(15, 23, 42, 0.8);
 }
 
-/* Giriş Alanlarının Modernizasyonu */
 .form-field input,
 .form-field select,
 .form-field textarea {
@@ -95,13 +100,12 @@
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Focus anındaki yeşil ışıltılı ve keskin modern sınır çizgisi */
 .form-field input:focus,
 .form-field select:focus,
 .form-field textarea:focus {
   border-color: var(--color-tropical-teal);
   background-color: #ffffff;
-  box-shadow: 0 0 0 4px rgba(56, 163, 165, 0.15); /* Yumuşak yeşil odaklanma halkası */
+  box-shadow: 0 0 0 4px rgba(56, 163, 165, 0.15);
 }
 
 .form-field textarea {
@@ -110,7 +114,6 @@
   line-height: 1.6;
 }
 
-/* Gönder Butonu (Mikro etkileşimli ve gölgeli) */
 .btn-submit {
   border-radius: 0.75rem;
   padding: 0.85rem 1.75rem;
@@ -131,7 +134,7 @@
 }
 
 .btn-submit:not(:disabled):active {
-  transform: translateY(1px) scale(0.97); /* Tıklama anındaki fiziksel yay etkisi */
+  transform: translateY(1px) scale(0.97);
 }
 
 .btn-submit:disabled {
@@ -141,7 +144,6 @@
   box-shadow: none;
 }
 
-/* Başarılı Gönderim Kutusu (Nane Yeşili Temalı) */
 .form-success {
   border-radius: 0.75rem;
   border: 1px solid rgba(87, 204, 153, 0.22);
@@ -158,4 +160,29 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
+}
+
+/* ===== İletişim Sayfası Sosyal Medya İkon Butonları ===== */
+.contact-social-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: #f8f9fa; /* Açık kart üzerinde duran soft gri zemin */
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  color: var(--color-baltic-blue) !important;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  text-decoration: none;
+}
+
+.contact-social-btn:hover {
+  color: #ffffff !important;
+  transform: translateY(-4px) scale(1.08); /* Yukarı süzülme ve büyüme */
+  box-shadow: 0 8px 20px rgba(56, 163, 165, 0.35); /* Yeşil gölge aurası */
+}
+
+.contact-social-btn:active {
+  transform: scale(0.95);
 }

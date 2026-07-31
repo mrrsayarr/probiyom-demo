@@ -131,6 +131,7 @@ var blogPosts = [
     imageDir: "images/blogs/blog_1_alerji.webp",
     imageName: "Alerji Spreyi ile rahat nefes, ferah ortamlar"
   },
+
   {
     title: "Bir çiftlikte hijyen sadece temizlik midir, yoksa hastalıkları önleyen görünmez bir savunma hattı mı? 🐄",
     text: `Ahır ve kümeslerdeki yoğun yaşam alanlarında, çıplak gözle göremediğimiz fakat hayvan sağlığını ve işletme verimliliğini doğrudan etkileyen kritik bir biyolojik dengesizlik yatmaktadır. Hayvan dışkısı, idrar, nem ve yem kalıntılarının birikmesi; ahır zemininde ve ekipmanlarda patojenlerin (zararlı bakterilerin) saklandığı dirençli bir "biyofilm" tabakası oluşturur. Geleneksel agresif kimyasal dezenfektanlar ise bu biyofilmi parçalayamadığı gibi, ortamdaki tüm yararlı koruyucu florayı da yok ederek zararlı bakterilerin çok daha güçlü ve dirençli (AMR) bir şekilde geri dönmesine (rebound etkisi) yol açar.
@@ -152,6 +153,7 @@ var blogPosts = [
     imageDir: "images/blogs/blog_3_ah.webp",
     imageName: "çiftlik hijyeni"
   },
+
   {
     title: "Endüstriyel Su sistemlerinde görünmeyen maliyet: Biyofilm",
     text: `Endüstriyel su sistemlerinde, soğutma kulelerinde ve eşanjörlerde (ısı değiştiricilerinde) gözle görülmeyen fakat işletme bütçelerini sessizce kemiren devasa bir maliyet kalemi bulunur: <strong>Biyofilm tabakası.</strong> Islak yüzeylerde zamanla biriken organik atıklar, bakteriler ve salgılardan oluşan bu yapışkan katman, sadece basit bir kirlilik değildir. Kireçten (kalsiyum karbonat) bile daha güçlü bir ısı yalıtkanı (izolatör) olan biyofilm, sistemin ısı transfer verimliliğini dramatik şekilde düşürerek enerji tüketimini ve elektrik maliyetlerini gizlice tırmandırır.
@@ -172,5 +174,6 @@ var blogPosts = [
       %100 biyo-bozunur, toksik olmayan ve aşındırıcı içermeyen yapısıyla Probiyom endüstriyel su arıtma çözümleri; tesis içi iş güvenliğini artırırken, atık suların doğaya zarar vermeden tahliye edilmesini sağlar. Tesisinizi korozyondan korumak, enerji faturalarını düşürmek ve doğa dostu bir işletme vizyonuna geçmek için biyolojik su yönetimini bugün keşfedin.`,
     imageDir: "images/blogs/blog_2_wtx.webp",
     imageName: "endüstriyel su arıtma"
-  }
+  },
+
 ];

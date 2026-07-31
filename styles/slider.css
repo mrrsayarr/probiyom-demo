@@ -236,3 +236,21 @@
     font-size: 0.9rem;
   }
 }
+
+/* ===== Zayıf Cihazlar ve Yavaş Ekran Kartları İçin Kasma Önleyici Kurallar ===== */
+
+/* 1. Ekran kartının (GPU) görünmeyen slaytları arka planda boşuna çizmesini engeller */
+.slider-slide:not(.is-active) {
+  visibility: hidden !important;
+}
+
+.slider-slide.is-active {
+  visibility: visible !important;
+}
+
+/* 2. Cihaz yavaşsa veya pil tasarrufundaysa kayma animasyonunu anlık yapıp %0 kasma sağlar */
+@media (prefers-reduced-motion: reduce) {
+  .slider-track {
+    transition: none !important;
+  }
+}

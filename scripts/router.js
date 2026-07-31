@@ -1,6 +1,6 @@
 /* ===================================================================
-   Hash-based Router with Dynamic SEO & Schema Integration
-   Routes: #home, #about, #products, #products/<slug>, #contact, #faq, #blog
+   Hash-based Router with Dynamic SEO & Blog Sub-Routing Integration
+   Routes: #home, #about, #products, #products/<slug>, #contact, #faq, #blog, #blog/<index>
    =================================================================== */
 
 var Router = (function () {
@@ -51,7 +51,16 @@ var Router = (function () {
         loadPage('pages/faq.html', initFaqPage);
         break;
       case 'blog':
-        loadPage('pages/blog.html', initBlogPage);
+        /* DÜZELTİLDİ: #blog/0 veya #blog/1 gibi spesifik blog linklerini yakalar */
+        if (parts.length > 1 && parts[1] !== undefined && parts[1] !== '') {
+          loadPage('pages/blog.html', function () {
+            initBlogPage(parts[1]);
+          });
+        } else {
+          loadPage('pages/blog.html', function () {
+            initBlogPage();
+          });
+        }
         break;
       default:
         loadPage('pages/not-found.html', function () {
@@ -84,7 +93,7 @@ var Router = (function () {
   }
 
   /* ===================================================================
-     YENİ: Dinamik SEO, Meta Etiketleri ve Şema (Schema.org) Enjektörü
+     Dinamik SEO, Meta Etiketleri ve Şema (Schema.org) Enjektörü
      =================================================================== */
 
   function updateSEO(title, description, path) {
@@ -128,7 +137,6 @@ var Router = (function () {
     tag.setAttribute('content', content);
   }
 
-  // Google için Dinamik Ürün Grubu Şeması (JSON-LD)
   function injectProductSchema(groupTitle, slug, description) {
     var oldSchema = document.getElementById('dynamic-schema');
     if (oldSchema && oldSchema.parentNode) {
@@ -150,10 +158,9 @@ var Router = (function () {
     document.head.appendChild(script);
   }
 
-  /* ---- Page initializers (SEO İyileştirmeleri Entegre Edildi) ---- */
+  /* ---- Page initializers ---- */
 
   function initHomePage() {
-    // Ana Sayfa SEO Güncellemesi
     updateSEO(
       'Probiyotik & Sinbiyotik Temizlik Teknolojisi',
       'Yüzde yüz doğal, patentli HeiQ VivoTech probiyotik ve sinbiyotik temizlik teknolojisi ile yaşam alanlarınızda 72 saate kadar kalıcı ve sürdürülebilir hijyen çözümleri.',
@@ -177,7 +184,6 @@ var Router = (function () {
   }
 
   function initProductsPage() {
-    // Genel Ürünler Sayfası SEO Güncellemesi
     updateSEO(
       'Ürün Gruplarımız',
       'Profesyonel temizlikten ev bakımına, hayvancılıktan kişisel bakıma kadar HeiQ Chrisal patentli probiyotik ve sinbiyotik hijyen ürünlerimizi keşfedin.',
@@ -190,7 +196,7 @@ var Router = (function () {
     }
   }
 
-function initProductGroupPage(slug) {
+  function initProductGroupPage(slug) {
     var groupEnum = GroupSlugToEnum[slug];
     if (groupEnum === undefined) {
       mainContainer.innerHTML = pageCache['pages/not-found.html'] ||
@@ -212,7 +218,7 @@ function initProductGroupPage(slug) {
     updateSEO(groupTitle, groupSeoDesc, '#products/' + slug);
     injectProductSchema(groupTitle, slug, groupSeoDesc);
 
-    /* Header Alanını İnşa Etme */
+    /* Build header */
     var headerEl = document.getElementById('group-header');
     if (headerEl) {
       var headerHtml = '<h1 class="text-brand mb-4 fw-bold fs-2">' + escapeHtml(groupTitle) + '</h1>';
@@ -236,7 +242,6 @@ function initProductGroupPage(slug) {
 
         introTextHtml += '</div>';
 
-        // ÇOKLU GÖRSEL VARSA: Sağ tarafa Slider konteyneri yerleştirilir
         if (groupIntro.images && groupIntro.images.length > 0) {
           headerHtml +=
             '<div class="row g-4 align-items-center mt-2">' +
@@ -245,7 +250,7 @@ function initProductGroupPage(slug) {
                 '<div id="group-intro-slider"></div>' +
               '</div>' +
             '</div>';
-        } else if (groupIntro.imageDir) { // TEK GÖRSEL VARSA
+        } else if (groupIntro.imageDir) {
           var imgAlt = groupIntro.imageName || groupTitle;
           var introImageHtml =
             '<div class="group-intro-image">' +
@@ -266,7 +271,6 @@ function initProductGroupPage(slug) {
 
       headerEl.innerHTML = headerHtml;
 
-      // YENİ: Çoklu görseller için Slider Bileşenini Tetikliyoruz
       if (groupIntro && groupIntro.images && groupIntro.images.length > 0) {
         var groupSliderEl = document.getElementById('group-intro-slider');
         if (groupSliderEl && typeof ImageSlider === 'function') {
@@ -277,7 +281,6 @@ function initProductGroupPage(slug) {
               title: ''
             };
           });
-          // 4 saniyede bir kayacak şekilde slider başlatılır
           ImageSlider(groupSliderEl, groupSlides, 4000);
         }
       }
@@ -291,7 +294,6 @@ function initProductGroupPage(slug) {
   }
 
   function initAboutPage() {
-    // Hakkımızda SEO Güncellemesi
     updateSEO(
       'Hakkımızda',
       'Probiyom olarak HeiQ Chrisal iş birliğiyle yüzde yüz doğal ve sürdürülebilir probiyotik hijyen teknolojilerini yaşam alanlarınıza taşıyoruz.',
@@ -325,7 +327,6 @@ function initProductGroupPage(slug) {
   }
 
   function initFaqPage() {
-    // SSS SEO Güncellemesi
     updateSEO(
       'Sıkça Sorulan Sorular',
       'Probiyotik ve sinbiyotik hijyen teknolojisi, kullanım alanları, 72 saat süren etkisi ve ürünlerimiz hakkında merak ettiğiniz tüm yanıtlar.',
@@ -338,22 +339,45 @@ function initProductGroupPage(slug) {
     }
   }
 
-  function initBlogPage() {
-    // Blog SEO Güncellemesi
-    updateSEO(
-      'Blog & Bilimsel Makaleler',
-      'Probiyotik teknoloji, mikrobiyom sağlığı, sürdürülebilirlik ve biyolojik hijyen hakkında en güncel makaleler ve bilimsel yayınlar.',
-      '#blog'
-    );
-
+  /* GÜNCELLENDİ: Blog Sayfası Başlatıcısı (Tekil Blog SEO Desteği Entegre Edildi) */
+  function initBlogPage(postParam) {
     var listEl = document.getElementById('blog-list');
-    if (listEl) {
-      BlogList(listEl, blogPosts);
+
+    // Eğer adreste spesifik bir makale indeksi verilmişse (Örn: #blog/0 veya #blog/1)
+    if (postParam !== undefined && postParam !== null && blogPosts && blogPosts.length > 0) {
+      var postIndex = parseInt(postParam, 10);
+      if (isNaN(postIndex) || postIndex < 0 || postIndex >= blogPosts.length) {
+        postIndex = 0; // Geçersiz indeks verilirse ilk makaleye yönlendirir
+      }
+
+      var post = blogPosts[postIndex];
+      var snippet = (post && post.text) ? post.text.replace(/<\/?[^>]+(>|$)/g, "").substring(0, 150) + '...' : '';
+
+      // Bu spesifik makaleye özel SEO Başlığı ve Özeti
+      updateSEO(
+        post.title,
+        snippet,
+        '#blog/' + postIndex
+      );
+
+      if (listEl && typeof BlogList === 'function') {
+        BlogList(listEl, blogPosts, postIndex);
+      }
+    } else {
+      // Genel Blog Listesi Görünümü (#blog)
+      updateSEO(
+        'Blog & Bilimsel Makaleler',
+        'Probiyotik teknoloji, mikrobiyom sağlığı, sürdürülebilirlik ve biyolojik hijyen hakkında en güncel makaleler ve bilimsel yayınlar.',
+        '#blog'
+      );
+
+      if (listEl && typeof BlogList === 'function') {
+        BlogList(listEl, blogPosts);
+      }
     }
   }
 
   function initContactPage() {
-    // İletişim SEO Güncellemesi
     updateSEO(
       'İletişim',
       'Probiyom Ekibi ile iletişime geçin. Teknik bilgi, ürün talepleri ve iş birliği süreçleri için bize ulaşabilirsiniz.',
@@ -366,13 +390,13 @@ function initProductGroupPage(slug) {
       addressEl.innerHTML = SiteData.address1 + '<br>' + SiteData.address2;
     }
 
-    var phoneEl = document.getElementById('about-phone');
+    var phoneEl = document.getElementById('contact-phone');
     if (phoneEl) {
       phoneEl.href = 'tel:' + SiteData.phone;
       phoneEl.textContent = SiteData.phone;
     }
 
-    var emailEl = document.getElementById('about-email');
+    var emailEl = document.getElementById('contact-email');
     if (emailEl) {
       emailEl.href = 'mailto:' + SiteData.email;
       emailEl.textContent = SiteData.email;
@@ -381,25 +405,21 @@ function initProductGroupPage(slug) {
     var instagramEl = document.getElementById('contact-instagram');
     if (instagramEl) {
       instagramEl.href = SiteData.instagram;
-      instagramEl.textContent = SiteData.instagram;
     }
 
     var xEl = document.getElementById('contact-x');
     if (xEl) {
       xEl.href = SiteData.x;
-      xEl.textContent = SiteData.x;
     }
 
     var linkedinEl = document.getElementById('contact-linkedin');
     if (linkedinEl) {
       linkedinEl.href = SiteData.linkedin;
-      linkedinEl.textContent = SiteData.linkedin;
     }
 
     var youtubeEl = document.getElementById('contact-youtube');
     if (youtubeEl) {
       youtubeEl.href = SiteData.youtube;
-      youtubeEl.textContent = SiteData.youtube;
     }
 
     /* Map */
