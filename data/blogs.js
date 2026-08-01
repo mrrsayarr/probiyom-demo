@@ -17,8 +17,7 @@ Artık soru şu değil:
 "Yüzeyi ne kadar temizlediniz?"
 Asıl soru şu:
 "Yüzeyde nasıl bir mikrobiyal denge bıraktınız?"
-Geleceğin hijyen anlayışı, yalnızca mikropları öldürmek değil; doğru mikrobiyal dengeyi oluşturmaktır
-`,
+Geleceğin hijyen anlayışı, yalnızca mikropları öldürmek değil; doğru mikrobiyal dengeyi oluşturmaktır`,
     imageDir: "images/blogs/blog_6_alerjen2.webp",
     imageName: "alerjen sprey ve antialerjik probiyotik gücü"
   },
