@@ -5,7 +5,7 @@
 var blogPosts = [
    {
     title: "Alerjinizi Tetikleyen Şey Toz mu, PET mi yoksa Polen mi? Yoksa Görünmeyen Mikrobiyal Dengesizlik mi?",
-    text: "<strong>Her gün saatlerce temizlik yapıyoruz.</strong>
+    text: `<strong>Her gün saatlerce temizlik yapıyoruz.</strong>
 Peki neden evlerde, okullarda, hastanelerde ve iş yerlerinde alerjenler bu kadar hızlı geri dönüyor?
 Çünkü geleneksel kimyasal temizlik çoğu zaman yalnızca anı temizler.
 Bilim ise artık farklı bir yaklaşım öneriyor:
