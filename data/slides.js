@@ -114,3 +114,17 @@ var productSlides = [
     link: "#products/pet",
   }
 ];
+
+// İLK AÇILIŞ GECİKMESİNİ (1 SN BEKLEMEYİ) SIFIRLAYAN ANINDA ÖN YÜKLEME
+(function () {
+  if (typeof window === 'undefined') return;
+  [homeSlides, productSlides].forEach(function (list) {
+    if (!list) return;
+    list.forEach(function (s, idx) {
+      if (s && s.src) {
+        var img = new Image();
+        img.src = s.src;
+      }
+    });
+  });
+})();

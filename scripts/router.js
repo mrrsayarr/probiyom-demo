@@ -10,6 +10,13 @@ var Router = (function () {
 
   function init(container) {
     mainContainer = container;
+    
+    // Sitenin ilk açılış gecikmesini önlemek için home.html şablonunu arka planda ön-çekim (prefetch) yapıyoruz
+    fetch('pages/home.html')
+      .then(function (res) { return res.text(); })
+      .then(function (html) { pageCache['pages/home.html'] = html; })
+      .catch(function () {});
+
     window.addEventListener('hashchange', onRoute);
     onRoute();
   }

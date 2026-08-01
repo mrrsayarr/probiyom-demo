@@ -14,16 +14,14 @@ function ImageSlider(container, slides, durationMs) {
   var counterSpan = null;
   var progressBar = null;
 
-  // HIZ OPTİMİZASYONU: Görselleri sayfa yüklendikten sonra arka planda RAM belleğe çeker
+  // HIZ OPTİMİZASYONU: Görselleri slider başlatılır başlatılmaz arka planda önbelleğe çeker
   function preloadImages() {
-    setTimeout(function () {
-      slides.forEach(function (slide, idx) {
-        if (idx > 0 && slide && slide.src) {
-          var img = new Image();
-          img.src = slide.src;
-        }
-      });
-    }, 1000); // 1 saniye sonra arka planda sessizce indirir
+    slides.forEach(function (slide, idx) {
+      if (slide && slide.src) {
+        var img = new Image();
+        img.src = slide.src;
+      }
+    });
   }
 
   function init() {
@@ -40,10 +38,12 @@ function ImageSlider(container, slides, durationMs) {
       var slideDiv = document.createElement('div');
       slideDiv.className = 'slider-slide' + (index === 0 ? ' is-active' : '');
 
-      var imgLoading = index === 0 ? 'eager' : 'lazy';
+      var imgAttrs = index === 0
+        ? 'loading="eager" fetchpriority="high" decoding="sync"'
+        : 'loading="eager" decoding="async"';
 
       var imageContainer = '<div class="slider-image-container">' +
-        '<img src="' + slide.src + '" alt="' + (slide.alt || '') + '" loading="' + imgLoading + '">' +
+        '<img src="' + slide.src + '" alt="' + (slide.alt || '') + '" ' + imgAttrs + '>' +
         '</div>';
 
       // AKILLI KONTROL: Sadece başlık verisi (title) dolu olan slaytlara metin kutusu ekler
@@ -150,6 +150,19 @@ function ImageSlider(container, slides, durationMs) {
     return num < 10 ? '0' + num : num;
   }
 
+  function preloadNextSlide(currentIdx) {
+    if (!slides || slides.length <= 1) return;
+    var nextIdx = (currentIdx + 1) % slides.length;
+    var nextSlide = slides[nextIdx];
+    if (nextSlide && nextSlide.src) {
+      var img = new Image();
+      img.src = nextSlide.src;
+      if (img.decode) {
+        img.decode().catch(function () {});
+      }
+    }
+  }
+
   function updateDOM() {
     slideElements.forEach(function (slide, idx) {
       if (idx === activeIndex) {
@@ -180,6 +193,8 @@ function ImageSlider(container, slides, durationMs) {
         progressBar.style.animationPlayState = 'paused';
       }
     }
+
+    preloadNextSlide(activeIndex);
   }
 
   function togglePause() {
