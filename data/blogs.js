@@ -7,9 +7,8 @@ var blogPosts = [
     title: "Alerjinizi Tetikleyen Şey Toz mu, PET mi yoksa Polen mi? Yoksa Görünmeyen Mikrobiyal Dengesizlik mi?",
     text: `<strong>Her gün saatlerce temizlik yapıyoruz.</strong>
 Peki neden evlerde, okullarda, hastanelerde ve iş yerlerinde alerjenler bu kadar hızlı geri dönüyor?
-Çünkü geleneksel kimyasal temizlik çoğu zaman yalnızca anı temizler.
-Bilim ise artık farklı bir yaklaşım öneriyor:
-Yüzey mikrobiyomunu yönetmek.
+Çünkü geleneksel kimyasal temizlik çoğu zaman yalnızca anı temizler. \n
+<strong>Bilim ise artık farklı bir yaklaşım öneriyor:</strong> \nYüzey mikrobiyomunu yönetmek.\n
 Klinik çalışmalar, probiyotik bazlı temizlik teknolojilerinin yüzeylerde faydalı bakterilerin oluşturduğu dengeli bir mikrobiyal ekosistem sayesinde organik kirlerin parçalanmasına yardımcı olduğunu, zararlı mikroorganizmaların yeniden çoğalmasını baskılayabildiğini ve daha sürdürülebilir bir hijyen sağladığını göstermektedir. Aynı zamanda bazı çalışmalarda antibiyotik direnç genlerinin azalması ve çevresel mikrobiyal dengenin iyileşmesi de rapor edilmiştir.
 Bu neden önemli?
 Çünkü ev tozu akarları, polenler, evcil hayvan kaynaklı alerjenler ve diğer organik alerjenler; biriken organik kalıntılarla birlikte yüzeylerde uzun süre kalabilir. Organik kirlerin biyolojik olarak parçalanmasını destekleyen probiyotik temizlik teknolojileri, alerjen yükünün azaltılmasına katkı sağlayarak daha sağlıklı yaşam alanlarının oluşturulmasına yardımcı olabilir.
