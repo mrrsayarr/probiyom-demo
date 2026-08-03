@@ -346,41 +346,56 @@ var Router = (function () {
     }
   }
 
-  /* GÜNCELLENDİ: Blog Sayfası Başlatıcısı (Tekil Blog SEO Desteği Entegre Edildi) */
+  /* GÜNCELLENDİ: Blog Sayfası Başlatıcısı (Slug + Geriye Dönük Sayısal Dizin Desteği)
+     #blog -> liste | #blog/<slug> -> tekil yazı | #blog/0 -> eski sayısal yazı (uyumluluk) */
   function initBlogPage(postParam) {
     var listEl = document.getElementById('blog-list');
 
-    // Eğer adreste spesifik bir makale indeksi verilmişse (Örn: #blog/0 veya #blog/1)
-    if (postParam !== undefined && postParam !== null && blogPosts && blogPosts.length > 0) {
-      var postIndex = parseInt(postParam, 10);
-      if (isNaN(postIndex) || postIndex < 0 || postIndex >= blogPosts.length) {
-        postIndex = 0; // Geçersiz indeks verilirse ilk makaleye yönlendirir
+    var hasParam = postParam !== undefined && postParam !== null && postParam !== '';
+    var isNumeric = hasParam && /^\d+$/.test(String(postParam));
+
+    if (hasParam && blogPosts && blogPosts.length > 0) {
+      var post = null;
+      var slug = null;
+
+      if (isNumeric) {
+        // Geriye dönük uyumluluk: eski #blog/0 tarzı sayısal linkler hâlâ çalışır
+        var idx = parseInt(postParam, 10);
+        if (isNaN(idx) || idx < 0 || idx >= blogPosts.length) idx = 0;
+        post = blogPosts[idx];
+        slug = blogSlug(post);
+      } else {
+        // Yeni slug tabanlı link: #blog/<slug>
+        var found = findBlogIndexBySlug(postParam, blogPosts);
+        if (found >= 0) {
+          post = blogPosts[found];
+          slug = postParam;
+        }
       }
 
-      var post = blogPosts[postIndex];
-      var snippet = (post && post.text) ? post.text.replace(/<\/?[^>]+(>|$)/g, "").substring(0, 150) + '...' : '';
+      if (post) {
+        var snippet = post.text ? post.text.replace(/<\/?[^>]+(>|$)/g, "").substring(0, 150) + '...' : '';
 
-      // Bu spesifik makaleye özel SEO Başlığı ve Özeti
-      updateSEO(
-        post.title,
-        snippet,
-        '#blog/' + postIndex
-      );
+        // Bu spesifik makaleye özel SEO Başlığı ve Özeti (canonical slug ile)
+        updateSEO(post.title, snippet, '#blog/' + slug);
 
-      if (listEl && typeof BlogList === 'function') {
-        BlogList(listEl, blogPosts, postIndex);
+        if (listEl && typeof BlogList === 'function') {
+          // BlogList identifier'ı (sayı ya da slug) kendisi çözer
+          BlogList(listEl, blogPosts, isNumeric ? parseInt(postParam, 10) : slug);
+        }
+        return;
       }
-    } else {
-      // Genel Blog Listesi Görünümü (#blog)
-      updateSEO(
-        'Blog & Bilimsel Makaleler',
-        'Probiyotik teknoloji, mikrobiyom sağlığı, sürdürülebilirlik ve biyolojik hijyen hakkında en güncel makaleler ve bilimsel yayınlar.',
-        '#blog'
-      );
+    }
 
-      if (listEl && typeof BlogList === 'function') {
-        BlogList(listEl, blogPosts);
-      }
+    // Genel Blog Listesi Görünümü (#blog) ya da bulunamayan slug
+    updateSEO(
+      'Blog & Bilimsel Makaleler',
+      'Probiyotik teknoloji, mikrobiyom sağlığı, sürdürülebilirlik ve biyolojik hijyen hakkında en güncel makaleler ve bilimsel yayınlar.',
+      '#blog'
+    );
+
+    if (listEl && typeof BlogList === 'function') {
+      BlogList(listEl, blogPosts);
     }
   }
 

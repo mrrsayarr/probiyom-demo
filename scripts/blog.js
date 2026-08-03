@@ -2,20 +2,28 @@
    BlogList – Switches between list overview and dedicated reading view
    =================================================================== */
 
-function BlogList(container, posts, initialPostIndex) {
+function BlogList(container, posts, initialIdentifier) {
   if (!posts || posts.length === 0) {
     container.innerHTML = '<div class="empty-state">Henüz blog yazısı eklenmedi.</div>';
     return;
   }
 
-  // Eğer adres satırından doğrudan bir makale indeksi verilmişse (#blog/0 gibi)
-  if (initialPostIndex !== undefined && initialPostIndex !== null && !isNaN(initialPostIndex)) {
-    var idx = parseInt(initialPostIndex, 10);
-    if (idx >= 0 && idx < posts.length) {
-      renderDetailView(idx);
+  // Adres satırından gelen identifier bir "sayı" (eski #blog/0) ya da "slug" (#blog/<slug>) olabilir.
+  // Slug, başlıktan türetildiği için yeni yazı eklense de mevcut yazıların URL'i asla kaymaz.
+  var viewIndex = -1;
+  if (initialIdentifier !== undefined && initialIdentifier !== null && initialIdentifier !== '') {
+    if (/^\d+$/.test(String(initialIdentifier))) {
+      // Geriye dönük uyumluluk: #blog/0 tarzı sayısal linkler hâlâ çalışır
+      var idx = parseInt(initialIdentifier, 10);
+      if (idx >= 0 && idx < posts.length) viewIndex = idx;
     } else {
-      renderListView();
+      var found = findBlogIndexBySlug(initialIdentifier, posts);
+      if (found >= 0) viewIndex = found;
     }
+  }
+
+  if (viewIndex >= 0) {
+    renderDetailView(viewIndex);
   } else {
     renderListView();
   }
@@ -40,7 +48,7 @@ function BlogList(container, posts, initialPostIndex) {
 
       html +=
         '<div class="col">' +
-        '<article class="blog-post h-100 border border-light-subtle rounded-3 overflow-hidden d-flex flex-column shadow-sm bg-white cursor-pointer" data-index="' + i + '">' +
+        '<article class="blog-post h-100 border border-light-subtle rounded-3 overflow-hidden d-flex flex-column shadow-sm bg-white cursor-pointer" data-index="' + i + '" data-slug="' + blogSlug(post) + '">' +
         imageHtml +
         '<div class="blog-post-body p-4 d-flex flex-column justify-content-between flex-grow-1">' +
         '<div>' +
@@ -60,12 +68,17 @@ function BlogList(container, posts, initialPostIndex) {
 
     container.innerHTML = html;
 
-    // Karta tıklandığında adres satırındaki hash değerini günceller (#blog/0)
+    // Karta tıklandığında adres satırındaki hash değerini SEO dostu slug ile günceller (#blog/<slug>)
     var cards = container.querySelectorAll('.blog-post');
     cards.forEach(function (card) {
       card.addEventListener('click', function () {
-        var idx = parseInt(this.getAttribute('data-index'), 10);
-        window.location.hash = '#blog/' + idx; // Adres satırını güncelleyerek router'ı tetikler
+        var slug = this.getAttribute('data-slug');
+        if (slug) {
+          window.location.hash = '#blog/' + slug; // Adres satırını güncelleyerek router'ı tetikler
+        } else {
+          var idx = parseInt(this.getAttribute('data-index'), 10);
+          window.location.hash = '#blog/' + idx; // Yedek: slug yoksa sayısal indeks
+        }
       });
     });
   }
