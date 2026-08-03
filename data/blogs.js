@@ -3,25 +3,26 @@
    =================================================================== */
 
 var blogPosts = [
-   {
+
+  {
     title: "Alerjinizi Tetikleyen Şey Toz mu, PET mi yoksa Polen mi? Yoksa Görünmeyen Mikrobiyal Dengesizlik mi?",
-    text: `<strong>Her gün saatlerce temizlik yapıyoruz.</strong>
-Peki neden evlerde, okullarda, hastanelerde ve iş yerlerinde alerjenler bu kadar hızlı geri dönüyor?
-Çünkü geleneksel kimyasal temizlik çoğu zaman yalnızca anı temizler. \n
-<strong>Bilim ise artık farklı bir yaklaşım öneriyor:</strong> \nYüzey mikrobiyomunu yönetmek.\n
-Klinik çalışmalar, probiyotik bazlı temizlik teknolojilerinin yüzeylerde faydalı bakterilerin oluşturduğu dengeli bir mikrobiyal ekosistem sayesinde organik kirlerin parçalanmasına yardımcı olduğunu, zararlı mikroorganizmaların yeniden çoğalmasını baskılayabildiğini ve daha sürdürülebilir bir hijyen sağladığını göstermektedir. Aynı zamanda bazı çalışmalarda antibiyotik direnç genlerinin azalması ve çevresel mikrobiyal dengenin iyileşmesi de rapor edilmiştir.
-Bu neden önemli?
-Çünkü ev tozu akarları, polenler, evcil hayvan kaynaklı alerjenler ve diğer organik alerjenler; biriken organik kalıntılarla birlikte yüzeylerde uzun süre kalabilir. Organik kirlerin biyolojik olarak parçalanmasını destekleyen probiyotik temizlik teknolojileri, alerjen yükünün azaltılmasına katkı sağlayarak daha sağlıklı yaşam alanlarının oluşturulmasına yardımcı olabilir.
-Artık soru şu değil:
-"Yüzeyi ne kadar temizlediniz?"
-Asıl soru şu:
-"Yüzeyde nasıl bir mikrobiyal denge bıraktınız?"
-Geleceğin hijyen anlayışı, yalnızca mikropları öldürmek değil; doğru mikrobiyal dengeyi oluşturmaktır`,
+    text: `Her gün saatlerce evimizi süpürüyor, siliyor ve dezenfekte ediyoruz. Peki neden evlerde, okullarda, hastanelerde ve iş yerlerinde ev tozu akarları, polenler ve evcil hayvan (PET) döküntüleri bu kadar hızlı geri dönüyor? Çünkü geleneksel kimyasal dezenfektanlar sadece anlık bir yüzey temizliği sağlar; kuruduktan hemen sonra koruyucu etkisini kaybeder ve ortamdaki hem zararlı hem de yararlı mikroflorayı öldürerek biyolojik bir boşluk yaratır.
+
+Bilim ve mikrobiyom araştırmaları artık çok daha sürdürülebilir bir yaklaşım öneriyor: <strong>Yüzey mikrobiyomunu doğru yönetmek.</strong> Klinik ve akademik çalışmalar, probiyotik bazlı temizlik teknolojilerinin yüzeylerde faydalı bakterilerden oluşan dengeli bir mikrobiyal ekosistem kurduğunu göstermektedir. Bu sayede organik kirler mikroskobik düzeyde parçalanır, zararlı patojenlerin yeniden çoğalması biyolojik olarak baskılanır ve 72 saate kadar kesintisiz bir koruma kalkanı elde edilir.
+
+Alerjen yükünün azaltılmasında probiyotik temizlik teknolojilerinin sağladığı temel biyolojik avantajlar şunlardır:
+
+- <strong>Ev Tozu Akarı (Mitelar) İzolasyonu:</strong> Kumaş ve tekstil liflerinin derinliklerindeki organik atıkları temizleyerek akarların besin kaynaklarını yok eder.
+- <strong>PET ve Polen Alerjenlerinin Baskılanması:</strong> Evcil hayvan döküntüleri, tükürük proteinleri ve bahar polenlerinin yüzeylerde tutunmasını ve solunum yollarına karışmasını engeller.
+- <strong>Dirençli Patojen ve AMR Azalımı:</strong> Kimyasal dezenfektanların aksine süper bakterilerin (AMR) antibiyotik direnç geni geliştirmesini ve ortama yayılmasını biyolojik yolla engeller.
+- <strong>72 Saat Kesintisiz Biyolojik Hijyen:</strong> Uygulama bittikten sonra dahi faydalı probiyotikler yüzeylerde canlı kalarak mikroskobik düzeyde derinlemesine temizlik yapmaya devam eder.
+
+Geleneksel temizlik yaklaşımlarının yarattığı kimyasal mumu hayatımızdan çıkardığımızda, cildimizin ve solunum yollarımızın 24 saat maruz kaldığı toksik yük de hafifler. Artık sorulması gereken soru <i>"Yüzeyi ne kadar agresif kimyasalla temizlediniz?"</i> değil, <strong>"Yüzeyde nasıl bir mikrobiyal denge bıraktınız?"</strong> olmalıdır. Geleceğin hijyen anlayışı, tüm mikroorganizmaları körü körüne yok etmek değil; doğru mikrobiyal dengeyi oluşturarak sağlığımızı ve gezegenimizi korumaktır.`,
     imageDir: "images/blogs/blog_6_alerjen2.webp",
     imageName: "alerjen sprey ve antialerjik probiyotik gücü"
   },
-   
-   {
+  
+  {
     title: "Çamaşır Yıkarken  Gizli Tehlike: Yumuşatıcılar Kalp Sağlığımızı Nasıl Etkiliyor?",
     text: `Evlerimizde <strong>temizlik ve tazelik</strong> hissiyle özdeşleştirdiğimiz bazı alışkanlıkların, sağlığımız üzerinde sandığımızdan çok daha derin izler bıraktığını biliyor muydunuz? Son dönemde yapılan bilimsel araştırmalar, çamaşır yumuşatıcılarının sadece çevreye değil, doğrudan kalp ve damar sağlığımıza da zarar verebileceğini gösteriyor.
 
