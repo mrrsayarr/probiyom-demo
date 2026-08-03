@@ -3,7 +3,25 @@
    =================================================================== */
 
 var blogPosts = [
-  {
+   {
+    title: "Alerjinizi Tetikleyen Şey Toz mu, PET mi yoksa Polen mi? Yoksa Görünmeyen Mikrobiyal Dengesizlik mi?",
+    text: `<strong>Her gün saatlerce temizlik yapıyoruz.</strong>
+Peki neden evlerde, okullarda, hastanelerde ve iş yerlerinde alerjenler bu kadar hızlı geri dönüyor?
+Çünkü geleneksel kimyasal temizlik çoğu zaman yalnızca anı temizler. \n
+<strong>Bilim ise artık farklı bir yaklaşım öneriyor:</strong> \nYüzey mikrobiyomunu yönetmek.\n
+Klinik çalışmalar, probiyotik bazlı temizlik teknolojilerinin yüzeylerde faydalı bakterilerin oluşturduğu dengeli bir mikrobiyal ekosistem sayesinde organik kirlerin parçalanmasına yardımcı olduğunu, zararlı mikroorganizmaların yeniden çoğalmasını baskılayabildiğini ve daha sürdürülebilir bir hijyen sağladığını göstermektedir. Aynı zamanda bazı çalışmalarda antibiyotik direnç genlerinin azalması ve çevresel mikrobiyal dengenin iyileşmesi de rapor edilmiştir.
+Bu neden önemli?
+Çünkü ev tozu akarları, polenler, evcil hayvan kaynaklı alerjenler ve diğer organik alerjenler; biriken organik kalıntılarla birlikte yüzeylerde uzun süre kalabilir. Organik kirlerin biyolojik olarak parçalanmasını destekleyen probiyotik temizlik teknolojileri, alerjen yükünün azaltılmasına katkı sağlayarak daha sağlıklı yaşam alanlarının oluşturulmasına yardımcı olabilir.
+Artık soru şu değil:
+"Yüzeyi ne kadar temizlediniz?"
+Asıl soru şu:
+"Yüzeyde nasıl bir mikrobiyal denge bıraktınız?"
+Geleceğin hijyen anlayışı, yalnızca mikropları öldürmek değil; doğru mikrobiyal dengeyi oluşturmaktır`,
+    imageDir: "images/blogs/blog_6_alerjen2.webp",
+    imageName: "alerjen sprey ve antialerjik probiyotik gücü"
+  },
+   
+   {
     title: "Çamaşır Yıkarken  Gizli Tehlike: Yumuşatıcılar Kalp Sağlığımızı Nasıl Etkiliyor?",
     text: `Evlerimizde <strong>temizlik ve tazelik</strong> hissiyle özdeşleştirdiğimiz bazı alışkanlıkların, sağlığımız üzerinde sandığımızdan çok daha derin izler bıraktığını biliyor muydunuz? Son dönemde yapılan bilimsel araştırmalar, çamaşır yumuşatıcılarının sadece çevreye değil, doğrudan kalp ve damar sağlığımıza da zarar verebileceğini gösteriyor.
 
