@@ -13,7 +13,7 @@ Probiyotikler ise yüzeye uygulandıklarında canlı ve aktif yapılarını koru
 Bu teknolojinin etkinliği; bağımsız araştırmacılar, laboratuvar testleri ve bilimsel çalışmalarla desteklenmektedir. Çünkü gerçek güven, vaatlerden değil, bilimsel kanıtlardan doğar.
 <strong>Bize Değil, Bilime Güvenin</strong>`,
     imageDir: "images/blogs/blog_7_enzim1.webp",
-    imageName: "Enzim ile temzilik Probiyotiklelre temizlik yerine geçmez. Probiyotikler 72 saate kadar enizm üretmeye devam eder"
+    imageName: "Enzim ile temizlik Probiyotiklelre temizlik yerine geçmez. Probiyotikler 72 saate kadar enzim üretmeye devam eder"
   },
    
    {
