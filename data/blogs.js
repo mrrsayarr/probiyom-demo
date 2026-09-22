@@ -4,7 +4,19 @@
 
 var blogPosts = [
 
-  {
+ {
+    title: "Temizlikte Enzimler Probiyotiklerin Yerine Geçmez",
+    text: `Temizlik teknolojilerinde sıkça karıştırılan iki kavram olan enzimler ve probiyotikler, yüzey temizliğinde tamamen farklı mekanizmalarla çalışır. Birçok kişi enzimatik temizleyicilerin probiyotikli ürünlerle aynı işlevi gördüğünü düşünse de bu iki içerik birbirinin doğrudan alternatifi değildir. Aralarındaki farkı doğru anlamak, yüzeylerde sağlanan hijyenin kalitesini ve kalıcılığını doğrudan etkiler.
+Anlaşılır bir benzetmeyle ifade etmek gerekirse: <strong>Enzimler aracılık yapar, probiyotikler ise bu araçları üretir ve çoğaltır.</strong> Enzimler, yüzeydeki belirli organik kirleri ve kalıntıları parçalamak üzere tasarlanmış biyolojik işçilerdir. Kir moleküllerini hızla bağlar ve bölerler; ancak görevleri bittiğinde veya tükendiklerinde yeniden oluşmazlar. Sınırlı bir çalışma süreleri ve kapasiteleri vardır.
+Probiyotikler ise yüzeye uygulandıklarında canlı ve aktif yapılarını koruyarak sürekli bir üretim döngüsü başlatırlar. Ortamda organik kalıntı ve uygun koşullar bulunduğu sürece probiyotikler yüzeyde çoğalır ve ihtiyaç duyulan enzimlerı kesintisiz olarak üretmeye devam eder. Senbiyotik temizlik konseptinde yer alan prebiyotikler ise bu canlı mikroorganizmaların yüzeye tutunup hızlıca aktif hale gelmesini sağlayan ilk enerji ve besin kaynağını sunar.
+Özetle, sadece enzim içeren bir ürün kullandığınızda yüzeye hazır araçlar bırakırsınız ve bu araçlar kısa sürede tükenir. Probiyotik ve prebiyotik destekli sinbiyotik bir temizlik tercih ettiğinizde ise yüzeye sürekli yeni araçlar üreten fabrikalar kurmuş olursunuz. İşte bu yüzden temizlikte enzimler probiyotiklerin yerini tutamaz; gerçek ve uzun süreli hijyen, sürekli enzim üreten canlı bir ekosistemle mümkündür.
+Bu teknolojinin etkinliği; bağımsız araştırmacılar, laboratuvar testleri ve bilimsel çalışmalarla desteklenmektedir. Çünkü gerçek güven, vaatlerden değil, bilimsel kanıtlardan doğar.
+<strong>Bize Değil, Bilime Güvenin</strong>`,
+    imageDir: "images/blogs/blog_7_enzim1.webp",
+    imageName: "Enzim ile temzilik Probiyotiklelre temizlik yerine geçmez. Probiyotikler 72 saate kadar enizm üretmeye devam eder"
+  },
+   
+   {
     title: "Alerjinizi Tetikleyen Şey Toz mu, PET mi yoksa Polen mi? Yoksa Görünmeyen Mikrobiyal Dengesizlik mi?",
     text: `Her gün saatlerce evimizi süpürüyor, siliyor ve dezenfekte ediyoruz. Peki neden evlerde, okullarda, hastanelerde ve iş yerlerinde ev tozu akarları, polenler ve evcil hayvan (PET) döküntüleri bu kadar hızlı geri dönüyor? Çünkü geleneksel kimyasal dezenfektanlar sadece anlık bir yüzey temizliği sağlar; kuruduktan hemen sonra koruyucu etkisini kaybeder ve ortamdaki hem zararlı hem de yararlı mikroflorayı öldürerek biyolojik bir boşluk yaratır.
 
