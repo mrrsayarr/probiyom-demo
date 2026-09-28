@@ -22,6 +22,7 @@
 
     <!-- Canonical URL (Google Çift İçerik / Dizinleme Kararlılığı) -->
     <link rel="canonical" href="https://www.probiyom.com/">
+    <link rel="describedby" href="/llms.txt" type="text/markdown">
 
     <!-- Open Graph / WhatsApp / Facebook / LinkedIn Paylaşım Etiketleri -->
     <meta property="og:locale" content="tr_TR">
@@ -160,8 +161,18 @@
         <main class="app-main">
             <div class="content-column" id="page-content">
 
-                <!-- Botlar ve SEO için geçici özet -->
-                <article class="seo-initial-content p-4">
+                <!-- Dinamik ana sayfa yüklenirken ilk ekran yüksekliğini korur ve CLS'yi önler. -->
+                <div class="initial-home-placeholder" aria-hidden="true">
+                    <div class="initial-home-placeholder-frame">
+                        <img src="images/homepage_sliders/hp_1.webp" alt="" width="1280" height="720"
+                            fetchpriority="high" decoding="async">
+                    </div>
+                    <div class="initial-slider-controls-placeholder"></div>
+                </div>
+
+                <!-- JavaScript kapalıysa temel içerik ve gezinme bağlantıları erişilebilir kalır. -->
+                <noscript>
+                    <article class="seo-initial-content p-4">
                     <h1 class="fs-2 fw-bold text-dark mb-3">Probiyotik Temizlik Ürünleri ve Teknolojisi | Probiyom</h1>
 
                     <p class="text-muted lh-relaxed mb-3">
@@ -197,7 +208,8 @@
                             <li><a href="#contact" class="text-decoration-none">İletişim</a></li>
                         </ul>
                     </nav>
-                </article>
+                    </article>
+                </noscript>
 
             </div>
         </main>

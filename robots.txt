@@ -1,9 +1,8 @@
 User-agent: *
 Allow: /
 
-# Yapay zeka asistanlarının marka ve blog
-# içerikleri doğru kaynak olarak kullanabilmesi için:
-Sitemap: https://www.probiyom.com/llms.txt
+# Yapay zeka asistanları için site özeti:
+# https://www.probiyom.com/llms.txt
 
 # Ana Site Haritası
 Sitemap: https://www.probiyom.com/sitemap.xml

@@ -4,6 +4,31 @@
   width: 100%;
 }
 
+/* Router ana sayfayı getirene kadar nihai slider ile aynı alanı ayırır. */
+.initial-home-placeholder-frame {
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 1.25rem;
+  background: #fff;
+}
+
+.initial-home-placeholder-frame img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.initial-slider-controls-placeholder {
+  width: 11.5rem;
+  height: 3.2rem;
+  margin: 1rem auto 0;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 50px;
+  background: #f8f9fa;
+}
+
 /* 
    İyileştirilmiş Sınır Çizgili Çerçeve Yapısı
    Hafif modern kenarlık ve yumuşak oval köşeler entegre edilmiştir.
@@ -220,6 +245,14 @@
 
 /* Mobil İyileştirmeleri */
 @media (max-width: 768px) {
+
+  .initial-home-placeholder-frame {
+    aspect-ratio: 16 / 10;
+  }
+
+  .initial-slider-controls-placeholder {
+    height: 2.75rem;
+  }
 
   /* Mobil Ekranlarda Oranları Koruyoruz */
   #home-slider .slider-image-container {
