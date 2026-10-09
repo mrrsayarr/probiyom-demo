@@ -150,3 +150,23 @@
   color: var(--color-text);
   font-weight: 700;
 }
+
+.blog-detail-text a {
+  color: #0969da;
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+.blog-detail-text a:hover,
+.blog-detail-text a:focus-visible {
+  color: var(--color-baltic-blue);
+  text-decoration-thickness: 2px;
+}
+
+.blog-detail-text a:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+  border-radius: 2px;
+}
