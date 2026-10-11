@@ -19,15 +19,15 @@ var faqs = [
     answer: "Kimyasal temizleyiciler zararlı maddeler içerebilir ve yüzeylerde kalıntı bırakabilirken, probiyotik temizleyiciler doğal mikroorganizmaları kullanır. Zararlı kimyasallar içermez, çevre dostudur ve evdekimikrobiyal dengeyi korur."
   },   
   {
- question: "Probiyotik temizleyicilerin kokusu var mıdır?",
- answer: "Probiyotik temizleyiciler, kötü kokuları maskelemek yerine kokuya neden olan organik maddeleri yok eder. Bu sayede genellikle hafif ve doğal bir kokuya sahiptirler veya kokusuzdurlar, ferah bir atmosfer bırakırlar.
+    question: "Probiyotik temizleyicilerin kokusu var mıdır?",
+    answer: "Probiyotik temizleyiciler, kötü kokuları maskelemek yerine kokuya neden olan organik maddeleri yok eder. Bu sayede genellikle hafif ve doğal bir kokuya sahiptirler veya kokusuzdurlar, ferah bir atmosfer bırakırlar.
 },
 {
- question: "Probiyotik temizleyiciler ne sıklıkla kullanılmalıdır?",
- answer: "Probiyotik temizleyicilerin kalıcı etkisi sayesinde, geleneksel temizleyicilere göre daha az sıklıkta kullanımla bile uzun süreli hijyen sağlanır. Genellikle haftalık rutin temizlikler için yeterlidirler, ancak yoğun kirlilik durumlarında daha sık kullanılabilirler."
+    question: "Probiyotik temizleyiciler ne sıklıkla kullanılmalıdır?",
+    answer: "Probiyotik temizleyicilerin kalıcı etkisi sayesinde, geleneksel temizleyicilere göre daha az sıklıkta kullanımla bile uzun süreli hijyen sağlanır. Genellikle haftalık rutin temizlikler için yeterlidirler, ancak yoğun kirlilik durumlarında daha sık kullanılabilirler."
 },
  {
-  question: "Heiq VivoTech Zemin ve İç Mekan ürünleri arasında ki fark nedir?",
-  answer: "İç mekan hertürlü masa tezgah kapı vs gibi sert yüzeylerde kullanılırken Zemin adı üsütünde suya dayanıklı hertürlü zemin ve yer temizliğinde kullanılır. Her ikisi de toza karşı uzun süreli etki yaratı."
+    question: "Heiq VivoTech Zemin ve İç Mekan ürünleri arasında ki fark nedir?",
+    answer: "İç mekan hertürlü masa tezgah kapı vs gibi sert yüzeylerde kullanılırken Zemin adı üsütünde suya dayanıklı hertürlü zemin ve yer temizliğinde kullanılır. Her ikisi de toza karşı uzun süreli etki yaratı."
   },
 ];
