@@ -171,12 +171,18 @@ function BlogList(container, posts, initialIdentifier) {
 
   function formatBlogText(text) {
     if (!text) return '';
-    var paragraphs = text.split('\n\n');
+    var paragraphs = text.split(/\r?\n[ \t]*\r?\n/);
     var result = '';
 
     for (var i = 0; i < paragraphs.length; i++) {
       var pText = paragraphs[i].trim();
       if (!pText) continue;
+
+      // Başlıkları paragraf içine almadan koru; <p><h2> geçerli HTML değildir.
+      if (/^<h([2-6])\b[^>]*>[\s\S]*<\/h\1>$/i.test(pText)) {
+        result += pText;
+        continue;
+      }
 
       if (pText.indexOf('\n-') !== -1 || pText.indexOf('- ') === 0) {
         var lines = pText.split('\n');

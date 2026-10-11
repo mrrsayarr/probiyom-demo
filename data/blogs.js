@@ -6,7 +6,8 @@ var blogPosts = [
 
  {
     title: "Probiyotik Temizliğin Gücü: Uzun Süreli ve Mikrobiyom Dostu Hijyen",
-    text: `<strong>Probiyotik Temizliğin Gücü: Evde Sağlıklı ve Kalıcı Hijyen</strong>
+    text: `<h2>Probiyotik Temizliğin Gücü: Evde Sağlıklı ve Kalıcı Hijyen</h2>
+
 Zararlı kimyasallardan arınmış, mikrobiyom dostu yaşam alanları yaratın ve sağlıklı bir gelecek inşa edin.
 
 Günümüz dünyasında, yaşam alanlarımızı temiz tutma arzumuz hiç olmadığı kadar güçlüdür. Geleneksel temizlik ürünleri genellikle sert kimyasallar içerir ve kısa süreli hijyen sağlarken, ardında gözle görünmeyen kalıntılar bırakabilir.
@@ -15,11 +16,11 @@ Bu kimyasallar sadece çevreye zarar vermekle kalmaz, aynı zamanda evimizdeki m
 
 İşte tam da bu noktada, probiyotik temizlik kavramı ön plana çıkmaktadır. Ev temizliğinde probiyotik kullanımı, sadece yüzeyleri temizlemekle kalmaz, aynı zamanda uzun vadeli ve sağlıklı bir ortam yaratır.
 
-Bu yenilikçi yaklaşım, zararlı bakterilerle savaşırken faydalı mikroorganizmaları destekler. Evinizde <Strong>kalıntısız, derinlemesine ve doğayla uyumlu bir hijyen</strong> sağlamanın kapılarını aralar. Probiyotikler, geleceğin temizlik anlayışını bugünden evlerimize taşıyor.
+Bu yenilikçi yaklaşım, zararlı bakterilerle savaşırken faydalı mikroorganizmaları destekler. Evinizde <strong>kalıntısız, derinlemesine ve doğayla uyumlu bir hijyen</strong> sağlamanın kapılarını aralar. Probiyotikler, geleceğin temizlik anlayışını bugünden evlerimize taşıyor.
 
 Geleneksel temizlik anlayışının ötesine geçerek, evlerimizde sağlıklı ve dengeli bir mikrobiyom oluşturmak artık mümkündür. Probiyotik temizleyiciler, hem siz hem de sevdikleriniz için daha güvenli bir yaşam alanı sunar. Bu yöntem, sürdürülebilir bir gelecek için atılan önemli bir adımdır.
 
-<strong>Probiyotik Temizliğin Geleneksel Yöntemlerden Farkı</strong>
+<h2>Probiyotik Temizliğin Geleneksel Yöntemlerden Farkı</h2>
 
 Geleneksel temizlik ürünleri genellikle yüzeydeki tüm bakterileri, iyisiyle kötüsüyle yok etmeyi hedefler. Bu "steril" ortam yaratma çabası, kısa vadede etkili gibi görünse de uzun vadede ciddi sorunlara yol açabilir. Faydalı bakterilerin de yok olması, zararlı patojenlerin daha dirençli hale gelmesine zemin hazırlar.
 
@@ -35,7 +36,7 @@ Bu yöntem, yüzeylerin görünenden daha derinlemesine temizlenmesini sağlar. 
 
 Geleneksel temizleyicilerin aksine, probiyotikler çevreye zararlı atıklar bırakmaz. Atık sulara karışan probiyotikler, su arıtma sistemlerine dahi olumlu katkılar sağlayabilir. Bu yönüyle sürdürülebilirlik hedeflerine de hizmet eder. Dolayısıyla, probiyotik temizlik, hem eviniz hem de gezegenimiz için daha iyi bir seçenektir.
 
-<strong>Evdeki Mikrobiyal Dengeyi Destekleme ve Mikrobiyom Dostu Yaşam Alanları</strong>
+<h2>Evdeki Mikrobiyal Dengeyi Destekleme ve Mikrobiyom Dostu Yaşam Alanları</h2>
 
 Evlerimiz, sandığımızdan çok daha karmaşık bir mikrobiyal ekosisteme sahiptir. Geleneksel temizlik ürünleri, bu hassas dengeyi bozarak, "iyi" ve "kötü" bakterileri ayrım gözetmeksizin yok eder. Bu durum, alerjilere, astıma ve diğer sağlık sorunlarına yol açabilecek patojenlerin çoğalmasına zemin hazırlayabilir.
 
@@ -52,7 +53,7 @@ Probiyotik temizleyiciler, özellikle alerjisi veya hassasiyeti olan kişiler i�
 Sonuç olarak, probiyotik temizlik, sadece fiziksel kirden arınma meselesi değildir. Aynı zamanda evinizde yaşayan herkesin sağlığını destekleyen bütünsel bir yaklaşım sunar. Bu yöntem, <strong>modern hijyen anlayışının vazgeçilmez bir parçası</strong> haline gelmektedir. Böylece eviniz hem temiz hem de
 biyolojik olarak dengeli hale gelir.
 
-<strong>Kalıcı Temizlik ve Kötü Kokulara Doğal Çözümler</strong>
+<h2>Kalıcı Temizlik ve Kötü Kokulara Doğal Çözümler</h2>
 
 Geleneksel temizlik ürünleriyle elde edilen parlaklık ve temizlik hissi genellikle kısa sürelidir. Yüzeyler kısa zamanda tekrar kirlenir ve kötü kokular geri döner. Bunun nedeni, kimyasalların sadece yüzeydeki kirliliği geçici olarak gidermesi, ancak koku ve kirliliğin ana kaynaklarına inmemesidir.
 
@@ -68,7 +69,7 @@ Probiyotik temizleyiciler, özellikle mutfakta ve banyoda karşılaşılan inat�
 
 Bu uzun süreli etki, daha az sıklıkta temizlik yapmanızı sağlar ve zaman tasarrufu sunar. Aynı zamanda temizlik ürünlerinin tüketimini azaltarak bütçenize de katkıda bulunur. Probiyotiklerin bu derinlemesine ve kalıcı temizlik gücü, modern evlerin vazgeçilmez bir parçası olmaya adaydır. Özellikle büyük ölçekli uygulamalar ve endüstriyel alanlar için de probiyotik çözümler mevcuttur; örneğin <a href="#products/industrial_water_treatment">endüstriyel su arıtma</a> gibi.
 
-<strong>Uygulama Alanları ve Probiyotik Temizliğin Çeşitli Kullanım Şekilleri</strong>
+<h2>Uygulama Alanları ve Probiyotik Temizliğin Çeşitli Kullanım Şekilleri</h2>
 
 Probiyotik temizleyiciler, evinizin hemen her köşesinde güvenle kullanılabilir. Mutfaktan banyoya, zeminlerden yüzeylere kadar geniş bir uygulama yelpazesine sahiptir. Bu çok yönlülük, tek bir ürünle evinizin genel hijyenini sağlamanıza olanak tanır.
 
