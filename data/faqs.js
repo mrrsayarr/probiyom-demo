@@ -8,7 +8,7 @@
 var faqs = [
   {
     question: "Probiyotik temizlik ürünleri nedir ve nasıl çalışır?",
-    answer: "Probiyotik temizlik ürünlerimiz, <strong>faydalı bakterilerin (probiyotikler) ve onların besinlerinin (prebiyotikler)</strong> patentli birleşimini içerir. Yüzeylere uygulandıktan sonra sürekli enzim üreterek organik kirleri parçalar ve yüzeylerde dengeli bir mikrobiyom oluşmasına yardımcı olur. Bu sayede temizlik etkisi kuruduktan sonra da uzun süre devam eder."
+    answer: "Probiyotik temizlik ürünlerimiz, <strong>faydalı bakterilerin (probiyotikler) ve onların besinlerinin (prebiyotikler)</strong> patentli birleşimini içerir. Probiyotik temizlik, yüzeylere faydalı mikroorganizmaların (probiyotiklerin) uygulanması prensibine dayanır. Bu mikroorganizmalar, yüzeylerdeki organik kirleri ve kötü koku kaynaklarını biyolojik olarak parçalayarak derinlemesine ve kalıcı bir temizlik sağlarYüzeylere uygulandıktan sonra sürekli enzim üreterek organik kirleri parçalar ve yüzeylerde dengeli bir mikrobiyom oluşmasına yardımcı olur. Bu sayede temizlik etkisi kuruduktan sonra da uzun süre devam eder."
   },
   {
     question: "Probiyotik temizleyicilerin kimyasal temizleyicilerden farkı nedir?",
