@@ -12,11 +12,11 @@ var faqs = [
   },
   {
     question: "Probiyotik temizleyicilerin kimyasal temizleyicilerden farkı nedir?",
-    answer: "Evet, probiyotik temizleyiciler biyolojik ve doğal içeriklere sahip olduğu için evcil hayvanlar ve çocuklar için tamamen güvenlidir. Kimyasal kalıntı bırakmadıkları için alerjik reaksiyon riskini minimize ederler."
+    answer: " Kimyasal kalıntı bırakmadıkları için alerjik reaksiyon riskini minimize ederler.Kimyasal temizleyiciler zararlı maddeler içerebilir ve yüzeylerde kalıntı bırakabilirken, probiyotik temizleyiciler doğal mikroorganizmaları kullanır. Zararlı kimyasallar içermez, çevre dostudur ve evdekimikrobiyal dengeyi korur."
   },
    {
     question: "Evcil hayvanlar ve çocuklar için güvenli midir?",
-    answer: "Kimyasal temizleyiciler zararlı maddeler içerebilir ve yüzeylerde kalıntı bırakabilirken, probiyotik temizleyiciler doğal mikroorganizmaları kullanır. Zararlı kimyasallar içermez, çevre dostudur ve evdekimikrobiyal dengeyi korur."
+    answer: "Evet, probiyotik temizleyiciler biyolojik ve doğal içeriklere sahip olduğu için evcil hayvanlar ve çocuklar için tamamen güvenlidir."
   },   
   {
     question: "Probiyotik temizleyicilerin kokusu var mıdır?",
