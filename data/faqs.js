@@ -12,7 +12,7 @@ var faqs = [
   },
   {
     question: "Probiyotik temizleyicilerin kimyasal temizleyicilerden farkı nedir?",
-    answer: " Kimyasal kalıntı bırakmadıkları için alerjik reaksiyon riskini minimize ederler.Kimyasal temizleyiciler zararlı maddeler içerebilir ve yüzeylerde kalıntı bırakabilirken, probiyotik temizleyiciler doğal mikroorganizmaları kullanır. Zararlı kimyasallar içermez, çevre dostudur ve evdekimikrobiyal dengeyi korur."
+    answer: " Kimyasal kalıntı bırakmadıkları için alerjik reaksiyon riskini minimize ederler.Kimyasal temizleyiciler zararlı maddeler içerebilir ve yüzeylerde kalıntı bırakabilirken, probiyotik temizleyiciler doğal mikroorganizmaları kullanır. Zararlı kimyasallar içermez, çevre dostudur ve evdeki mikrobiyal dengeyi korur."
   },
    {
     question: "Evcil hayvanlar ve çocuklar için güvenli midir?",
