@@ -24,7 +24,7 @@ Alerji dostu, bebek güvenli ve evcil hayvan dostu temizlik stratejileriyle evin
 
 Evlerimiz, dış dünyadan korunmak için tasarlanmış olsa da, iç mekan havası kalitesi çoğu zaman göz ardı edilir. Oysa ki, dışarıdaki kirlilik kadar hatta bazen daha fazla alerjen ve kirletici, evimizin içinde birikebilir. Bu durum, özellikle alerjisi olan bireyler, astım hastaları ve hassas solunum sistemine sahip bebekler için ciddi sağlık riskleri oluşturur.
 
-En yaygın iç mekan alerjenleri arasında ev tozu akarları, evcil hayvan tüyleri ve derisi, küf sporları ve polenler yer alır. Bu mikropartiküller, halılarımızda, mobilyalarımızda ve hatta hava sirkülasyon sistemlerimizde kolayca barınabilir. Düzenli temizlik yapılmadığında veya yanlış yöntemler kullanıldığında, bu alerjenler havaya karışarak solunum yoluyla vücudumuza girebilir.
+En yaygın iç mekan alerjenleri arasında <a href="#products/home_cleaning">ev tozu akarları, evcil hayvan tüyleri ve derisi, küf sporları ve polenler</a>  yer alır. Bu mikropartiküller, halılarımızda, mobilyalarımızda ve hatta hava sirkülasyon sistemlerimizde kolayca barınabilir. Düzenli temizlik yapılmadığında veya yanlış yöntemler kullanıldığında, bu alerjenler havaya karışarak solunum yoluyla vücudumuza girebilir.
 
 Ev içi hava kalitesini artırmak için atılacak ilk adımlardan biri, alerjen kaynaklarını doğru bir şekilde tanımlamaktır. Yatak odası, genellikle en fazla toz akarı barındıran alandır; evcil hayvanlar ise tüy ve deri döküntüleriyle evdeki alerjen yükünü artırır. Banyo ve mutfak gibi nemli alanlar ise küf oluşumu için ideal ortamlar sunar.
 
