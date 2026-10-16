@@ -30,4 +30,28 @@ var faqs = [
     question: "Heiq VivoTech Zemin ve İç Mekan ürünleri arasında ki fark nedir?",
     answer: "İç mekan hertürlü masa tezgah kapı vs gibi sert yüzeylerde kullanılırken Zemin adı üsütünde suya dayanıklı hertürlü zemin ve yer temizliğinde kullanılır. Her ikisi de toza karşı uzun süreli etki yaratır."
   },
+   {
+    question: "Alerjisi olan bir evde en çok hangi temizlik ürünlerinden kaçınılmalıdır?",
+    answer: "Alerjisi olan bir evde, sentetik kokular, amonyak, klor ve fitalatlar içeren temizlik ürünlerinden kesinlikle kaçınılmalıdır. Bu kimyasallar, solunum yolu tahrişine ve alerjik reaksiyonlara neden olabilir."
+  },
+ {
+    question: "Bebekler için güvenli temizlik yaparken nelere özellikle dikkat etmeliyim?",
+    answer: "Bebekler için güvenli temizlik yaparken, kimyasal içermeyen, doğal bazlı ve hipoalerjenik ürünleri tercih etmelisiniz. Ayrıca, bebeklerin temas ettiği yüzeyleri sık sık temizlemeli ve oyuncaklarını düzenli olarak dezenfekte etmelisiniz."
+  },
+  {
+    question: "Evcil hayvan tüyleri ve alerjenlerini azaltmak için hangi yöntemler etkilidir?",
+    answer: "Evcil hayvan tüyleri ve alerjenlerini azaltmak için hayvanlarınızı düzenli olarak taramalı, yatak takımlarını yüksek sıcaklıkta yıkamalı ve HEPA filtreli elektrik süpürgesi kullanmalısınız. Mobilya kılıflarını sık sık temizlemek de önemlidir"
+  },
+   {
+    question: "Probiyotik temizlik ürünleri alerji ve bebek dostu evlerde nasıl bir fark yaratır?",
+    answer: "Probiyotik temizlik ürünleri, zararlı kimyasallar yerine faydalı mikroorganizmalar kullanarak yüzeylerde uzun süreli koruma sağlar. Bu sayede, alerjenleri ve kötü bakterileri azaltarak daha dengeli ve sağlıklı bir mikrobiyom oluşturur, alerji ve bebek dostu bir ortam sunar."
+  },
+   {
+    question: "Evdeki hava kalitesini doğal yollarla nasıl artırabilirim?",
+    answer: "Evdeki hava kalitesini doğal yollarla artırmak için düzenli havalandırma yapmalı, iç mekan bitkileri bulundurmalı ve kimyasal kokulu oda spreylerinden kaçınmalısınız. Ayrıca, nem seviyesini kontrol altında tutmak ve alerjenleri düzenli olarak temizlemek de önemlidir"
+  },
+   {
+    question: "",
+    answer: " "
+  },
 ];
