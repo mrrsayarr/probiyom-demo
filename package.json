@@ -3,6 +3,8 @@
   "private": true,
   "scripts": {
     "build": "node scripts/build-seo.cjs",
+    "predeploy": "npm run build",
+    "deploy": "npx wrangler deploy",
     "prestart": "npm run build",
     "start": "node serve.mjs"
   },
