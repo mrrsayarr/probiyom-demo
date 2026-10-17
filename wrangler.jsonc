@@ -1,14 +1,15 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "probiyom-demo",
-  "compatibility_date": "2026-07-28",
-  "observability": {
-    "enabled": true
-  },
+  "name": "probiyom-new",
+  "compatibility_date": "2026-08-04",
+  "main": "scripts/seo-worker.mjs",
+  "observability": { "enabled": true },
   "assets": {
-    "directory": "."
+    "directory": "dist",
+    "binding": "ASSETS",
+    "run_worker_first": true,
+    "not_found_handling": "none",
+    "html_handling": "none"
   },
-  "compatibility_flags": [
-    "nodejs_compat"
-  ]
+  "compatibility_flags": [ "nodejs_compat" ]
 }

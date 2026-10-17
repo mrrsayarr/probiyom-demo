@@ -2,31 +2,29 @@
    ImageSlider – GPU-Accelerated Dynamic Sliding Carousel
    =================================================================== */
 
-function ImageSlider(container, slides, durationMs) {
+function ImageSlider(container, slides, durationMs, options) {
   if (!slides || slides.length === 0) return;
+  options = options || {};
   durationMs = durationMs || 7000; // Slayt geçiş hızı 7 saniye
 
   var activeIndex = 0;
   var timer = null;
-  var isPaused = false;
+  var prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var isPaused = !!prefersReducedMotion;
   var slideElements = [];
   var pauseBtn = null;
   var counterSpan = null;
   var progressBar = null;
-
-  // HIZ OPTİMİZASYONU: Görselleri slider başlatılır başlatılmaz arka planda önbelleğe çeker
-  function preloadImages() {
-    slides.forEach(function (slide, idx) {
-      if (slide && slide.src) {
-        var img = new Image();
-        img.src = slide.src;
-      }
-    });
-  }
+  var destroyed = false;
+  var navigationVersion = 0;
 
   function init() {
     var wrapper = document.createElement('div');
     wrapper.className = 'slider-wrapper';
+    if (options.controls === 'top-right') wrapper.classList.add('slider-wrapper--controls-top-right');
+    wrapper.setAttribute('role', 'region');
+    wrapper.setAttribute('aria-roledescription', 'slayt gösterisi');
+    wrapper.setAttribute('aria-label', options.label || 'Görsel slaytlar');
 
     var frame = document.createElement('div');
     frame.className = 'slider-frame';
@@ -37,26 +35,38 @@ function ImageSlider(container, slides, durationMs) {
     slides.forEach(function (slide, index) {
       var slideDiv = document.createElement('div');
       slideDiv.className = 'slider-slide' + (index === 0 ? ' is-active' : '');
+      slideDiv.setAttribute('role', 'group');
+      slideDiv.setAttribute('aria-label', (index + 1) + ' / ' + slides.length);
 
-      var imgAttrs = index === 0
-        ? 'loading="eager" fetchpriority="high" decoding="sync"'
-        : 'loading="eager" decoding="async"';
-
-      var imageContainer = '<div class="slider-image-container">' +
-        '<img src="' + slide.src + '" alt="' + (slide.alt || '') + '" ' + imgAttrs + '>' +
-        '</div>';
+      var imageContainer = document.createElement('div');
+      imageContainer.className = 'slider-image-container';
+      var image = document.createElement('img');
+      image.setAttribute('data-src', slide.src);
+      image.alt = slide.alt || '';
+      image.loading = index === 0 ? 'eager' : 'lazy';
+      image.decoding = 'async';
+      if (index === 0) image.setAttribute('fetchpriority', 'high');
+      if (index === 0) setResponsiveImage(image, slide.src, '(max-width: 575px) 100vw, (max-width: 1440px) 84vw, 1140px');
+      imageContainer.appendChild(image);
 
       // AKILLI KONTROL: Sadece başlık verisi (title) dolu olan slaytlara metin kutusu ekler
-      var titleHtml = (slide.title && slide.title.trim().length > 0)
-        ? '<div class="slider-title"><p>' + slide.title + '</p></div>'
-        : '';
-
-      var innerContent = imageContainer + titleHtml;
-
+      var content = document.createDocumentFragment();
+      content.appendChild(imageContainer);
+      if (slide.title && slide.title.trim().length > 0) {
+        var title = document.createElement('div');
+        title.className = 'slider-title';
+        var titleText = document.createElement('p');
+        titleText.textContent = slide.title;
+        title.appendChild(titleText);
+        content.appendChild(title);
+      }
       if (slide.link) {
-        slideDiv.innerHTML = '<a href="' + slide.link + '">' + innerContent + '</a>';
+        var link = document.createElement('a');
+        link.href = slide.link;
+        link.appendChild(content);
+        slideDiv.appendChild(link);
       } else {
-        slideDiv.innerHTML = innerContent;
+        slideDiv.appendChild(content);
       }
 
       track.appendChild(slideDiv);
@@ -77,7 +87,8 @@ function ImageSlider(container, slides, durationMs) {
     // Birleşik Cam Kontrol Paneli (Control Dock)
     if (slides.length > 1) {
       var dockContainer = document.createElement('div');
-      dockContainer.className = 'slider-dock-container d-flex justify-content-center mt-3';
+      dockContainer.className = 'slider-dock-container d-flex justify-content-center' +
+        (options.controls === 'top-right' ? '' : ' mt-3');
 
       var controlDock = document.createElement('div');
       controlDock.className = 'slider-control-dock';
@@ -134,7 +145,6 @@ function ImageSlider(container, slides, durationMs) {
     container.appendChild(wrapper);
     
     updateDOM();
-    preloadImages(); // Slayt başlatılınca diğer resimleri arka planda indirir
   }
 
   function updatePauseButton() {
@@ -155,10 +165,11 @@ function ImageSlider(container, slides, durationMs) {
     var nextIdx = (currentIdx + 1) % slides.length;
     var nextSlide = slides[nextIdx];
     if (nextSlide && nextSlide.src) {
-      var img = new Image();
-      img.src = nextSlide.src;
-      if (img.decode) {
-        img.decode().catch(function () {});
+      var img = slideElements[nextIdx].querySelector('img');
+      if (!img.getAttribute('src')) {
+        img.loading = 'eager';
+        img.setAttribute('fetchpriority', 'low');
+        setResponsiveImage(img, nextSlide.src, '(max-width: 575px) 100vw, (max-width: 1440px) 84vw, 1140px');
       }
     }
   }
@@ -167,8 +178,12 @@ function ImageSlider(container, slides, durationMs) {
     slideElements.forEach(function (slide, idx) {
       if (idx === activeIndex) {
         slide.classList.add('is-active');
+        slide.removeAttribute('inert');
+        slide.setAttribute('aria-hidden', 'false');
       } else {
         slide.classList.remove('is-active');
+        slide.setAttribute('inert', '');
+        slide.setAttribute('aria-hidden', 'true');
       }
     });
 
@@ -183,8 +198,10 @@ function ImageSlider(container, slides, durationMs) {
 
     if (progressBar) {
       progressBar.style.animationDuration = durationMs + 'ms';
+      var replacement = progressBar.cloneNode(false);
+      progressBar.replaceWith(replacement);
+      progressBar = replacement;
       progressBar.classList.remove('is-animating');
-      void progressBar.offsetWidth; // Reflow
       
       if (!isPaused) {
         progressBar.classList.add('is-animating');
@@ -194,10 +211,10 @@ function ImageSlider(container, slides, durationMs) {
       }
     }
 
-    preloadNextSlide(activeIndex);
   }
 
   function togglePause() {
+    if (destroyed) return;
     isPaused = !isPaused;
     if (isPaused) {
       clearTimeout(timer);
@@ -216,32 +233,46 @@ function ImageSlider(container, slides, durationMs) {
   }
 
   function goTo(idx) {
-    activeIndex = idx;
+    if (destroyed) return;
     clearTimeout(timer);
     timer = null;
-    updateDOM();
-    if (!isPaused) {
-      scheduleNext();
+    var version = ++navigationVersion;
+    var image = slideElements[idx].querySelector('img');
+    image.loading = 'eager';
+    image.setAttribute('fetchpriority', 'high');
+    if (!image.getAttribute('src')) setResponsiveImage(image, slides[idx].src, '(max-width: 575px) 100vw, (max-width: 1440px) 84vw, 1140px');
+    function commit() {
+      if (destroyed || version !== navigationVersion) return;
+      activeIndex = idx;
+      updateDOM();
+      if (!isPaused) scheduleNext();
     }
+    if (!image.complete && image.decode) image.decode().catch(function () {}).then(commit);
+    else commit();
   }
 
   function scheduleNext() {
+    if (destroyed) return;
     if (slides.length <= 1) return;
     if (isPaused) return;
     
     timer = setTimeout(function () {
-      activeIndex = (activeIndex + 1) % slides.length;
-      updateDOM();
-      scheduleNext();
+      goTo((activeIndex + 1) % slides.length);
     }, durationMs);
   }
 
   init();
+  var initialImage = slideElements[0].querySelector('img');
+  if (initialImage.decode) initialImage.decode().catch(function () {}).then(function () {
+    if (!destroyed) preloadNextSlide(0);
+  });
   if (!isPaused) scheduleNext();
 
   return {
     destroy: function () {
+      destroyed = true;
       clearTimeout(timer);
+      timer = null;
     },
   };
 }

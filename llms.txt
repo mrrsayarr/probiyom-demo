@@ -1,38 +1,124 @@
 # Probiyom - Probiyotik ve Sinbiyotik Teknolojisi
 
-> Probiyom, IDOL Invest bünyesinde faaliyet gösteren; patentli HeiQ Chrisal ve HeiQ VivoTech teknolojileriyle doğal, biyolojik ve sürdürülebilir hijyen çözümleri sunan bir markadır.
+- [Sayfayı ziyaret et](https://www.probiyom.com/)
 
-Probiyom; probiyotik ve prebiyotik bazlı profesyonel temizlik, ev temizliği, kişisel bakım, hayvancılık, evcil hayvan bakımı ve endüstriyel su arıtma ürünleri sunar.
+> Probiyom, IDOL Invest bünyesinde faaliyet gösteren; patentli HeiQ Chrisal ve HeiQ VivoTech teknolojileri ile %100 doğal, biyolojik ve sürdürülebilir hijyen çözümleri sunan bir markadır. Probiyotik ve prebiyotik bazlı temizlik, kişisel bakım ve endüstriyel ürünler geliştirir.
 
-## Temel Sayfalar
+## Sayfalar
 
-- [Ana sayfa](https://www.probiyom.com/): Probiyom markası, probiyotik ve sinbiyotik teknoloji hakkında genel bilgi.
-- [Hakkımızda](https://www.probiyom.com/#about): Probiyom'un yaklaşımı, teknolojisi ve kurumsal bilgileri.
-- [Ürünler](https://www.probiyom.com/#products): Tüm ürün gruplarının kataloğu.
-- [Blog](https://www.probiyom.com/#blog): Probiyotik teknoloji, mikrobiyom, hijyen ve sürdürülebilirlik makaleleri.
-- [Sıkça Sorulan Sorular](https://www.probiyom.com/#faq): Ürünler ve probiyotik temizlik teknolojisi hakkında yanıtlar.
-- [İletişim](https://www.probiyom.com/#contact): Probiyom iletişim ve adres bilgileri.
+- [Ana Sayfa](https://www.probiyom.com/)
+- [Hakkımızda](https://www.probiyom.com/about/)
+- [Ürünlerimiz](https://www.probiyom.com/products/)
+- [Blog](https://www.probiyom.com/blog/)
+- [Sıkça Sorulan Sorular](https://www.probiyom.com/faq/)
+- [İletişim](https://www.probiyom.com/contact/)
 
-## Ürün Grupları
+## Blog Yazıları ve Kaynaklar
 
-- [Profesyonel Temizlik Ürünleri](https://www.probiyom.com/#products/professional_cleaning): Profesyonel alanlar için probiyotik temizlik çözümleri.
-- [Ev Temizlik Ürünleri](https://www.probiyom.com/#products/home_cleaning): Ev ve yaşam alanlarına yönelik temizlik ürünleri.
-- [Kişisel Bakım Ürünleri](https://www.probiyom.com/#products/personal_care): Cilt mikrobiyomunu destekleyen kişisel bakım ürünleri.
-- [Soğuk Sis ve Püskürtme Ürünleri](https://www.probiyom.com/#products/cold_mist_spraying): Geniş ve ulaşılması zor alanlara yönelik uygulama çözümleri.
-- [Endüstriyel Su Arıtma Ürünleri](https://www.probiyom.com/#products/industrial_water_treatment): Biyofilm ve organik birikime yönelik endüstriyel çözümler.
-- [Hayvancılık Ürünleri](https://www.probiyom.com/#products/livestock): Hayvan yaşam alanlarında mikrobiyal dengeyi destekleyen çözümler.
-- [Evcil Hayvan Ürünleri](https://www.probiyom.com/#products/pet): Evcil hayvan ve yaşam alanlarına yönelik bakım ürünleri.
+### Alerji, Bebek ve Evcil Hayvan Dostu Temizlik: Güvenli Yaşam Alanları
+- [Sayfayı ziyaret et](https://www.probiyom.com/blog/alerji-bebek-ve-evcil-hayvan-dostu-temizlik-guvenli-yasam-alanlari/)
+Özet: HEPA filtreli süpürgeler, nem kontrolü, yüzeye uygun temizlik ve ürün etiketi üzerinden ev bakımını ele alır. EPA ve CDC rehberlerine bağlantılar içerir.
+Kaynaklar:
+- [EPA — Ev içi partiküller, alerjenler ve HEPA filtreli süpürgeler](https://www.epa.gov/indoor-air-quality-iaq/sources-indoor-particulate-matter-pm)
+- [CDC — Evde temizlik ve dezenfeksiyon](https://www.cdc.gov/hygiene/about/when-and-how-to-clean-and-disinfect-your-home.html)
 
-## Bilimsel Blog Makaleleri
+### Probiyotik Temizliğin Gücü: Uzun Süreli ve Mikrobiyom Dostu Hijyen
+- [Sayfayı ziyaret et](https://www.probiyom.com/blog/probiyotik-temizligin-gucu-uzun-sureli-ve-mikrobiyom-dostu-hijyen/)
+Özet: Probiyotik temizlik yaklaşımını ve hastane ortamındaki araştırmaların kapsamını açıklar. Hastane sonuçlarının ev ürünleri ve alerji tedavisine doğrudan genellenemeyeceğini belirtir.
+Kaynaklar:
+- [Caselli ve arkadaşları, PLOS ONE (2018)](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0199616)
+- [HeiQ — Synbio teknoloji platformu](https://www.heiq.com/game-changers/heiq-synbio-synbiotic-systems-technology-platform)
 
-- [Çamaşır Yıkarken Gizli Tehlike](https://www.probiyom.com/#blog/camasir-yikarken-gizli-tehlike-yumusaticilar-kalp-sagligimizi-nasil-etkiliyor): Çamaşır yumuşatıcıları, sentetik bileşenler ve probiyotikli temizlik alternatifleri.
-- [Görünmez Küresel Tehdit: Antibiyotik Direnci](https://www.probiyom.com/#blog/gorunmez-kuresel-tehdit-antibiyotik-direnci-amr-gelecegimizin-en-buyuk-tehdidi-mi): Antimikrobiyal direnç, kimyasal dezenfektanlar ve biyolojik hijyen yaklaşımı.
-- [Alerjinize Karşı Yeni Nesil Sinbiyotik Güç](https://www.probiyom.com/#blog/alerjinize-karsi-yeni-nesil-sinbiyotik-guc): Toz akarı, polen ve evcil hayvan alerjenlerine yönelik sinbiyotik çözümler.
-- [Çiftlik Hijyeni ve Biyolojik Savunma](https://www.probiyom.com/#blog/bir-ciftlikte-hijyen-sadece-temizlik-midir-yoksa-hastaliklari-onleyen-gorunmez-bir-savunma-hatti-mi): Hayvan refahı, mikrobiyal denge ve sürdürülebilir çiftlik hijyeni.
-- [Endüstriyel Su Sistemlerinde Biyofilm](https://www.probiyom.com/#blog/endustriyel-su-sistemlerinde-gorunmeyen-maliyet-biyofilm): Biyofilm, enerji verimliliği, Legionella riski ve mikrobiyolojik korozyon.
+### Temizlikte Enzimler Probiyotiklerin Yerine Geçmez
+- [Sayfayı ziyaret et](https://www.probiyom.com/blog/temizlikte-enzimler-probiyotiklerin-yerine-gecmez/)
+Özet: Enzimlerin katalizör rolü ile mikroorganizmaların enzim üretimini ayırır. Enzimlerin her tepkimede tükenmediğini ve etkinliğin ortam koşullarına bağlı olduğunu açıklar.
+Kaynaklar:
+- [OpenStax Biology 2e — Enzimler](https://openstax.org/books/biology-2e/pages/6-5-enzymes)
+- [HeiQ — Sinbiyotik deterjanlarda enzim üretimi](https://www.heiq.com/products/cleaning-laundry-biotechnology/heiq-synbio-synbiotic-laundry-detergent)
 
-## Kurumsal Bilgiler
+### Alerjinizi Tetikleyen Şey Toz mu, PET mi yoksa Polen mi? Yoksa Görünmeyen Mikrobiyal Dengesizlik mi?
+- [Sayfayı ziyaret et](https://www.probiyom.com/blog/alerjinizi-tetikleyen-sey-toz-mu-pet-mi-yoksa-polen-mi-yoksa-gorunmeyen-mikrobiyal-dengesizlik-mi/)
+Özet: Toz, polen, küf ve evcil hayvan kaynaklarının yönetimini ele alır. Tekstil yüzeylerine yönelik ürün bilgisi ile alerjik hastalık tedavisini birbirinden ayırır.
+Kaynaklar:
+- [EPA — Astım tetikleyicilerinin kontrolü](https://www.epa.gov/asthma/asthma-triggers-gain-control)
+- [HeiQ — Sinbiyotik tekstil alerjen spreyi](https://www.heiq.com/products/biotechnology-cleaning-laundry-textiles/heiq-synbio-synbiotic-textile-allergen-spray)
 
-- [Probiyom web sitesi](https://www.probiyom.com/): Resmî marka sitesi.
-- [IDOL Invest](https://www.idolinvest.com/): Probiyom'un bağlı olduğu kuruluş.
+### Çamaşır Yıkarken  Gizli Tehlike: Yumuşatıcılar Kalp Sağlığımızı Nasıl Etkiliyor?
+- [Sayfayı ziyaret et](https://www.probiyom.com/blog/camasir-yikarken-gizli-tehlike-yumusaticilar-kalp-sagligimizi-nasil-etkiliyor/)
+Özet: NEJM mikroplastik araştırmasının gözlemsel kapsamını açıklar. Çalışmanın yumuşatıcıların kalp hastalığına neden olduğunu veya deterjan değişiminin kalp sağlığını koruduğunu göstermediğini belirtir.
+Kaynaklar:
+- [Marfella ve arkadaşları, NEJM (2024)](https://www.nejm.org/doi/full/10.1056/NEJMoa2309822)
+- [HeiQ — Sinbiyotik çamaşır deterjanı](https://www.heiq.com/products/cleaning-laundry-biotechnology/heiq-synbio-synbiotic-laundry-detergent)
 
+### Görünmez Küresel Tehdit: Antibiyotik Direnci AMR, Geleceğimizin En Büyük Tehdidi mi?
+- [Sayfayı ziyaret et](https://www.probiyom.com/blog/gorunmez-kuresel-tehdit-antibiyotik-direnci-amr-gelecegimizin-en-buyuk-tehdidi-mi/)
+Özet: Antimikrobiyal direnç ve farkındalık konularını ele alır; WHO ve The Lancet kaynaklarına bağlantı verir.
+Kaynaklar:
+- [WHO Bilgi Sayfası](https://www.who.int/news-room/fact-sheets/detail/antimicrobial-resistance)
+- [The Lancet Makalesi](https://www.thelancet.com/journals/lancet/article/PIIS0140-6736(21)02724-0/fulltext)
+
+### Alerjinize karşı yeni nesil Sinbiyotik Güç
+- [Sayfayı ziyaret et](https://www.probiyom.com/blog/alerjinize-karsi-yeni-nesil-sinbiyotik-guc/)
+Özet: Sinbiyotik tekstil spreyi mekanizmasını ele alır. Farklı teknoloji ve ürünlere ait test oranlarının birbirinin yerine kullanılamayacağını açıklar.
+Kaynaklar:
+- [HeiQ — Sinbiyotik tekstil alerjen spreyi](https://www.heiq.com/products/biotechnology-cleaning-laundry-textiles/heiq-synbio-synbiotic-textile-allergen-spray)
+- [EPA — Ev içi alerjen kaynaklarını azaltma](https://www.epa.gov/asthma/asthma-triggers-gain-control)
+
+### Bir çiftlikte hijyen sadece temizlik midir, yoksa hastalıkları önleyen görünmez bir savunma hattı mı? 🐄
+- [Sayfayı ziyaret et](https://www.probiyom.com/blog/bir-ciftlikte-hijyen-sadece-temizlik-midir-yoksa-hastaliklari-onleyen-gorunmez-bir-savunma-hatti-mi/)
+Özet: HeiQ’nun SRUC ve Wern Layer Farm uygulamalarından aktardığı verileri kapsamlarıyla birlikte açıklar. İşletme sonuçlarının koşullara bağlı olduğunu belirtir.
+Kaynaklar:
+- [HeiQ VivoTech — Hayvan barınaklarında probiyotik temizlik](https://www.heiq.com/products/animal-care-biotechnology/heiq-vivotech-probiotic-agricultural-animal-care)
+
+### Endüstriyel Su sistemlerinde görünmeyen maliyet: Biyofilm
+- [Sayfayı ziyaret et](https://www.probiyom.com/blog/endustriyel-su-sistemlerinde-gorunmeyen-maliyet-biyofilm/)
+Özet: Endüstriyel organik birikinti yönetimini ve CDC soğutma kulesi rehberini birlikte ele alır. Biyofilm temizliğinin tek başına Legionella riskini ortadan kaldırmadığını belirtir.
+Kaynaklar:
+- [HeiQ — Endüstriyel su arıtma](https://www.heiq.com/products/water-treatment)
+- [CDC — Soğutma kulelerinde Legionella kontrolü](https://www.cdc.gov/control-legionella/php/toolkit/cooling-towers-module.html)
+
+## Ürün Kategorileri
+
+### Profesyonel Temizlik Ürünleri
+- [Sayfayı ziyaret et](https://www.probiyom.com/products/professional_cleaning/)
+Açıklama: Profesyonel kullanım için yüksek performanslı probiyotik temizlik ürünleri; iç mekan, yağ çözücü, zemin, makina, yağ tutucu, köpük ekstra, sıhhi temizlik ve tuvalet jeli ürünleri.
+
+### Ev Temizlik Ürünleri
+- [Sayfayı ziyaret et](https://www.probiyom.com/products/home_cleaning/)
+Açıklama: Ev kullanımı için probiyotik bulaşık deterjanı, çamaşır deterjanı, alerjen spreyi, temizlik spreyi, tuvalet jeli ve hijyen ürünleri.
+
+### Kişisel Bakım Ürünleri
+- [Sayfayı ziyaret et](https://www.probiyom.com/products/personal_care/)
+Açıklama: Probiyotik ve prebiyotik içeren cilt dostu duş jeli, cilt yenileyici bakım kremi gibi kişisel bakım ürünleri.
+
+### Soğuk Sis ve Püskürtme Ürünleri
+- [Sayfayı ziyaret et](https://www.probiyom.com/products/cold_mist_spraying/)
+Açıklama: Ofis, otel ve kamusal alanlar için soğuk sisleme (fogging) ve püskürtme çözümleri; HVAC ve klima sistemleriyle uyumlu.
+
+### Endüstriyel Su Arıtma Ürünleri
+- [Sayfayı ziyaret et](https://www.probiyom.com/products/industrial_water_treatment/)
+Açıklama: Endüstriyel su sistemleri, göletler ve soğutma kuleleri için probiyotik su arıtma konsantreleri; biyofilm ve korozyon kontrolü.
+
+### Hayvancılık Ürünleri
+- [Sayfayı ziyaret et](https://www.probiyom.com/products/livestock/)
+Açıklama: Çiftlik temizleyici, ortam dengeleyici, su plus gibi hayvan barınak hijyeni ve sağlığı için probiyotik çözümler.
+
+### PET Ürünleri
+- [Sayfayı ziyaret et](https://www.probiyom.com/products/pet/)
+Açıklama: Evcil hayvan alerjen ve koku kontrolü için probiyotik pet sprey, şampuan ve yedek kartuş ürünleri.
+
+## İletişim & Kurumsal Bilgi
+
+- Marka: Probiyom
+- Kurumsal Bağlılık: IDOL Invest
+- Web Sitesi: https://www.probiyom.com/
+- Teknoloji: HeiQ Chrisal, HeiQ VivoTech
+- Adres: Merdivenköy Mahallesi, Dikyol Sokak, B Blok, No 2/179, Kadıköy, İstanbul, Türkiye, 34732
+- Telefon: +90-532-346-48-84
+- E-posta: probiyom@idolinvest.com
+- Koordinatlar: 40.992680, 29.068512
+- Sosyal Medya:
+  - Instagram: https://www.instagram.com/probiyom/
+  - X (Twitter): https://x.com/probiyom
+  - LinkedIn: https://www.linkedin.com/company/probiyom
+  - YouTube: https://www.youtube.com/@Probiyom

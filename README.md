@@ -1,51 +1,29 @@
-# Probiyom Website
+# Probiyom
 
-**Probiyom** is a brand operating under [IDOL Invest](https://www.idolinvest.com/), offering probiotic and prebiotic-based cleaning, personal care, and industrial products. This repository contains the source code for Probiyom's corporate website.
+## Yerel önizleme
 
----
+Node.js kurulu olmalıdır. İlk kullanımda `npm install`, ardından bu klasörde `npm start` çalıştırın.
+`npm start`, önizlemeyi açmadan önce güncel içeriklerden otomatik build alır.
+Adres: http://localhost:7076/ — kapatmak için Ctrl+C.
 
-**Probiyom**, [IDOL Invest](https://www.idolinvest.com/) bünyesinde faaliyet gösteren, probiyotik ve prebiyotik bazlı temizlik, kişisel bakım ve endüstriyel ürünler sunan bir markadır. Bu repo, Probiyom'un kurumsal web sitesinin kaynak kodunu içermektedir.
+Önizleme sunucusu tek dosya `serve.mjs`; Python veya tarayıcı kurulumu gerekmez.
+Port doluysa `node serve.mjs 7077` kullanın.
 
----
+## İçerik ve yayın
 
-## Technical Structure / Teknik Yapı
+- `data/`, `pages/`: metinler, ürünler, SSS ve sayfalar.
+- `styles/`, `scripts/`: görünüm ve etkileşimler.
+- `images/`: kullanılan görseller; `st/`: bağımsız teklif sayfası.
+- `dist/`: üretilen yayın paketi; elle düzenlemeyin.
 
-A single-page application built with plain HTML/CSS/JS, requiring no framework or build step. Page transitions are managed by a hash-based router.
+İlk derleme için `npm install`, ardından `npm run build` çalıştırın.
+İçerik değişikliklerinden sonra `npm run build` ile önizleme ve yayın paketini yenileyin.
+Derleme yalnızca Node.js ve HTML işleme paketi kullanır; tarayıcı indirme, Chromium, Playwright veya root yetkisi gerekmez.
 
-Framework veya build adımı gerektirmeyen, saf HTML/CSS/JS ile geliştirilmiş tek sayfalı bir uygulamadır. Sayfa geçişleri hash tabanlı bir router ile yönetilir.
+Cloudflare build komutu: `npm run build`. Yayın ayarları `wrangler.jsonc`,
+yönlendirmeler `scripts/seo-worker.mjs` içindedir. Eski `/#blog/...` bağlantıları,
+sonunda `/` bulunan adresler, sitemap ve SEO etiketleri korunur.
 
-## Pages / Sayfalar
+Kontrol: `node serve.mjs --check`.
 
-| Route | EN | TR |
-|---|---|---|
-| `#home` | Home | Ana sayfa |
-| `#about` | About | Hakkımızda |
-| `#products` | Product catalogue | Ürün kataloğu |
-| `#products/<slug>` | Product group detail | Ürün grubu detayı |
-| `#contact` | Contact | İletişim |
-
-## Folder Structure / Klasör Yapısı
-
-```
-probiyom-website/
-├── index.html        # App shell / Uygulama kabuğu
-├── pages/            # HTML partials loaded by router / Router tarafından yüklenen HTML parçaları
-├── styles/           # CSS modules / CSS modülleri
-├── scripts/          # JS modules / JS modülleri
-├── data/             # Product, slide and site data / Ürün, slayt ve site verisi
-└── images/           # Static assets / Statik görseller
-```
-
-## Running Locally / Yerel Geliştirme
-
-The router loads page partials via `fetch()`, so the site cannot be opened directly in the browser — it must be served over HTTP.
-
-Router, sayfa parçalarını `fetch()` ile yüklediği için dosyanın doğrudan tarayıcıda açılması çalışmaz. Bir HTTP sunucusu üzerinden servis edilmesi gerekir:
-
-```bash
-# Python
-python -m http.server 8080
-
-# Node.js
-npx serve .
-```
+Trendyol duyurusu: görseli değiştirmek için `images/trendyol-popup.webp` dosyasını yenileyin. Mağaza bağlantısı ve duyuruyu açma/kapatma ayarı `data/site.js` içindedir. Duyuru her tam sayfa açılışında/yenilemede bir kez açılır; site içindeki menü geçişlerinde tekrarlanmaz.

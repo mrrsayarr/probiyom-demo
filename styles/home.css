@@ -1,384 +1,175 @@
-    /* ===== home.html Ekstra İnovasyon Sınıfları ===== */
+/* Homepage layout and the opt-in carousel control placement. */
+.home-opening { position: relative; padding-block: 1rem 2.5rem; }
+.home-certificates { display: none; }
+@media (min-width: 1200px) {
+  .home-certificates {
+    position: absolute;
+    top: 32px;
+    width: min(240px, calc((100vw - 100%) / 2 + 32px));
+    height: clamp(380px, 35vw, 680px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    gap: 32px;
+    pointer-events: none;
+    user-select: none;
+    opacity: .2;
+    filter: grayscale(1);
+  }
+  .home-certificates img { width: 100%; height: 150px; object-fit: contain; }
+  .home-certificates--left { left: calc((100vw - 100%) / -2 - 64px); }
+  .home-certificates--right { right: calc((100vw - 100%) / -2 - 64px); padding-top: 70px; }
+  .home-certificates--left img:nth-child(2) { transform: translateX(12px) rotate(-8deg); }
+  .home-certificates--right img:first-child { transform: rotate(7deg); }
+}
 
-    /* YENİ: Tarayıcılarda breakout hilesinden (width 100vw) dolayı dikey kaydırma 
-       çubuğu eklenince ortaya çıkan yatay kayma (horizontal scroll) hatasını 
-       sticky navbar düzenini kesinlikle bozmadan kapatan ultra-modern kural */
+/* Restored comparison section, with a single-column reading order on small screens. */
+.protection-comparison { padding: clamp(32px, 5vw, 64px) 0; }
+.protection-comparison > header { text-align: center; margin-bottom: 40px; }
+.protection-comparison > header > span { font-size: .8rem; text-transform: uppercase; font-weight: 700; letter-spacing: .15em; color: #52647a; }
+.protection-comparison h2 { margin: 14px 0 20px; font-size: clamp(1.8rem, 3vw, 2.5rem); color: var(--color-baltic-blue); }
+.protection-comparison header p { font-size: 1rem; color: #52647a; }
+.protection-comparison__scroll { max-width: 1050px; margin: auto; overflow-x: auto; border: 1px solid #e2e8f0; border-radius: 16px; box-shadow: 0 2px 5px rgb(15 23 42 / 6%); }
+.protection-comparison table { width: 100%; min-width: 640px; border-collapse: collapse; background: #fff; }
+.protection-comparison th, .protection-comparison td { padding: 20px 18px; text-align: left; font-size: .95rem; line-height: 1.65; vertical-align: middle; }
+.protection-comparison thead th { background: var(--color-baltic-blue); color: #fff; text-align: center; border-right: 1px solid #fff; }
+.protection-comparison thead th:last-child { color: #80edb9; border: 0; }
+.protection-comparison tbody th { width: 18%; color: #0f172a; }
+.protection-comparison td { width: 41%; color: #52647a; }
+.protection-comparison td:last-child { font-weight: 600; color: #0f172a; }
+.protection-comparison tbody tr + tr { border-top: 1px solid #f1f5f9; }
 
+.biofilm-comparison {
+  position: relative;
+  left: 50%;
+  width: 100vw;
+  margin-inline: -50vw;
+  padding: clamp(32px, 4vw, 64px) clamp(16px, 2vw, 40px);
+  background: #f8fafc;
+}
+.biofilm-comparison__heading { max-width: 1100px; margin: 0 auto 48px; text-align: center; }
+.biofilm-comparison__label { display: inline-block; padding: 3px 14px; margin-bottom: 16px; border: 1px solid #dce5eb; border-radius: 24px; background: #fff; color: #52647a; font-size: .8rem; font-weight: 600; text-transform: uppercase; }
+.biofilm-comparison__heading h2 { font-size: clamp(1.65rem, 2.4vw, 2.5rem); color: #0f172a; line-height: 1.25; margin-bottom: 20px; text-wrap: balance; }
+.biofilm-comparison__heading > p { max-width: 72ch; margin: auto; font-size: .95rem; color: #52647a; line-height: 1.7; }
+.biofilm-comparison__grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 28px; max-width: 1800px; margin: auto; align-items: center; }
+.biofilm-comparison__card { --comparison-accent: #dc3545; --comparison-tint: #fff1f2; --comparison-ink: #b42332; align-self: stretch; display: flex; flex-direction: column; min-width: 0; padding: clamp(24px, 3vw, 48px); border-top: 4px solid var(--comparison-accent); border-radius: 20px; background: #fff; box-shadow: 0 8px 24px rgba(15,23,42,.045); }
+.biofilm-comparison__card--biological { --comparison-accent: #10b981; --comparison-tint: #ecfdf5; --comparison-ink: #00695b; }
+.biofilm-comparison__card-heading { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; margin-bottom: 24px; font-size: .85rem; color: #52647a; }
+.biofilm-comparison__badge { padding: 10px 16px; border-radius: 24px; background: var(--comparison-tint); color: var(--comparison-ink); font-size: .8rem; font-weight: 700; text-transform: uppercase; }
+.biofilm-comparison__card h3 { font-size: 1.25rem; color: #0f172a; margin-bottom: 24px; }
+.biofilm-comparison__card ul { display: flex; flex-direction: column; gap: 16px; margin: 0 0 32px; padding: 0; list-style: none; }
+.biofilm-comparison__card li { display: flex; align-items: flex-start; gap: 14px; }
+.biofilm-comparison__card li svg { flex: 0 0 26px; width: 26px; height: 26px; margin-top: 2px; border-radius: 50%; background: var(--comparison-tint); color: var(--comparison-accent); fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.biofilm-comparison__card li p { margin: 0; font-size: .95rem; line-height: 1.6; color: #425b76; }
+.biofilm-comparison__card li strong { color: #0f172a; }
+.biofilm-comparison__result { margin: auto 0 0; padding: 16px 20px; border-radius: 8px; background: var(--comparison-tint); color: var(--comparison-ink); font-size: .9rem; line-height: 1.65; }
+.biofilm-comparison__image { min-width: 0; margin: 0; }
+.biofilm-comparison__image img { display: block; width: 100%; height: auto; border-radius: 20px; box-shadow: 0 18px 36px rgba(15,23,42,.14); }
+@media (min-width: 1200px) {
+  .biofilm-comparison__grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
 
+#home-slider .slider-wrapper--controls-top-right .slider-frame {
+  padding: 0;
+  border-radius: 16px;
+  border: 1px solid rgba(15, 23, 42, .1);
+  box-shadow: 0 14px 36px rgba(15, 23, 42, .12), 0 2px 8px rgba(15, 23, 42, .06);
+  background: #fff;
+}
+#home-slider .slider-wrapper--controls-top-right .slider-dock-container {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: auto;
+  margin: 0;
+  z-index: 6;
+}
+#home-slider .slider-wrapper--controls-top-right .slider-control-dock {
+  gap: .25rem;
+  padding: .35rem .45rem;
+  border: 1px solid rgba(255, 255, 255, .2);
+  border-radius: 14px;
+  background: var(--color-baltic-blue);
+  box-shadow: 0 8px 22px rgba(15, 23, 42, .22);
+  color: #fff;
+}
+#home-slider .slider-wrapper--controls-top-right .dock-btn {
+  width: 44px;
+  height: 44px;
+  flex: 0 0 44px;
+  background: transparent;
+  color: #fff;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  transition: background-color .18s ease, color .18s ease, border-color .18s ease, transform .18s ease;
+}
+#home-slider .slider-wrapper--controls-top-right .dock-btn svg { width: 17px; height: 17px; }
+#home-slider .slider-wrapper--controls-top-right .dock-btn:active { transform: scale(.95); }
+#home-slider .slider-wrapper--controls-top-right .dock-btn:focus-visible {
+  outline: 3px solid var(--color-mint-leaf);
+  outline-offset: 2px;
+}
+#home-slider .slider-wrapper--controls-top-right .dock-counter {
+  min-width: 3.25rem;
+  padding-inline: .1rem;
+  color: #fff;
+  font-family: inherit;
+  font-size: .78rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: .025em;
+  text-align: center;
+  white-space: nowrap;
+}
+@media (hover: hover) {
+  #home-slider .slider-wrapper--controls-top-right .dock-btn:hover {
+    background: rgba(255, 255, 255, .16);
+    border-color: rgba(255, 255, 255, .22);
+    color: #fff;
+  }
+}
+@media (max-width: 991.98px) {
+  #home-slider .slider-wrapper--controls-top-right .slider-dock-container {
+    position: static;
+    width: 100%;
+    margin-top: 8px;
+  }
+}
+@media (max-width: 576px) {
+  .home-opening { padding-block: .5rem 1.5rem; }
+  #home-slider .slider-wrapper--controls-top-right .slider-control-dock { gap: .1rem; padding: .25rem .3rem; border-radius: 12px; }
+  #home-slider .slider-wrapper--controls-top-right .dock-counter { min-width: 2.85rem; font-size: .72rem; }
+}
 
-    /* ===== Slogan Bantı Premium Temizlik & Parlama Animasyonu ===== */
-
-    .slogan-section {
-        cursor: pointer;
-    }
-
-    /* Karartma ve Biyolojik Renk Geçiş Katalizörü */
-    .slogan-overlay {
-        position: absolute;
-        inset: 0;
-        background-color: rgba(15, 23, 42, 0.5);
-        /* Koyu Slate Gri */
-        transition: background-color 0.6s ease;
-        z-index: 1;
-        pointer-events: none;
-    }
-
-    .slogan-section:hover .slogan-overlay {
-        /* Üzerine gelindiğinde aktif probiyotikleri temsil eden taze su tonuna geçer */
-        background-color: rgba(34, 87, 122, 0.35);
-    }
-
-    /* 
-       "Silecek/Temizlik" Efekti (Clean Wipe)
-       Hover anında soldan sağa kayan eğik ışık huzmesi, yüzeyin temizlendiğini sembolize eder.
-    */
-    .slogan-section::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: -150%;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(90deg,
-                rgba(255, 255, 255, 0) 0%,
-                rgba(255, 255, 255, 0.22) 50%,
-                rgba(255, 255, 255, 0) 100%);
-        transform: skewX(-25deg);
-        transition: left 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-        z-index: 2;
-        pointer-events: none;
-    }
-
-    .slogan-section:hover::before {
-        left: 150%;
-    }
-
-    /* 
-       Yazı Üzerinde "Işıltı" Efekti (Shimmer/Clean Shine)
-       Yazının pürüzsüz ve tertemiz bir yüzey gibi ışığı yansıtmasını sağlar.
-    */
-    .shimmer-text {
-        background: linear-gradient(to right,
-                #ffffff 20%,
-                #ffffff 40%,
-                var(--color-light-green) 50%,
-                #ffffff 60%,
-                #ffffff 80%);
-        background-size: 200% auto;
-        color: transparent;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-        -webkit-background-clip: text;
-        transition: text-shadow 0.4s ease, filter 0.4s ease;
-        display: inline-block;
-    }
-
-    .slogan-section:hover .shimmer-text {
-        animation: textShine 1.5s linear infinite;
-        /* Alerji/koruma taze yeşil parıltı aurası */
-        filter: drop-shadow(0 0 8px rgba(87, 204, 153, 0.5));
-    }
-
-    @keyframes textShine {
-        to {
-            background-position: 200% center;
-        }
-    }
-
-    html,
-    body {
-        overflow-x: clip !important;
-    }
-
-    /* İnovasyon Sütunları Hover Efekti */
-    .hover-translate-y {
-        transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
-    }
-
-    .hover-translate-y:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08) !important;
-    }
-
-    /* Nasıl Çalışır? Adım Simgesi Efekti */
-    .step-icon-wrapper {
-        transition: transform 0.3s ease, background-color 0.3s ease;
-    }
-
-    .col-md-4:hover .step-icon-wrapper {
-        transform: scale(1.08) rotate(5deg);
-        background-color: var(--color-tropical-teal) !important;
-    }
-
-    /* Kimyasal vs Probiyotikli Tablo Stilleri */
-    .table-responsive {
-        border-radius: 1rem;
-    }
-
-    .table thead th {
-        font-weight: 700;
-        letter-spacing: 0.02em;
-    }
-
-    .table tbody tr {
-        transition: background-color 0.2s ease;
-    }
-
-    .table tbody tr:hover {
-        background-color: rgba(34, 87, 122, 0.02);
-    }
-
-    /* Küresel Güven Logoları Geçişleri */
-    .brand-logo-bar {
-        opacity: 0.75;
-        transition: opacity 0.3s ease;
-    }
-
-    .brand-logo-bar:hover {
-        opacity: 1;
-    }
-
-    .brand-logo-item {
-        padding: 1rem 0;
-        border: 1px dashed rgba(0, 0, 0, 0.08);
-        border-radius: 0.5rem;
-        transition: background-color 0.2s, border-color 0.2s;
-        background-color: rgba(0, 0, 0, 0.01);
-    }
-
-    .brand-logo-item span {
-        font-size: 0.8rem;
-        letter-spacing: 0.05em;
-        text-transform: uppercase;
-        transition: color 0.2s;
-    }
-
-    .brand-logo-item:hover {
-        background-color: #ffffff;
-        border-color: rgba(56, 163, 165, 0.3);
-    }
-
-    .brand-logo-item:hover span {
-        color: var(--color-tropical-teal) !important;
-    }
-
-    /* ===== home.html Yeni Kategori Çipi İyileştirmeleri ===== */
-
-    .product-pill {
-        transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    /* Simgelerin başlangıç rengi (Hafif gri/mavi tonlu) */
-    .product-pill .pill-icon {
-        color: rgba(15, 23, 42, 0.45);
-        transition: color 0.25s ease, transform 0.25s ease;
-    }
-
-    /* Üzerine gelindiğinde simge de yazı gibi beyaz olur ve hafifçe büyür */
-    .product-pill:hover .pill-icon {
-        color: #ffffff !important;
-        transform: scale(1.12) rotate(-5deg);
-        /* Hafif bükülme hareketi */
-    }
-
-    /* Mobil Kartlarda Renk Dengelemeleri */
-    .text-danger-emphasis {
-        color: #842029 !important;
-        /* Bootstrap Danger rengi ile uyumlu yumuşak ton */
-    }
-
-    .text-success-emphasis {
-        color: #0f5132 !important;
-        /* Bootstrap Success rengi ile uyumlu yumuşak ton */
-    }
-
-
-/* ===== Bilimin Işığında Probiyom Yeni Ekstra Etkileşimler ===== */
-
-    /* Sol taraftaki dikey görsel panelin z-index ve overlay özellikleri */
-    .science-visual-card {
-        z-index: 1;
-        transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
-    }
-
-    .science-visual-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 15px 35px -10px rgba(34, 87, 122, 0.2) !important;
-    }
-
-    /* Kartın üzerine gelince başlığın marka yeşiline dönmesini sağlar */
-    .science-card-link:hover .title-hover {
-        color: var(--color-tropical-teal) !important;
-    }
-
-    /* Araştırmayı incele okunun kayma geçiş hızı */
-    .science-card-action svg {
-        transition: transform 0.25s ease;
-    }
-
-    /* Kartın üzerine gelince oku çok hafif sağa kaydırarak derinlik verir */
-    .science-card-link:hover .science-card-action svg {
-        transform: translateX(4px);
-    }
-
-    /* ===== Bilimsel Kapak %100 Saf CSS Slayt Geçişleri (Bunu Eskisiyle Değiştirin) ===== */
-
-    /* 
-       Slayt konteynerinin konumlandırması (Bootstrap sınıflarından bağımsızlaştırıldı) 
-    */
-    .science-slides-container {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        z-index: 0;
-        pointer-events: none;
-    }
-
-    /* 
-       Slayt Katmanları: Tarayıcıların katmanı her koşulda çizebilmesi için 
-       boyut, opaklık ve animasyon kuralları CSS içinde kesinleştirilmiştir.
-    */
-    .science-bg-slide {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-size: cover;
-        background-position: center;
-        opacity: 0;
-        transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-        /* Döngüsel 28 saniyelik animasyonu başlatır */
-        animation: cssFadeSlideshow 28s infinite ease-in-out;
-        z-index: 0;
-    }
-
-    /* Kartın üzerine gelince aktif olan arka plan görselinin hafifçe büyümesi (Derinlik efekti) */
-    .science-visual-card:hover .science-bg-slide {
-        transform: scale(1.04);
-    }
-
-    /* Slayt Zamanlayıcı Gecikmeleri (Sırayla 4 saniyede bir devreye girer) */
-    .science-bg-slide:nth-child(1) { animation-delay: 0s; }
-    .science-bg-slide:nth-child(2) { animation-delay: 4s; }
-    .science-bg-slide:nth-child(3) { animation-delay: 8s; }
-    .science-bg-slide:nth-child(4) { animation-delay: 12s; }
-    .science-bg-slide:nth-child(5) { animation-delay: 16s; }
-    .science-bg-slide:nth-child(6) { animation-delay: 20s; }
-    .science-bg-slide:nth-child(7) { animation-delay: 24s; }
-
-    /* 28 Saniyelik Kesintisiz Opaklık Animasyonu */
-    @keyframes cssFadeSlideshow {
-        0% { opacity: 0; }
-        3.57% { opacity: 1; }      /* 1s yumuşak açılış */
-        14.28% { opacity: 1; }     /* 4s görünür kalma süresi */
-        17.85% { opacity: 0; }     /* 1s yumuşak kapanış */
-        100% { opacity: 0; }       /* Kalan sürede gizli bekleme */
-    }
-
-    /* ===== Bilimsel Kapak %100 Saf CSS Slayt Geçişleri (Bunu Eskisiyle Değiştirin) ===== */
-
-    /* 
-       Slayt konteynerinin konumlandırması (Görsel vitrini üst %70 alandadır) 
-    */
-    .science-slides-container {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        z-index: 0;
-        pointer-events: none;
-    }
-
-    /* 
-       Slayt Katmanları: object-fit: contain yapılarak 
-       1200x600 boyutundaki ambalaj görsellerinin kırpılması %100 önlenmiştir.
-    */
-    .science-bg-slide {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-size: contain; /* GÜNCEL: Sıkışmayı ve kırpılmayı önler */
-        background-repeat: no-repeat;
-        background-position: center;
-        background-color: #ffffff; /* Şişe arka planlarıyla birleşen beyaz zemin */
-        opacity: 0;
-        transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-        /* Döngüsel 28 saniyelik animasyonu başlatır */
-        animation: cssFadeSlideshow 28s infinite ease-in-out;
-        z-index: 0;
-    }
-
-    /* Kartın üzerine gelince aktif olan arka plan görselinin hafifçe büyümesi (Derinlik efekti) */
-    .science-visual-card:hover .science-bg-slide {
-        transform: scale(1.04);
-    }
-
-    /* Slayt Zamanlayıcı Gecikmeleri (Sırayla 4 saniyede bir devreye girer) */
-    .science-bg-slide:nth-child(1) { animation-delay: 0s; }
-    .science-bg-slide:nth-child(2) { animation-delay: 4s; }
-    .science-bg-slide:nth-child(3) { animation-delay: 8s; }
-    .science-bg-slide:nth-child(4) { animation-delay: 12s; }
-    .science-bg-slide:nth-child(5) { animation-delay: 16s; }
-    .science-bg-slide:nth-child(6) { animation-delay: 20s; }
-    .science-bg-slide:nth-child(7) { animation-delay: 24s; }
-
-    /* 28 Saniyelik Kesintisiz Opaklık Animasyonu */
-    @keyframes cssFadeSlideshow {
-        0% { opacity: 0; }
-        3.57% { opacity: 1; }      /* 1s yumuşak açılış */
-        14.28% { opacity: 1; }     /* 4s görünür kalma süresi */
-        17.85% { opacity: 0; }     /* 1s yumuşak kapanış */
-        100% { opacity: 0; }       /* Kalan sürede gizli bekleme */
-    }
-
-    /* ===== Bilimin Işığında Probiyom Yeni Ekstra Etkileşimler ===== */
-
-    /* Sol taraftaki iki bölmeli dikey görsel panel */
-    .science-visual-card {
-        z-index: 1;
-        transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
-    }
-
-    .science-visual-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 15px 35px -10px rgba(34, 87, 122, 0.2) !important;
-    }
-
-    /* Kartın üzerine gelince başlığın marka yeşiline dönmesini sağlar */
-    .science-card-link:hover .title-hover {
-        color: var(--color-tropical-teal) !important;
-    }
-
-    .science-card-action svg {
-        transition: transform 0.25s ease;
-    }
-
-    /* Kartın üzerine gelince oku çok hafif sağa kaydırarak derinlik verir */
-    .science-card-link:hover .science-card-action svg {
-        transform: translateX(4px);
-    }
-
-    /* ===== Gerçek Sertifika Logoları Görsel Stilleri ===== */
-    
-    .brand-logo-img {
-        max-width: 110px;
-        max-height: 52px;
-        width: auto;
-        height: auto;
-        object-fit: contain;
-        /* Başlangıçta sade kurumsal gri tonda durur */
-        filter: grayscale(100%) opacity(0.65);
-        transition: filter 0.35s ease, transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    /* Üzerine gelindiğinde amblemler gerçek orjinal renklerine bürünür */
-    .brand-logo-item:hover .brand-logo-img {
-        filter: grayscale(0%) opacity(1);
-        transform: scale(1.08);
-    }
+/* Phone-only opening: full-width artwork and a closer reading section. */
+@media (max-width: 575.98px) {
+  .home-opening { padding-block: 0; margin-top: -1rem; }
+  #home-slider { position: relative; left: 50%; width: 100vw; margin-left: -50vw; }
+  #home-slider .slider-wrapper--controls-top-right .slider-frame {
+    border: 0; border-radius: 0; box-shadow: none;
+  }
+  #home-slider .slider-image-container { aspect-ratio: 16 / 9; }
+  #home-slider .slider-wrapper--controls-top-right .slider-dock-container { margin-top: 10px; }
+  #home-slider .slider-wrapper--controls-top-right .slider-control-dock {
+    gap: 0; padding: 2px 6px; border: 1px solid #e3ebef; border-radius: 999px;
+    background: #fff; color: var(--color-baltic-blue); box-shadow: 0 4px 12px rgb(34 87 122 / 7%);
+  }
+  #home-slider .slider-wrapper--controls-top-right .dock-btn,
+  #home-slider .slider-wrapper--controls-top-right .dock-counter { color: var(--color-baltic-blue); }
+  #home-slider .slider-wrapper--controls-top-right .dock-btn { border-radius: 50%; }
+  #home-slider .slider-wrapper--controls-top-right .dock-btn:hover,
+  #home-slider .slider-wrapper--controls-top-right .dock-btn:focus-visible { background: #eef5f7; color: var(--color-baltic-blue); }
+  .home-opening + .page-section {
+    padding-top: 24px !important; padding-bottom: 24px !important;
+    margin-top: 0 !important; margin-bottom: 24px !important;
+    margin-inline: calc((100% - 100vw) / 2 + 20px);
+  }
+  .home-opening + .page-section > .container { padding-inline: 0; }
+  .home-opening + .page-section .row { --bs-gutter-y: 1.5rem; }
+  .home-opening + .page-section #home-title {
+    font-size: clamp(1.65rem, 6.4vw, 1.95rem) !important;
+    line-height: 1.22 !important; text-wrap: balance;
+  }
+  .home-opening + .page-section p { line-height: 1.7; }
+}
