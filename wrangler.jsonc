@@ -3,6 +3,7 @@
   "name": "probiyom-new",
   "compatibility_date": "2026-08-04",
   "main": "scripts/seo-worker.mjs",
+  "build": { "command": "npm run build" },
   "observability": { "enabled": true },
   "assets": {
     "directory": "dist",
