@@ -1,0 +1,38 @@
+# Generated for Apache/Plesk. Serve real pages; never rewrite unknown URLs to the homepage.
+DirectoryIndex index.html
+Options -Indexes
+ErrorDocument 404 /404.html
+
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteRule ^blog/0/?$ /blog/alerji-bebek-ve-evcil-hayvan-dostu-temizlik-guvenli-yasam-alanlari/ [R=308,L]
+RewriteRule ^blog/1/?$ /blog/probiyotik-temizligin-gucu-uzun-sureli-ve-mikrobiyom-dostu-hijyen/ [R=308,L]
+RewriteRule ^blog/2/?$ /blog/temizlikte-enzimler-probiyotiklerin-yerine-gecmez/ [R=308,L]
+RewriteRule ^blog/3/?$ /blog/alerjinizi-tetikleyen-sey-toz-mu-pet-mi-yoksa-polen-mi-yoksa-gorunmeyen-mikrobiyal-dengesizlik-mi/ [R=308,L]
+RewriteRule ^blog/4/?$ /blog/camasir-yikarken-gizli-tehlike-yumusaticilar-kalp-sagligimizi-nasil-etkiliyor/ [R=308,L]
+RewriteRule ^blog/5/?$ /blog/gorunmez-kuresel-tehdit-antibiyotik-direnci-amr-gelecegimizin-en-buyuk-tehdidi-mi/ [R=308,L]
+RewriteRule ^blog/6/?$ /blog/alerjinize-karsi-yeni-nesil-sinbiyotik-guc/ [R=308,L]
+RewriteRule ^blog/7/?$ /blog/bir-ciftlikte-hijyen-sadece-temizlik-midir-yoksa-hastaliklari-onleyen-gorunmez-bir-savunma-hatti-mi/ [R=308,L]
+RewriteRule ^blog/8/?$ /blog/endustriyel-su-sistemlerinde-gorunmeyen-maliyet-biyofilm/ [R=308,L]
+RewriteCond %{THE_REQUEST} \s/+[^?\s]*index\.html[?\s] [NC]
+RewriteRule ^(.*/)?index\.html$ /$1 [R=308,L]
+</IfModule>
+
+<IfModule mod_headers.c>
+Header always set X-Content-Type-Options "nosniff"
+Header always set X-Frame-Options "SAMEORIGIN"
+Header always set Referrer-Policy "strict-origin-when-cross-origin"
+<FilesMatch "\.(html|txt|xml|json)$">
+Header set Cache-Control "no-cache"
+</FilesMatch>
+<FilesMatch "\.(css|js|webp|png|jpe?g|svg|woff2)$">
+Header set Cache-Control "public, max-age=604800"
+</FilesMatch>
+<FilesMatch "^(site\.[a-f0-9]{12}\.(css|js)|.+-[a-f0-9]{8}-[0-9]+\.webp)$">
+Header set Cache-Control "public, max-age=31536000, immutable"
+</FilesMatch>
+</IfModule>
+
+<IfModule mod_deflate.c>
+AddOutputFilterByType DEFLATE text/html text/plain text/css application/javascript text/javascript application/json application/xml text/xml image/svg+xml
+</IfModule>
