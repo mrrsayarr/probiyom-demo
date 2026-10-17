@@ -22,7 +22,7 @@
   --bs-white-rgb: 255, 255, 255;
   --bs-black-rgb: 0, 0, 0;
   --bs-primary-rgb: 13, 110, 253;
-  --bs-secondary-rgb: 108, 117, 125;
+  --bs-secondary-rgb: 82, 100, 122;
   --bs-success-rgb: 25, 135, 84;
   --bs-danger-rgb: 220, 53, 69;
   --bs-warning-rgb: 255, 193, 7;
@@ -136,7 +136,7 @@ p { font-size: 1.05rem; line-height: 1.75; font-weight: 400; }
 .cert-svg { width: 100%; max-width: 60px; height: 60px; color: rgba(15,23,42,0.35); transition: color 0.25s cubic-bezier(0.16, 1, 0.3, 1), transform 0.25s cubic-bezier(0.16, 1, 0.3, 1); }
 .brand-logo-item:hover .cert-svg { color: var(--color-baltic-blue); transform: scale(1.08) rotate(3deg); }
 .brand-logo-item span { transition: color 0.25s ease; }
-.brand-logo-item:hover span { color: var(--color-tropical-teal) !important; }
+.brand-logo-item:hover span { color: var(--color-baltic-blue) !important; }
 .brand-logo-img { max-width: 110px; max-height: 52px; width: auto; height: auto; object-fit: contain; filter: grayscale(100%) opacity(0.65); transition: filter 0.35s ease, transform 0.35s cubic-bezier(0.16, 1, 0.3, 1); }
 .brand-logo-item:hover .brand-logo-img { filter: grayscale(0%) opacity(1); transform: scale(1.08); }
 
@@ -363,7 +363,7 @@ header.app-header, .app-header { position: sticky !important; top: 0 !important;
 .grid-product-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 290px), 1fr)); gap: 2rem; width: 100%; }
 .product-card { border-radius: 1.5rem; border: 1px solid rgba(0,0,0,0.06); padding: 2rem; box-shadow: 0 10px 25px -10px rgba(0,0,0,0.04); display: flex; flex-direction: column; position: relative; transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease; }
 .product-card:hover { transform: translateY(-8px); border-color: rgba(34,87,122,0.15) !important; box-shadow: 0 20px 40px -15px rgba(34,87,122,0.12) !important; }
-.product-card:has(.upcoming) { opacity: 0.75; border-style: dashed; }
+.product-card:has(.upcoming) { opacity: 1; border-style: dashed; }
 .product-card:has(.upcoming):hover { transform: translateY(-3px); box-shadow: 0 10px 20px -10px rgba(0,0,0,0.05) !important; }
 .product-card-header { margin-bottom: 1.25rem; }
 .product-card-header h3 { letter-spacing: -0.015em; line-height: 1.3; }
@@ -461,6 +461,23 @@ header.app-header, .app-header { position: sticky !important; top: 0 !important;
 .faq-answer-inner p { font-size: 0.95rem; line-height: 1.7; color: #475569; }
 @media (max-width: 768px) { .faq-question { font-size: 0.95rem; padding: 1.15rem 1rem !important; } .faq-arrow-container { width: 1.85rem; height: 1.85rem; } }
 
+.site-breadcrumbs { max-width: 1140px; margin: 12px auto 0; padding: 0 24px; font-size: .8rem; color: #52647a; }
+.site-breadcrumbs ol { display: flex; flex-wrap: wrap; gap: 6px 10px; list-style: none; padding: 0; margin: 0; }
+.site-breadcrumbs li { display: inline; overflow-wrap: anywhere; }
+.site-breadcrumbs li + li::before { content: '/'; margin-right: 10px; color: #52647a; }
+.site-breadcrumbs a { color: #22577a; text-decoration: underline; text-underline-offset: 3px; }
+@media (max-width: 767px) {
+  .site-breadcrumbs { margin-top: 8px; padding: 0 20px; font-size: .7rem; line-height: 1.5; }
+  .site-breadcrumbs ol { gap: 3px 6px; }
+  .site-breadcrumbs li + li::before { margin-right: 6px; }
+}
+.blog-related { margin-top: 36px; padding-top: 24px; border-top: 1px solid #dce5eb; }
+.blog-related h2 { font-size: 1.15rem; color: #22577a; margin: 0 0 12px; }
+.blog-related ul { padding-left: 20px; }
+.blog-related li { margin: 8px 0; }
+.blog-related a { color: #22577a; text-decoration: underline; text-underline-offset: 3px; }
+
+
 /* ===== Blog ===== */
 .blog-post { cursor: pointer; transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease, border-color 0.3s ease; }
 .blog-post:hover { transform: translateY(-6px); border-color: rgba(34,87,122,0.2) !important; box-shadow: 0 12px 24px -10px rgba(34,87,122,0.15) !important; }
@@ -514,12 +531,13 @@ header.app-header, .app-header { position: sticky !important; top: 0 !important;
 .table tbody tr { transition: background-color 0.2s ease; }
 .table tbody tr:hover { background: rgba(34,87,122,0.02); }
 
-.brand-logo-bar { opacity: 0.75; transition: opacity 0.3s ease; }
+.brand-logo-bar { opacity: 1; }
 .brand-logo-bar:hover { opacity: 1; }
 .brand-logo-item { padding: 1rem 0; border: 1px dashed rgba(0,0,0,0.08); border-radius: 0.5rem; transition: background-color 0.2s, border-color 0.2s; background: rgba(0,0,0,0.01); }
 .brand-logo-item span { font-size: 0.8rem; letter-spacing: 0.05em; text-transform: uppercase; transition: color 0.2s; }
 .brand-logo-item:hover { background: #fff; border-color: rgba(56,163,165,0.3); }
-.brand-logo-item:hover span { color: var(--color-tropical-teal) !important; }
+.science-card .badge { color: #22577a !important; }
+.brand-logo-item:hover span { color: var(--color-baltic-blue) !important; }
 
 /* Science CSS Slideshow (Pure CSS) */
 .science-slides-container { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
@@ -537,7 +555,7 @@ header.app-header, .app-header { position: sticky !important; top: 0 !important;
 
 .science-visual-card { z-index: 1; transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease; }
 .science-visual-card:hover { transform: translateY(-5px); box-shadow: 0 15px 35px -10px rgba(34,87,122,0.2) !important; }
-.science-card-link:hover .title-hover { color: var(--color-tropical-teal) !important; }
+.science-card-link:hover .title-hover { color: #236e70 !important; }
 .science-card-action svg { transition: transform 0.25s ease; }
 .science-card-link:hover .science-card-action svg { transform: translateX(4px); }
 

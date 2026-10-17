@@ -15,6 +15,11 @@ var PageSEO = (function () {
   }
 
   function updateSEO(title, description, path) {
+    var cleanPath = SiteRoutes.normalize(path || '');
+    var metadata = typeof SeoContent !== 'undefined' && SeoContent[cleanPath];
+    title = metadata && metadata.title || title;
+    description = metadata && metadata.description || description;
+    description = (description || '').replace(/\s+/g, ' ').trim();
     // 1. Title Tag
     document.title = title ? title + " | Probiyom" : "Probiyom - Probiyotik & Sinbiyotik Teknolojisi";
 
@@ -36,7 +41,6 @@ var PageSEO = (function () {
       canonical.setAttribute('rel', 'canonical');
       document.head.appendChild(canonical);
     }
-    var cleanPath = SiteRoutes.normalize(path || '');
     var pageUrl = absoluteUrl(SiteRoutes.href(cleanPath));
     canonical.setAttribute('href', pageUrl);
 
@@ -78,6 +82,7 @@ var PageSEO = (function () {
   }
 
   function injectProductSchema(groupTitle, slug, description) {
+    description = document.querySelector('meta[name="description"]').getAttribute('content');
     var schema = {
       "@context": "https://schema.org",
       "@type": "CollectionPage",
@@ -95,18 +100,18 @@ var PageSEO = (function () {
   function injectBlogPostSchema(post, slug) {
     var pageUrl = absoluteUrl(SiteRoutes.href('blog/' + slug));
     var imageUrl = post.imageDir ? absoluteUrl(post.imageDir) : DEFAULT_IMAGE;
-    var articleDescription = post.text ? post.text.replace(/<\/?[^>]+(>|$)/g, '').substring(0, 300) : '';
+    var articleDescription = document.querySelector('meta[name="description"]').getAttribute('content');
     updateMetaTag('og:type', 'article');
     updateMetaTag('og:image', imageUrl);
     updateMetaTag('twitter:image', imageUrl, 'name');
-    updateMetaTag('twitter:title', post.title ? post.title + ' | Probiyom' : 'Probiyom', 'name');
+    updateMetaTag('twitter:title', document.title, 'name');
     updateMetaTag('twitter:description', articleDescription, 'name');
     updateMetaTag('twitter:url', pageUrl, 'name');
     var schema = {
       "@context": "https://schema.org",
       "@type": "BlogPosting",
       "headline": post.title,
-      "description": post.text ? post.text.replace(/<\/?[^>]+(>|$)/g, "").substring(0, 300) : '',
+      "description": articleDescription,
       "image": imageUrl,
       "author": {
         "@type": "Organization",
@@ -268,10 +273,10 @@ var PageSEO = (function () {
             "@type": "ListItem",
             "position": index + 1,
             "item": {
-              "@type": "Product",
+              "@type": "CollectionPage",
               "name": ProductGroupLabels[enumVal],
               "url": absoluteUrl(SiteRoutes.href('products/' + slug)),
-              "description": ProductGroupIntroText[enumVal] ? ProductGroupIntroText[enumVal].paragraph : ''
+              "description": typeof SeoContent !== 'undefined' && SeoContent['products/' + slug] ? SeoContent['products/' + slug].description : ''
             }
           };
         })
@@ -280,6 +285,30 @@ var PageSEO = (function () {
     injectSchema(schema);
   }
 
+
+  function breadcrumbs(root, page, parameter) {
+    root.querySelectorAll('.site-breadcrumbs').forEach(function (nav) { nav.remove(); });
+    if (!parameter || (page !== 'products' && page !== 'blog') || !root.querySelector('h1')) return;
+    var items = [{ name: 'Ana Sayfa', url: SITE_ORIGIN + '/' }];
+    if (parameter && (page === 'products' || page === 'blog')) {
+      items.push({ name: page === 'products' ? 'Ürünlerimiz' : 'Blog', url: absoluteUrl(SiteRoutes.href(page)) });
+    }
+    items.push({ name: root.querySelector('h1').textContent.trim(), url: document.querySelector('link[rel="canonical"]').getAttribute('href') });
+    var nav = document.createElement('nav');
+    nav.className = 'site-breadcrumbs';
+    nav.setAttribute('aria-label', 'Sayfa konumu');
+    nav.innerHTML = '<ol>' + items.map(function (item, index) {
+      return '<li>' + (index === items.length - 1 ? '<span aria-current="page">' + escapeHtml(item.name) + '</span>' : '<a href="' + escapeAttr(new URL(item.url).pathname) + '">' + escapeHtml(item.name) + '</a>') + '</li>';
+    }).join('') + '</ol>';
+    root.prepend(nav);
+    var current = document.getElementById('dynamic-schema');
+    var schemas = current ? JSON.parse(current.textContent) : [];
+    if (!Array.isArray(schemas)) schemas = [schemas];
+    schemas.push({ '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: items.map(function (item, index) {
+      return { '@type': 'ListItem', position: index + 1, name: item.name, item: item.url };
+    }) });
+    injectSchema(schemas);
+  }
 
   return {
     update: updateSEO,
@@ -290,6 +319,7 @@ var PageSEO = (function () {
     faq: injectFaqSchema,
     contact: injectContactPageSchema,
     about: injectAboutPageSchema,
-    products: injectProductsPageSchema
+    products: injectProductsPageSchema,
+    breadcrumbs: breadcrumbs
   };
 })();

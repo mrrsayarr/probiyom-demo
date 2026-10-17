@@ -59,7 +59,7 @@ function BlogList(container, posts, initialIdentifier) {
       if (post.imageDir) {
         imageHtml =
           '<div class="blog-post-image position-relative overflow-hidden bg-white">' +
-          '<img' + responsiveImageAttributes(post.imageDir, '(max-width: 767px) 100vw, 800px') + ' src="' + escapeAttr(post.imageDir) + '" alt="' + escapeAttr(imageAlt) + '" class="w-100 h-100 object-fit-contain p-2 transition-all" loading="lazy">' +
+          '<img' + responsiveImageAttributes(post.imageDir, cardImageSizes(post.imageDir)) + ' src="' + escapeAttr(post.imageDir) + '" alt="' + escapeAttr(imageAlt) + '" class="w-100 h-100 object-fit-contain p-2 transition-all" loading="' + (i === 0 ? 'eager' : 'lazy') + '" decoding="async"' + (i === 0 ? ' fetchpriority="high"' : '') + '>' +
           '</div>';
       }
 
@@ -119,7 +119,7 @@ function BlogList(container, posts, initialIdentifier) {
     if (post.imageDir) {
       imageHtml =
         '<div class="blog-detail-image rounded-3 overflow-hidden mb-4 shadow-sm bg-white text-center">' +
-        '<img' + responsiveImageAttributes(post.imageDir, '(max-width: 767px) 100vw, 800px') + ' src="' + escapeAttr(post.imageDir) + '" alt="' + escapeAttr(imageAlt) + '" class="img-fluid object-fit-contain p-2" style="max-height: 480px; width: auto; margin: 0 auto;" loading="lazy">' +
+        '<img' + responsiveImageAttributes(post.imageDir, '(max-width: 767px) calc(100vw - 48px), 800px') + ' src="' + escapeAttr(post.imageDir) + '" alt="' + escapeAttr(imageAlt) + '" class="img-fluid object-fit-contain p-2" style="max-height: 480px; width: auto; margin: 0 auto;" loading="eager" fetchpriority="high" decoding="async">' +
         '</div>';
     }
 
@@ -139,6 +139,7 @@ function BlogList(container, posts, initialIdentifier) {
       '<h1 class="blog-detail-title text-brand mb-4 fw-bold fs-2">' + escapeHtml(post.title) + '</h1>' +
       renderMetadata(post) +
       '<div class="blog-detail-text fs-6 text-muted lh-lg">' + formattedTextHtml + '</div>' +
+      relatedLinks(post) +
       '</div>' +
 
       /* YENİ: 2. Geri Dön Butonu (Yazı Bitiminde Altta) */
@@ -248,6 +249,29 @@ function BlogList(container, posts, initialIdentifier) {
         }
       });
     });
+  }
+
+  function cardImageSizes(src) {
+    var asset = typeof ImageAssets !== 'undefined' && ImageAssets[src.split('?')[0]];
+    var ratio = asset ? Math.min(1, asset.width / asset.height / 1.6) : 1;
+    function slot(pixels) { return Math.ceil((pixels - 24) * ratio) + 'px'; }
+    return '(max-width: 575px) calc((100vw - 64px) * ' + ratio.toFixed(3) + '), (max-width: 767px) ' + slot(490) + ', (max-width: 991px) ' + slot(334) + ', ' + slot(350);
+  }
+
+  function relatedLinks(post) {
+    var metadata = typeof SeoContent !== 'undefined' && SeoContent['blog/' + blogSlug(post)];
+    if (!metadata || !metadata.groups) return '';
+    var links = metadata.groups.map(function (slug) {
+      return '<li><a href="' + escapeAttr(SiteRoutes.href('products/' + slug)) + '">' + escapeHtml(ProductGroupLabels[GroupSlugToEnum[slug]]) + '</a></li>';
+    });
+    posts.filter(function (candidate) {
+      if (candidate === post) return false;
+      var candidateMeta = SeoContent['blog/' + blogSlug(candidate)];
+      return candidateMeta && candidateMeta.groups.some(function (group) { return metadata.groups.indexOf(group) !== -1; });
+    }).slice(0, 2).forEach(function (candidate) {
+      links.push('<li><a href="' + escapeAttr(SiteRoutes.href('blog/' + blogSlug(candidate))) + '">' + escapeHtml(candidate.title) + '</a></li>');
+    });
+    return '<section class="blog-related" aria-label="İlgili içerikler ve ürünler"><h2>İlgili içerikler ve ürünler</h2><ul>' + links.join('') + '</ul></section>';
   }
 
   function getSnippet(text, maxLength) {

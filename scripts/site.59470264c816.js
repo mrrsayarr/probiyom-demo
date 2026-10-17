@@ -30,6 +30,102 @@ var SocialIcons = {
 };
 
 ;
+/* Search summaries are independent of visible headings and permanent URLs. */
+var SeoContent = {
+  home: {
+    title: 'Probiyotik ve Sinbiyotik Temizlik Ürünleri',
+    description: 'Probiyom ile HeiQ VivoTech ve Synbio teknolojilerini keşfedin. Ev, tesis, kişisel bakım ve endüstriyel kullanım için probiyotik temizlik ürünlerini inceleyin.'
+  },
+  about: {
+    title: 'Hakkımızda: Probiyotik Hijyen Teknolojileri',
+    description: 'Probiyom’un yaklaşımını, sektörel deneyimini ve HeiQ teknolojileriyle sunduğu probiyotik temizlik çözümlerini tanıyın. İş birliği için ekibimize ulaşın.'
+  },
+  products: {
+    title: 'Probiyotik Temizlik ve Bakım Ürünleri',
+    description: 'Ev ve profesyonel temizlik, kişisel bakım, soğuk sisleme, su arıtma ve hayvan bakımı için Probiyom ürün gruplarını kullanım alanlarına göre keşfedin.'
+  },
+  contact: {
+    title: 'İletişim: Ürün Bilgisi ve İş Birliği',
+    description: 'Probiyom ekibine ürün seçimi, kullanım bilgisi, teklif ve iş birliği için ulaşın. İletişim formunu, İstanbul adresimizi ve Trendyol mağazamızı inceleyin.'
+  },
+  faq: {
+    title: 'Probiyotik Temizlik Hakkında Sık Sorulan Sorular',
+    description: 'Probiyotik temizliğin çalışma prensibi, ürün seçimi, kullanım sıklığı ve çocuklu ya da evcil hayvanlı evlerde dikkat edilecek noktalar hakkında yanıtlar bulun.'
+  },
+  blog: {
+    title: 'Probiyotik Temizlik, Mikrobiyom ve Hijyen Blogu',
+    description: 'Probiyotik temizlik, sinbiyotik teknoloji, alerjenler, biyofilm ve sürdürülebilir hijyen üzerine kaynak bağlantıları içeren Probiyom yazılarını okuyun.'
+  },
+  'products/professional_cleaning': {
+    description: 'Otel, restoran, ofis ve tesislerde yüzey, zemin ve ekipman temizliği için HeiQ VivoTech probiyotik ürünlerini inceleyin. Uygulamanıza uygun çözümü bulun.'
+  },
+  'products/home_cleaning': {
+    description: 'Evde zemin, mutfak, banyo ve günlük yüzey temizliği için probiyotik ürünleri keşfedin. HeiQ temizlik çözümlerini kullanım alanlarına göre karşılaştırın.'
+  },
+  'products/personal_care': {
+    description: 'Cildin doğal mikrobiyomunu desteklemeye yönelik probiyotik ve sinbiyotik kişisel bakım ürünlerini tanıyın. Formülleri ve kullanım özelliklerini inceleyin.'
+  },
+  'products/cold_mist_spraying': {
+    description: 'Ofis, otel ve ortak kullanım alanlarında yüzey bakımı için HeiQ VivoTech soğuk sisleme ve püskürtme çözümlerini, uygulama alanlarını ve ürünlerini inceleyin.'
+  },
+  'products/industrial_water_treatment': {
+    description: 'Soğutma suyu ve endüstriyel sistemlerde organik birikim ile biyofilm yönetimine yönelik probiyotik su arıtma ürünlerini ve uygulama alanlarını keşfedin.'
+  },
+  'products/pet': {
+    title: 'Evcil Hayvan Bakımı ve Probiyotik Temizlik Ürünleri',
+    description: 'Evcil hayvanların deri, tüy ve yaşam alanı bakımı için HeiQ Synbio Pet ürünlerini keşfedin. Probiyotik bakım, temizlik ve koku yönetimi çözümlerini inceleyin.'
+  },
+  'products/livestock': {
+    description: 'Ahır, altlık, ekipman ve çiftlik ortamlarının bakımı için HeiQ VivoTech probiyotik hayvancılık ürünlerini tanıyın. Kullanım alanlarına uygun çözümleri inceleyin.'
+  },
+  'blog/alerji-bebek-ve-evcil-hayvan-dostu-temizlik-guvenli-yasam-alanlari': {
+    title: 'Alerji, Bebek ve Evcil Hayvan Dostu Ev Temizliği',
+    description: 'Bebekli ve evcil hayvanlı evlerde temizlik planı oluşturun. HEPA filtre, nem kontrolü, alerjen yönetimi ve yüzeye uygun ürün seçimi için rehberimizi okuyun.',
+    groups: ['home_cleaning', 'pet']
+  },
+  'blog/probiyotik-temizligin-gucu-uzun-sureli-ve-mikrobiyom-dostu-hijyen': {
+    title: 'Probiyotik Temizlik ve Mikrobiyom Dostu Hijyen',
+    description: 'Probiyotik temizlik nasıl çalışır? Faydalı mikroorganizmalar, organik kirlerin parçalanması ve evden endüstriye kullanım alanlarını kaynaklarıyla inceleyin.',
+    groups: ['home_cleaning', 'professional_cleaning']
+  },
+  'blog/temizlikte-enzimler-probiyotiklerin-yerine-gecmez': {
+    title: 'Temizlikte Enzim ve Probiyotik Arasındaki Fark',
+    description: 'Enzimler ile probiyotikler aynı şey mi? Temizlik formüllerindeki rollerini, enzim üretimini ve ürün seçerken dikkat edilecek farkları kaynaklarıyla öğrenin.',
+    groups: ['home_cleaning', 'professional_cleaning']
+  },
+  'blog/alerjinizi-tetikleyen-sey-toz-mu-pet-mi-yoksa-polen-mi-yoksa-gorunmeyen-mikrobiyal-dengesizlik-mi': {
+    title: 'Evde Alerjenler: Toz, Polen ve Evcil Hayvanlar',
+    description: 'Ev tozu, polen ve evcil hayvan kaynaklı alerjenleri tanıyın. HEPA filtre, nem kontrolü, tekstil bakımı ve yüzeye uygun temizlik adımlarını birlikte inceleyin.',
+    groups: ['home_cleaning', 'pet']
+  },
+  'blog/camasir-yikarken-gizli-tehlike-yumusaticilar-kalp-sagligimizi-nasil-etkiliyor': {
+    title: 'Çamaşır Bakımı: Yumuşatıcılar ve Ürün Seçimi',
+    description: 'Çamaşır bakımında parfüm, içerik ve dozaj seçimini değerlendirin. Yumuşatıcılarla ilgili sağlık iddialarını, araştırmaların sınırlarını ve kaynakları okuyun.',
+    groups: ['home_cleaning']
+  },
+  'blog/gorunmez-kuresel-tehdit-antibiyotik-direnci-amr-gelecegimizin-en-buyuk-tehdidi-mi': {
+    title: 'Antibiyotik Direnci (AMR) Nedir? Kaynaklı Rehber',
+    description: 'Antibiyotik direncinin neden önemli olduğunu, küresel etkilerini ve hijyenle ilişkisini öğrenin. WHO ve bilimsel yayınlara dayanan Probiyom rehberini okuyun.',
+    groups: ['professional_cleaning']
+  },
+  'blog/alerjinize-karsi-yeni-nesil-sinbiyotik-guc': {
+    title: 'Sinbiyotik Temizlik ve Tekstil Alerjenlerinin Yönetimi',
+    description: 'Sinbiyotik temizlikte probiyotik ve prebiyotiklerin rolünü keşfedin. Tekstil alerjen spreylerini, yüzey uyumunu ve üretici açıklamalarını kaynaklarıyla inceleyin.',
+    groups: ['home_cleaning']
+  },
+  'blog/bir-ciftlikte-hijyen-sadece-temizlik-midir-yoksa-hastaliklari-onleyen-gorunmez-bir-savunma-hatti-mi': {
+    title: 'Çiftlik Hijyeni ve Probiyotik Ortam Bakımı',
+    description: 'Çiftliklerde zemin, altlık, ekipman ve su hattı bakımını birlikte değerlendirin. Probiyotik hijyen ürünlerinin kullanım alanlarını ve üretici verilerini okuyun.',
+    groups: ['livestock']
+  },
+  'blog/endustriyel-su-sistemlerinde-gorunmeyen-maliyet-biyofilm': {
+    title: 'Endüstriyel Su Sistemlerinde Biyofilm Yönetimi',
+    description: 'Endüstriyel su sistemlerinde biyofilmin bakım ihtiyacıyla ilişkisini keşfedin. Probiyotik su arıtma yaklaşımını, uygulama sınırlarını ve kaynakları inceleyin.',
+    groups: ['industrial_water_treatment']
+  }
+};
+
+;
 var ProductGroup = {
   ProfessionalCleaning: 1,
   HomeCleaning: 2,
@@ -612,11 +708,11 @@ var faqs = [
   },
   {
     question: "Probiyotik temizleyicilerin kimyasal temizleyicilerden farkı nedir?",
-    answer: " Kimyasal kalıntı bırakmadıkları için alerjik reaksiyon riskini minimize ederler. Kimyasal temizleyiciler zararlı maddeler içerebilir ve yüzeylerde kalıntı bırakabilirken, probiyotik temizleyiciler doğal mikroorganizmaları kullanır. Zararlı kimyasallar içermez, çevre dostudur ve evdeki mikrobiyal dengeyi korur."
+    answer: "Probiyotik temizleyiciler, yüzey aktif maddelerin temizlik etkisini faydalı mikroorganizmaların biyolojik aktivitesiyle birleştirir. Formül ve kullanım koşulları, etkinin süresini ve yüzey uyumunu belirler. Doğal içerik, tek başına alerji yapmama veya her yüzeyde güvenli kullanım garantisi değildir; ürün etiketi ve güvenlik bilgileri birlikte değerlendirilmelidir."
   },
    {
     question: "Evcil hayvanlar ve çocuklar için güvenli midir?",
-    answer: "Evet, probiyotik temizleyiciler biyolojik ve doğal içeriklere sahip olduğu için evcil hayvanlar ve çocuklar için tamamen güvenlidir."
+    answer: "Çocuklu ve evcil hayvanlı evlerde ürünün kullanım amacı, seyreltme oranı ve etiket talimatları dikkate alınmalıdır. Yüzey temizleyicilerini doğrudan cilde veya hayvana uygulamayın; bu amaçlar için üretilen bakım ürünlerini seçin. Ürünleri çocukların ve hayvanların erişemeyeceği yerde saklayın. Kullanım alanınıza uygun ürün için ekibimizden bilgi alabilirsiniz."
   },   
   {
     question: "Probiyotik temizleyicilerin kokusu var mıdır?",
@@ -632,11 +728,11 @@ var faqs = [
   },
    {
     question: "Alerjisi olan bir evde en çok hangi temizlik ürünlerinden kaçınılmalıdır?",
-    answer: "Alerjisi olan bir evde, sentetik kokular, amonyak, klor ve fitalatlar içeren temizlik ürünlerinden kesinlikle kaçınılmalıdır. Bu kimyasallar, solunum yolu tahrişine ve alerjik reaksiyonlara neden olabilir."
+    answer: "Ürün seçiminde içerik listesi, parfüm bilgisi, kullanım amacı ve güvenlik talimatlarını birlikte inceleyin. Bilinen bir hassasiyetiniz varsa ilgili bileşeni içermeyen seçenekleri değerlendirin. Ürünleri birbirine karıştırmayın; kullanım sırasında etiketin havalandırma ve koruyucu ekipman talimatlarını izleyin."
   },
  {
     question: "Bebekler için güvenli temizlik yaparken nelere özellikle dikkat etmeliyim?",
-    answer: "Bebekler için güvenli temizlik yaparken, kimyasal içermeyen, doğal bazlı ve hipoalerjenik ürünleri tercih etmelisiniz. Ayrıca, bebeklerin temas ettiği yüzeyleri sık sık temizlemeli ve oyuncaklarını düzenli olarak dezenfekte etmelisiniz."
+    answer: "Bebeğin temas ettiği yüzeye uygun ürünü seçin; kullanım miktarı, durulama ve kuruma talimatlarını izleyin. Doğal veya probiyotik ibaresini tek başına güvenlik garantisi olarak değerlendirmeyin. Oyuncak ve gıda ile temas eden yüzeylerde üreticinin talimatlarını kontrol edin. Bir temizlik ürünü, ayrıca onaylanmış bir dezenfektan işlevi varmış gibi kullanılmamalıdır."
   },
   {
     question: "Evcil hayvan tüyleri ve alerjenlerini azaltmak için hangi yöntemler etkilidir?",
@@ -648,7 +744,7 @@ var faqs = [
   },
    {
     question: "Evdeki hava kalitesini doğal yollarla nasıl artırabilirim?",
-    answer: "Evdeki hava kalitesini doğal yollarla artırmak için düzenli havalandırma yapmalı, iç mekan bitkileri bulundurmalı ve kimyasal kokulu oda spreylerinden kaçınmalısınız. Ayrıca, nem seviyesini kontrol altında tutmak ve alerjenleri düzenli olarak temizlemek de önemlidir"
+    answer: "İç hava kalitesinde havalandırma, nem kontrolü ve kirletici kaynakların azaltılması birlikte değerlendirilir. Toz ve alerjen birikimini düzenli yüzey ve tekstil bakımıyla azaltabilirsiniz. Bir oda kokusunu veya temizlik ürününü, havalandırmanın ya da ihtiyaç duyulan hava filtrelemesinin yerine koymayın."
   },
 ];
 
@@ -919,18 +1015,21 @@ HeiQ, sinbiyotik çamaşır deterjanlarında probiyotik ve prebiyotiklerin tekst
 
       Bugün tıp dünyası, istatistiksel sıralamaların çok ötesinde, insanlık tarihinin en büyük biyolojik krizlerinden biriyle karşı karşıya: Antimikrobiyal Direnç AMR. Konu sadece sayıların kaçıncı sırada olduğu değil; konu, bildiğimiz anlamda tıbbın sonunun gelme riskidir.
 
-      <strong>🛑 Koruyucu Kalkanımız Neden Erimeye Başladı?</strong>
+      <h2>Koruyucu Kalkanımız Neden Erimeye Başladı?</h2>
+
       Antibiyotikler, insan ömrünü uzatan en büyük buluşlardan biridir. Ancak onları o kadar yaygın, o kadar bilinçsiz ve o kadar hoyratça kullandık ki, bakterilere hayatta kalmayı ve bu silahlara karşı savunma mekanizmaları geliştirmeyi öğrettik.
       Biz gereksiz yere her şifayı antibiyotikte aradıkça, bakteriler mutasyona uğradı ve Süper Bakteri dediğimiz, mevcut hiçbir ilaçla öldürülemeyen türlere dönüştü. İşin acı tarafı; biz yeni antibiyotikler geliştiremiyoruz. Yeni bir molekül bulmak on yıllar alırken, bakterilerin o moleküle direnç kazanması bazen sadece birkaç ay sürüyor. Küresel ilaç sektörü bu alanda çıkmaza girmiş durumda.
 
-      <strong>⚠️ AMR Neden Bu Kadar Tehlikeli ve Önemli?</strong>
+      <h2>AMR Neden Bu Kadar Tehlikeli ve Önemli?</h2>
+
       AMR, sadece yatakta yatan ve ağır enfeksiyon geçiren hastaların sorunu değildir. Bu sessiz kriz, hepimizin hayat standardını kökten tehdit ediyor:
 
       - <strong>Tıbbın Temelleri Sürdürülemez Hale Gelir:</strong> Bugün rutin olarak yapılan kalça protezi ameliyatları, sezaryen doğumlar, bypass operasyonları veya kemoterapi tedavileri, arkalarındaki antibiyotik koruması sayesinde güvenlidir. AMR baskın hale geldiğinde, en basit cerrahi müdahale bile hastayı ameliyattan değil, sonrasında kapacağı ve tedavisi olmayan bir bakteriden dolayı ölüm riskine sokacaktır.
       - <strong>Basit Yaralanmalar Ölümcül Olabilir:</strong> Penisilinden önce, bahçede elini küçük bir paslı çivi çizen ya da basit bir boğaz enfeksiyonu geçiren insanlar hayatını kaybediyordu. AMR bizi tam olarak bu döneme geri götürme potansiyeline sahip.
       - <strong>Ekonomik ve Sosyal Yıkım:</strong> Dirençli bakterilerle enfekte olan hastaların tedavi süreleri uzuyor, daha pahalı ve yan etkisi çok daha ağır olan son çare ilaçlarına başvuruluyor. Bu durum, sağlık sistemleri üzerinde taşınamaz bir mali yük oluşturuyor.
 
-      <strong>📢 Neden Küresel Bir Farkındalık Yaratmalıyız?</strong>
+      <h2>Neden Küresel Bir Farkındalık Yaratmalıyız?</h2>
+
       Antimikrobiyal dirençle mücadele, sadece laboratuvarlardaki bilim insanlarının veya hastanedeki doktorların görevi olamaz. Bu, toplumsal bir seferberlik gerektirir. Çünkü bir kişinin antibiyotiği yanlış kullanması, sadece kendisini değil, o dirençli bakteriyi çevreye yayarak tüm toplumu tehlikeye atar.
 
       Farkındalık yaratmak zorundayız çünkü:
@@ -943,7 +1042,8 @@ HeiQ, sinbiyotik çamaşır deterjanlarında probiyotik ve prebiyotiklerin tekst
 
       #Sağlık #AntimikrobiyalDirenç #AMR #KamuSağlığı #Sürdürülebilirlik #GelecekSağlık #Tıp #Farkındalık
 
-      <strong>📚 Bilimsel Referanslar ve Kaynaklar:</strong>
+      <h2>Bilimsel Referanslar ve Kaynaklar:</h2>
+
       - <strong>Dünya Sağlık Örgütü (WHO) - Antimikrobiyal Direnç Durum Raporu:</strong> AMR'nin tanımı, küresel tehdit boyutu ve yapılması gereken acil eylemler hakkındaki resmi rehber niteliğindeki <a href="https://www.who.int/news-room/fact-sheets/detail/antimicrobial-resistance" target="_blank" rel="noopener" style="color: var(--color-baltic-blue); text-decoration: underline;">WHO Bilgi Sayfası</a> linkinden erişebilirsiniz.
       - <strong>The Lancet - Küresel Direnç Araştırması (GRAM):</strong> Süper bakterilerin modern tıp ve insan sağlığı üzerindeki gerçek etkilerini inceleyen kapsamlı bilimsel çalışmaya <a href="https://www.thelancet.com/journals/lancet/article/PIIS0140-6736(21)02724-0/fulltext" target="_blank" rel="noopener" style="color: var(--color-baltic-blue); text-decoration: underline;">The Lancet Makalesi</a> linkinden ulaşabilirsiniz.`,
     imageDir: "images/blogs/blog_4_amr.webp",
@@ -2162,7 +2262,7 @@ function BlogList(container, posts, initialIdentifier) {
       if (post.imageDir) {
         imageHtml =
           '<div class="blog-post-image position-relative overflow-hidden bg-white">' +
-          '<img' + responsiveImageAttributes(post.imageDir, '(max-width: 767px) 100vw, 800px') + ' src="' + escapeAttr(post.imageDir) + '" alt="' + escapeAttr(imageAlt) + '" class="w-100 h-100 object-fit-contain p-2 transition-all" loading="lazy">' +
+          '<img' + responsiveImageAttributes(post.imageDir, cardImageSizes(post.imageDir)) + ' src="' + escapeAttr(post.imageDir) + '" alt="' + escapeAttr(imageAlt) + '" class="w-100 h-100 object-fit-contain p-2 transition-all" loading="' + (i === 0 ? 'eager' : 'lazy') + '" decoding="async"' + (i === 0 ? ' fetchpriority="high"' : '') + '>' +
           '</div>';
       }
 
@@ -2222,7 +2322,7 @@ function BlogList(container, posts, initialIdentifier) {
     if (post.imageDir) {
       imageHtml =
         '<div class="blog-detail-image rounded-3 overflow-hidden mb-4 shadow-sm bg-white text-center">' +
-        '<img' + responsiveImageAttributes(post.imageDir, '(max-width: 767px) 100vw, 800px') + ' src="' + escapeAttr(post.imageDir) + '" alt="' + escapeAttr(imageAlt) + '" class="img-fluid object-fit-contain p-2" style="max-height: 480px; width: auto; margin: 0 auto;" loading="lazy">' +
+        '<img' + responsiveImageAttributes(post.imageDir, '(max-width: 767px) calc(100vw - 48px), 800px') + ' src="' + escapeAttr(post.imageDir) + '" alt="' + escapeAttr(imageAlt) + '" class="img-fluid object-fit-contain p-2" style="max-height: 480px; width: auto; margin: 0 auto;" loading="eager" fetchpriority="high" decoding="async">' +
         '</div>';
     }
 
@@ -2242,6 +2342,7 @@ function BlogList(container, posts, initialIdentifier) {
       '<h1 class="blog-detail-title text-brand mb-4 fw-bold fs-2">' + escapeHtml(post.title) + '</h1>' +
       renderMetadata(post) +
       '<div class="blog-detail-text fs-6 text-muted lh-lg">' + formattedTextHtml + '</div>' +
+      relatedLinks(post) +
       '</div>' +
 
       /* YENİ: 2. Geri Dön Butonu (Yazı Bitiminde Altta) */
@@ -2351,6 +2452,29 @@ function BlogList(container, posts, initialIdentifier) {
         }
       });
     });
+  }
+
+  function cardImageSizes(src) {
+    var asset = typeof ImageAssets !== 'undefined' && ImageAssets[src.split('?')[0]];
+    var ratio = asset ? Math.min(1, asset.width / asset.height / 1.6) : 1;
+    function slot(pixels) { return Math.ceil((pixels - 24) * ratio) + 'px'; }
+    return '(max-width: 575px) calc((100vw - 64px) * ' + ratio.toFixed(3) + '), (max-width: 767px) ' + slot(490) + ', (max-width: 991px) ' + slot(334) + ', ' + slot(350);
+  }
+
+  function relatedLinks(post) {
+    var metadata = typeof SeoContent !== 'undefined' && SeoContent['blog/' + blogSlug(post)];
+    if (!metadata || !metadata.groups) return '';
+    var links = metadata.groups.map(function (slug) {
+      return '<li><a href="' + escapeAttr(SiteRoutes.href('products/' + slug)) + '">' + escapeHtml(ProductGroupLabels[GroupSlugToEnum[slug]]) + '</a></li>';
+    });
+    posts.filter(function (candidate) {
+      if (candidate === post) return false;
+      var candidateMeta = SeoContent['blog/' + blogSlug(candidate)];
+      return candidateMeta && candidateMeta.groups.some(function (group) { return metadata.groups.indexOf(group) !== -1; });
+    }).slice(0, 2).forEach(function (candidate) {
+      links.push('<li><a href="' + escapeAttr(SiteRoutes.href('blog/' + blogSlug(candidate))) + '">' + escapeHtml(candidate.title) + '</a></li>');
+    });
+    return '<section class="blog-related" aria-label="İlgili içerikler ve ürünler"><h2>İlgili içerikler ve ürünler</h2><ul>' + links.join('') + '</ul></section>';
   }
 
   function getSnippet(text, maxLength) {
@@ -2477,6 +2601,11 @@ var PageSEO = (function () {
   }
 
   function updateSEO(title, description, path) {
+    var cleanPath = SiteRoutes.normalize(path || '');
+    var metadata = typeof SeoContent !== 'undefined' && SeoContent[cleanPath];
+    title = metadata && metadata.title || title;
+    description = metadata && metadata.description || description;
+    description = (description || '').replace(/\s+/g, ' ').trim();
     // 1. Title Tag
     document.title = title ? title + " | Probiyom" : "Probiyom - Probiyotik & Sinbiyotik Teknolojisi";
 
@@ -2498,7 +2627,6 @@ var PageSEO = (function () {
       canonical.setAttribute('rel', 'canonical');
       document.head.appendChild(canonical);
     }
-    var cleanPath = SiteRoutes.normalize(path || '');
     var pageUrl = absoluteUrl(SiteRoutes.href(cleanPath));
     canonical.setAttribute('href', pageUrl);
 
@@ -2540,6 +2668,7 @@ var PageSEO = (function () {
   }
 
   function injectProductSchema(groupTitle, slug, description) {
+    description = document.querySelector('meta[name="description"]').getAttribute('content');
     var schema = {
       "@context": "https://schema.org",
       "@type": "CollectionPage",
@@ -2557,18 +2686,18 @@ var PageSEO = (function () {
   function injectBlogPostSchema(post, slug) {
     var pageUrl = absoluteUrl(SiteRoutes.href('blog/' + slug));
     var imageUrl = post.imageDir ? absoluteUrl(post.imageDir) : DEFAULT_IMAGE;
-    var articleDescription = post.text ? post.text.replace(/<\/?[^>]+(>|$)/g, '').substring(0, 300) : '';
+    var articleDescription = document.querySelector('meta[name="description"]').getAttribute('content');
     updateMetaTag('og:type', 'article');
     updateMetaTag('og:image', imageUrl);
     updateMetaTag('twitter:image', imageUrl, 'name');
-    updateMetaTag('twitter:title', post.title ? post.title + ' | Probiyom' : 'Probiyom', 'name');
+    updateMetaTag('twitter:title', document.title, 'name');
     updateMetaTag('twitter:description', articleDescription, 'name');
     updateMetaTag('twitter:url', pageUrl, 'name');
     var schema = {
       "@context": "https://schema.org",
       "@type": "BlogPosting",
       "headline": post.title,
-      "description": post.text ? post.text.replace(/<\/?[^>]+(>|$)/g, "").substring(0, 300) : '',
+      "description": articleDescription,
       "image": imageUrl,
       "author": {
         "@type": "Organization",
@@ -2730,10 +2859,10 @@ var PageSEO = (function () {
             "@type": "ListItem",
             "position": index + 1,
             "item": {
-              "@type": "Product",
+              "@type": "CollectionPage",
               "name": ProductGroupLabels[enumVal],
               "url": absoluteUrl(SiteRoutes.href('products/' + slug)),
-              "description": ProductGroupIntroText[enumVal] ? ProductGroupIntroText[enumVal].paragraph : ''
+              "description": typeof SeoContent !== 'undefined' && SeoContent['products/' + slug] ? SeoContent['products/' + slug].description : ''
             }
           };
         })
@@ -2742,6 +2871,30 @@ var PageSEO = (function () {
     injectSchema(schema);
   }
 
+
+  function breadcrumbs(root, page, parameter) {
+    root.querySelectorAll('.site-breadcrumbs').forEach(function (nav) { nav.remove(); });
+    if (!parameter || (page !== 'products' && page !== 'blog') || !root.querySelector('h1')) return;
+    var items = [{ name: 'Ana Sayfa', url: SITE_ORIGIN + '/' }];
+    if (parameter && (page === 'products' || page === 'blog')) {
+      items.push({ name: page === 'products' ? 'Ürünlerimiz' : 'Blog', url: absoluteUrl(SiteRoutes.href(page)) });
+    }
+    items.push({ name: root.querySelector('h1').textContent.trim(), url: document.querySelector('link[rel="canonical"]').getAttribute('href') });
+    var nav = document.createElement('nav');
+    nav.className = 'site-breadcrumbs';
+    nav.setAttribute('aria-label', 'Sayfa konumu');
+    nav.innerHTML = '<ol>' + items.map(function (item, index) {
+      return '<li>' + (index === items.length - 1 ? '<span aria-current="page">' + escapeHtml(item.name) + '</span>' : '<a href="' + escapeAttr(new URL(item.url).pathname) + '">' + escapeHtml(item.name) + '</a>') + '</li>';
+    }).join('') + '</ol>';
+    root.prepend(nav);
+    var current = document.getElementById('dynamic-schema');
+    var schemas = current ? JSON.parse(current.textContent) : [];
+    if (!Array.isArray(schemas)) schemas = [schemas];
+    schemas.push({ '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: items.map(function (item, index) {
+      return { '@type': 'ListItem', position: index + 1, name: item.name, item: item.url };
+    }) });
+    injectSchema(schemas);
+  }
 
   return {
     update: updateSEO,
@@ -2752,7 +2905,8 @@ var PageSEO = (function () {
     faq: injectFaqSchema,
     contact: injectContactPageSchema,
     about: injectAboutPageSchema,
-    products: injectProductsPageSchema
+    products: injectProductsPageSchema,
+    breadcrumbs: breadcrumbs
   };
 })();
 
@@ -3407,6 +3561,7 @@ var PageControllers = (function () {
       blog: function () { initBlogPage(parameter); }
     };
     if (Object.prototype.hasOwnProperty.call(initializers, page)) initializers[page]();
+    PageSEO.breadcrumbs(root, page, parameter);
     sizePageImages(root);
     return {
       destroy: function () {
@@ -3638,6 +3793,8 @@ var Router = (function () {
         return res.text();
       })
       .then(function (html) {
+        // This directive applies to the standalone fragment, not the routed page.
+        html = html.replace(/^<meta name="robots" content="noindex, follow">\r?\n/, '');
         pageCache[url] = html;
         delete pendingPages[url];
         return html;

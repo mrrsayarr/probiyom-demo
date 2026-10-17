@@ -264,18 +264,21 @@ HeiQ, sinbiyotik çamaşır deterjanlarında probiyotik ve prebiyotiklerin tekst
 
       Bugün tıp dünyası, istatistiksel sıralamaların çok ötesinde, insanlık tarihinin en büyük biyolojik krizlerinden biriyle karşı karşıya: Antimikrobiyal Direnç AMR. Konu sadece sayıların kaçıncı sırada olduğu değil; konu, bildiğimiz anlamda tıbbın sonunun gelme riskidir.
 
-      <strong>🛑 Koruyucu Kalkanımız Neden Erimeye Başladı?</strong>
+      <h2>Koruyucu Kalkanımız Neden Erimeye Başladı?</h2>
+
       Antibiyotikler, insan ömrünü uzatan en büyük buluşlardan biridir. Ancak onları o kadar yaygın, o kadar bilinçsiz ve o kadar hoyratça kullandık ki, bakterilere hayatta kalmayı ve bu silahlara karşı savunma mekanizmaları geliştirmeyi öğrettik.
       Biz gereksiz yere her şifayı antibiyotikte aradıkça, bakteriler mutasyona uğradı ve Süper Bakteri dediğimiz, mevcut hiçbir ilaçla öldürülemeyen türlere dönüştü. İşin acı tarafı; biz yeni antibiyotikler geliştiremiyoruz. Yeni bir molekül bulmak on yıllar alırken, bakterilerin o moleküle direnç kazanması bazen sadece birkaç ay sürüyor. Küresel ilaç sektörü bu alanda çıkmaza girmiş durumda.
 
-      <strong>⚠️ AMR Neden Bu Kadar Tehlikeli ve Önemli?</strong>
+      <h2>AMR Neden Bu Kadar Tehlikeli ve Önemli?</h2>
+
       AMR, sadece yatakta yatan ve ağır enfeksiyon geçiren hastaların sorunu değildir. Bu sessiz kriz, hepimizin hayat standardını kökten tehdit ediyor:
 
       - <strong>Tıbbın Temelleri Sürdürülemez Hale Gelir:</strong> Bugün rutin olarak yapılan kalça protezi ameliyatları, sezaryen doğumlar, bypass operasyonları veya kemoterapi tedavileri, arkalarındaki antibiyotik koruması sayesinde güvenlidir. AMR baskın hale geldiğinde, en basit cerrahi müdahale bile hastayı ameliyattan değil, sonrasında kapacağı ve tedavisi olmayan bir bakteriden dolayı ölüm riskine sokacaktır.
       - <strong>Basit Yaralanmalar Ölümcül Olabilir:</strong> Penisilinden önce, bahçede elini küçük bir paslı çivi çizen ya da basit bir boğaz enfeksiyonu geçiren insanlar hayatını kaybediyordu. AMR bizi tam olarak bu döneme geri götürme potansiyeline sahip.
       - <strong>Ekonomik ve Sosyal Yıkım:</strong> Dirençli bakterilerle enfekte olan hastaların tedavi süreleri uzuyor, daha pahalı ve yan etkisi çok daha ağır olan son çare ilaçlarına başvuruluyor. Bu durum, sağlık sistemleri üzerinde taşınamaz bir mali yük oluşturuyor.
 
-      <strong>📢 Neden Küresel Bir Farkındalık Yaratmalıyız?</strong>
+      <h2>Neden Küresel Bir Farkındalık Yaratmalıyız?</h2>
+
       Antimikrobiyal dirençle mücadele, sadece laboratuvarlardaki bilim insanlarının veya hastanedeki doktorların görevi olamaz. Bu, toplumsal bir seferberlik gerektirir. Çünkü bir kişinin antibiyotiği yanlış kullanması, sadece kendisini değil, o dirençli bakteriyi çevreye yayarak tüm toplumu tehlikeye atar.
 
       Farkındalık yaratmak zorundayız çünkü:
@@ -288,7 +291,8 @@ HeiQ, sinbiyotik çamaşır deterjanlarında probiyotik ve prebiyotiklerin tekst
 
       #Sağlık #AntimikrobiyalDirenç #AMR #KamuSağlığı #Sürdürülebilirlik #GelecekSağlık #Tıp #Farkındalık
 
-      <strong>📚 Bilimsel Referanslar ve Kaynaklar:</strong>
+      <h2>Bilimsel Referanslar ve Kaynaklar:</h2>
+
       - <strong>Dünya Sağlık Örgütü (WHO) - Antimikrobiyal Direnç Durum Raporu:</strong> AMR'nin tanımı, küresel tehdit boyutu ve yapılması gereken acil eylemler hakkındaki resmi rehber niteliğindeki <a href="https://www.who.int/news-room/fact-sheets/detail/antimicrobial-resistance" target="_blank" rel="noopener" style="color: var(--color-baltic-blue); text-decoration: underline;">WHO Bilgi Sayfası</a> linkinden erişebilirsiniz.
       - <strong>The Lancet - Küresel Direnç Araştırması (GRAM):</strong> Süper bakterilerin modern tıp ve insan sağlığı üzerindeki gerçek etkilerini inceleyen kapsamlı bilimsel çalışmaya <a href="https://www.thelancet.com/journals/lancet/article/PIIS0140-6736(21)02724-0/fulltext" target="_blank" rel="noopener" style="color: var(--color-baltic-blue); text-decoration: underline;">The Lancet Makalesi</a> linkinden ulaşabilirsiniz.`,
     imageDir: "images/blogs/blog_4_amr.webp",

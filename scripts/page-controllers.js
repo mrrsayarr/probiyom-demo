@@ -271,6 +271,7 @@ var PageControllers = (function () {
       blog: function () { initBlogPage(parameter); }
     };
     if (Object.prototype.hasOwnProperty.call(initializers, page)) initializers[page]();
+    PageSEO.breadcrumbs(root, page, parameter);
     sizePageImages(root);
     return {
       destroy: function () {

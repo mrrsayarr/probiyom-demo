@@ -214,6 +214,8 @@ var Router = (function () {
         return res.text();
       })
       .then(function (html) {
+        // This directive applies to the standalone fragment, not the routed page.
+        html = html.replace(/^<meta name="robots" content="noindex, follow">\r?\n/, '');
         pageCache[url] = html;
         delete pendingPages[url];
         return html;
