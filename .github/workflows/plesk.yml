@@ -34,12 +34,21 @@ jobs:
           const fs = require('node:fs');
           const path = require('node:path');
           const assert = require('node:assert/strict');
+          const { parseHTML } = require('linkedom');
           const { routes } = JSON.parse(fs.readFileSync('state/plesk-build.json', 'utf8'));
           assert.ok(routes.length > 0);
+          const descriptions = new Set();
           for (const route of routes) {
             const html = fs.readFileSync(path.join('dist-plesk', route, 'index.html'), 'utf8');
             assert.ok(html.includes('https://www.probiyom.com' + route), route);
             assert.ok(html.includes('GTM-578BDWC9'), route);
+            const { document } = parseHTML(html);
+            const description = document.querySelector('meta[name="description"]').getAttribute('content');
+            assert.ok(description && !descriptions.has(description), 'Missing or duplicate description: ' + route);
+            descriptions.add(description);
+            assert.equal(document.querySelectorAll('meta[name="robots"]').length, 1, route);
+            assert.ok(!document.querySelector('meta[name="robots"]').getAttribute('content').includes('noindex'), route);
+            assert.equal(document.querySelectorAll('h1').length, 1, route);
           }
           assert.ok(fs.existsSync('dist-plesk/.htaccess'));
           assert.ok(fs.existsSync('dist-plesk/404.html'));

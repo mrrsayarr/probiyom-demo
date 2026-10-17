@@ -60,6 +60,7 @@ Sayfa adresleri `/` ile biter. Eski `/#blog/...` bağlantıları tarayıcıda il
 index.html                 Ortak HTML kabuğu, Google etiketleri ve temel metaveri
 data/                      İçerik ve site ayarları
   site.js                  İletişim, sosyal medya, mağaza ve popup ayarları
+  seo.js                   Sayfalara özel SEO başlıkları, açıklamalar ve ilgili ürünler
   categories.js            Ana sayfa ve ürünler sayfasının ortak kategori kartları
   products.js              Ürünler, grup tanımları ve grup açıklamaları
   blogs.js                 Blog metinleri, görselleri ve yayın tarihleri
@@ -122,7 +123,7 @@ Soru ve cevaplar `data/faqs.js` içinden düzenlenir. İletişim bilgileri ve so
 
 Mağaza bağlantısı `data/site.js` içindeki `trendyol` alanıdır. Popup’ın görünürlüğü, görsel adresi ve alternatif metni aynı dosyadaki `storeAnnouncement` ayarlarından yönetilir.
 
-Mevcut popup görseli `images/trendyol-popup.webp` dosyasıdır. Popup her tam sayfa açılışında veya yenilemede bir kez görünür; site içi menü geçişlerinde tekrarlanmaz. Mobilde görselin tamamı gösterilir. İletişim formunun altındaki mağaza duyurusu da aynı mağaza bağlantısını kullanır.
+Mağaza popup’ı her tam sayfa açılışında veya yenilemede otomatik olarak bir kez görünür; site içi menü geçişlerinde tekrarlanmaz. Görsel `images/trendyol-popup.webp` dosyasından gelir ve mobilde tamamı gösterilir. Mağaza bağlantısı ile görünürlük ayarları `data/site.js` üzerinden yönetilir. İletişim sayfasındaki mağaza duyurusu da korunur.
 
 ### Görseller
 
@@ -133,6 +134,10 @@ Bir görselin dosyası değişirse eski optimize varyantlar yeni dosyayla eşle�
 ## SEO ve Google etiketleri
 
 Her sayfa için ayrı başlık, açıklama, canonical ve uygun yapılandırılmış veri üretilir. Canonical adreslerde `https://www.probiyom.com` kullanılır. Sayfa şablonları bağımsız arama sonuçları olarak indekslenmemeleri için `noindex` başlığıyla sunulur.
+
+Arama ve sosyal paylaşım özetlerini `data/seo.js` üzerinden düzenleyin. Anahtarlar kalıcı sayfa yollarıdır; SEO başlığını değiştirmek yazının görünen başlığını veya URL’sini değiştirmez. Yeni blogların özeti için de bu dosyaya kayıt eklenebilir. `groups` alanı yazı sonundaki ilgili ürünleri ve benzer içerikleri belirler. Yayın tarihleri `data/blogs.js` içinde tutulur; bilinmeyen tarihler üretilmez.
+
+Sayfa konumu bağlantıları yalnızca ürün grubu detaylarında ve blog yazılarında gösterilir; BreadcrumbList şeması bu görünür bağlantılarla eşleşir. Mobilde bağlantılar daha küçük yazı ve aralıklarla sunulur. Ürün grupları ürün listesi sayfalarıdır; kategori kartları tekil ürün gibi işaretlenmez. Yayın çıktısındaki HTML şablonları ayrıca `noindex` meta içerir; yönlendirici bu yalnızca şablona ait etiketi sayfaya eklemeden önce temizler.
 
 - Google Tag Manager kapsayıcısı: `GTM-578BDWC9`. Kod ve `noscript` yedeği `index.html` içindedir.
 - Search Console doğrulama metaları ve doğrulama HTML dosyası korunmalıdır.

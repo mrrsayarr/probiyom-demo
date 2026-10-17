@@ -152,14 +152,18 @@ async function build() {
       preload.setAttribute('imagesizes', hero.getAttribute('sizes'));
       preload.setAttribute('fetchpriority', 'high'); document.head.appendChild(preload);
     }
-    const popupSource = context.SiteData.storeAnnouncement.image.split('?')[0];
-    const popupAsset = imageAssets[popupSource];
-    const popupPreload = document.createElement('link');
-    popupPreload.setAttribute('rel', 'preload'); popupPreload.setAttribute('as', 'image');
-    popupPreload.setAttribute('href', popupSource);
-    if (popupAsset.srcset) popupPreload.setAttribute('imagesrcset', popupAsset.srcset);
-    popupPreload.setAttribute('imagesizes', '(max-width: 639px) calc(100vw - 32px), 410px');
-    popupPreload.setAttribute('fetchpriority', 'high'); document.head.appendChild(popupPreload);
+    if (context.SiteData.storeAnnouncement.enabled) {
+      const popupSource = context.SiteData.storeAnnouncement.image.split('?')[0];
+      const popupAsset = imageAssets[popupSource];
+      const preload = document.createElement('link');
+      preload.setAttribute('rel', 'preload');
+      preload.setAttribute('as', 'image');
+      preload.setAttribute('href', popupSource);
+      if (popupAsset && popupAsset.srcset) preload.setAttribute('imagesrcset', popupAsset.srcset);
+      preload.setAttribute('imagesizes', '(max-width: 639px) calc(100vw - 32px), 410px');
+      preload.setAttribute('fetchpriority', 'high');
+      document.head.appendChild(preload);
+    }
 
     assert.equal(main.querySelectorAll('h1').length, 1, route + ': expected one main heading');
     assert.ok(!titles.has(document.title), route + ': duplicate page title');
@@ -194,6 +198,13 @@ async function build() {
     routes.map(route => '  <url><loc>' + origin + route + '</loc></url>').join('\n') + '\n</urlset>\n';
   await fs.writeFile(path.join(root, 'sitemap.xml'), sitemap);
   for (const name of ['data', 'images', 'pages', 'st', 'styles']) await fs.cp(path.join(root, name), path.join(dist, name), { recursive: true, force: true });
+  // HTML protects template fragments even when nginx bypasses Apache headers.
+  for (const name of await fs.readdir(path.join(dist, 'pages'))) {
+    if (!name.endsWith('.html')) continue;
+    const file = path.join(dist, 'pages', name);
+    const template = await fs.readFile(file, 'utf8');
+    await fs.writeFile(file, '<meta name="robots" content="noindex, follow">\n' + template);
+  }
   await fs.mkdir(path.join(dist, 'scripts'), { recursive: true });
   for (const name of await fs.readdir(path.join(root, 'scripts'))) {
     if (name.endsWith('.js')) await fs.copyFile(path.join(root, 'scripts', name), path.join(dist, 'scripts', name));

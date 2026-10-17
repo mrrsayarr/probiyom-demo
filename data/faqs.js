@@ -12,11 +12,11 @@ var faqs = [
   },
   {
     question: "Probiyotik temizleyicilerin kimyasal temizleyicilerden farkı nedir?",
-    answer: " Kimyasal kalıntı bırakmadıkları için alerjik reaksiyon riskini minimize ederler. Kimyasal temizleyiciler zararlı maddeler içerebilir ve yüzeylerde kalıntı bırakabilirken, probiyotik temizleyiciler doğal mikroorganizmaları kullanır. Zararlı kimyasallar içermez, çevre dostudur ve evdeki mikrobiyal dengeyi korur."
+    answer: "Probiyotik temizleyiciler, yüzey aktif maddelerin temizlik etkisini faydalı mikroorganizmaların biyolojik aktivitesiyle birleştirir. Formül ve kullanım koşulları, etkinin süresini ve yüzey uyumunu belirler. Doğal içerik, tek başına alerji yapmama veya her yüzeyde güvenli kullanım garantisi değildir; ürün etiketi ve güvenlik bilgileri birlikte değerlendirilmelidir."
   },
    {
     question: "Evcil hayvanlar ve çocuklar için güvenli midir?",
-    answer: "Evet, probiyotik temizleyiciler biyolojik ve doğal içeriklere sahip olduğu için evcil hayvanlar ve çocuklar için tamamen güvenlidir."
+    answer: "Çocuklu ve evcil hayvanlı evlerde ürünün kullanım amacı, seyreltme oranı ve etiket talimatları dikkate alınmalıdır. Yüzey temizleyicilerini doğrudan cilde veya hayvana uygulamayın; bu amaçlar için üretilen bakım ürünlerini seçin. Ürünleri çocukların ve hayvanların erişemeyeceği yerde saklayın. Kullanım alanınıza uygun ürün için ekibimizden bilgi alabilirsiniz."
   },   
   {
     question: "Probiyotik temizleyicilerin kokusu var mıdır?",
@@ -32,11 +32,11 @@ var faqs = [
   },
    {
     question: "Alerjisi olan bir evde en çok hangi temizlik ürünlerinden kaçınılmalıdır?",
-    answer: "Alerjisi olan bir evde, sentetik kokular, amonyak, klor ve fitalatlar içeren temizlik ürünlerinden kesinlikle kaçınılmalıdır. Bu kimyasallar, solunum yolu tahrişine ve alerjik reaksiyonlara neden olabilir."
+    answer: "Ürün seçiminde içerik listesi, parfüm bilgisi, kullanım amacı ve güvenlik talimatlarını birlikte inceleyin. Bilinen bir hassasiyetiniz varsa ilgili bileşeni içermeyen seçenekleri değerlendirin. Ürünleri birbirine karıştırmayın; kullanım sırasında etiketin havalandırma ve koruyucu ekipman talimatlarını izleyin."
   },
  {
     question: "Bebekler için güvenli temizlik yaparken nelere özellikle dikkat etmeliyim?",
-    answer: "Bebekler için güvenli temizlik yaparken, kimyasal içermeyen, doğal bazlı ve hipoalerjenik ürünleri tercih etmelisiniz. Ayrıca, bebeklerin temas ettiği yüzeyleri sık sık temizlemeli ve oyuncaklarını düzenli olarak dezenfekte etmelisiniz."
+    answer: "Bebeğin temas ettiği yüzeye uygun ürünü seçin; kullanım miktarı, durulama ve kuruma talimatlarını izleyin. Doğal veya probiyotik ibaresini tek başına güvenlik garantisi olarak değerlendirmeyin. Oyuncak ve gıda ile temas eden yüzeylerde üreticinin talimatlarını kontrol edin. Bir temizlik ürünü, ayrıca onaylanmış bir dezenfektan işlevi varmış gibi kullanılmamalıdır."
   },
   {
     question: "Evcil hayvan tüyleri ve alerjenlerini azaltmak için hangi yöntemler etkilidir?",
@@ -48,6 +48,6 @@ var faqs = [
   },
    {
     question: "Evdeki hava kalitesini doğal yollarla nasıl artırabilirim?",
-    answer: "Evdeki hava kalitesini doğal yollarla artırmak için düzenli havalandırma yapmalı, iç mekan bitkileri bulundurmalı ve kimyasal kokulu oda spreylerinden kaçınmalısınız. Ayrıca, nem seviyesini kontrol altında tutmak ve alerjenleri düzenli olarak temizlemek de önemlidir"
+    answer: "İç hava kalitesinde havalandırma, nem kontrolü ve kirletici kaynakların azaltılması birlikte değerlendirilir. Toz ve alerjen birikimini düzenli yüzey ve tekstil bakımıyla azaltabilirsiniz. Bir oda kokusunu veya temizlik ürününü, havalandırmanın ya da ihtiyaç duyulan hava filtrelemesinin yerine koymayın."
   },
 ];
