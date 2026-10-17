@@ -1,0 +1,73 @@
+name: Plesk yayinini hazirla
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: plesk-publish
+  cancel-in-progress: false
+
+jobs:
+  build:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+          cache: npm
+      - name: Bagimliliklari kur
+        run: npm ci --include=dev
+      - name: Plesk icin HTML sayfalarini olustur
+        run: npm run build:plesk
+      - name: Yayin dosyalarini kontrol et
+        shell: bash
+        run: |
+          node <<'NODE'
+          const fs = require('node:fs');
+          const path = require('node:path');
+          const assert = require('node:assert/strict');
+          const { routes } = JSON.parse(fs.readFileSync('state/plesk-build.json', 'utf8'));
+          assert.ok(routes.length > 0);
+          for (const route of routes) {
+            const html = fs.readFileSync(path.join('dist-plesk', route, 'index.html'), 'utf8');
+            assert.ok(html.includes('https://www.probiyom.com' + route), route);
+            assert.ok(html.includes('GTM-578BDWC9'), route);
+          }
+          assert.ok(fs.existsSync('dist-plesk/.htaccess'));
+          assert.ok(fs.existsSync('dist-plesk/404.html'));
+          console.log(routes.length + ' sayfa ve yayin dosyalari hazir.');
+          NODE
+      - name: Hazir siteyi plesk dalina gonder
+        shell: bash
+        run: |
+          set -euo pipefail
+          publish_dir="$RUNNER_TEMP/probiyom-plesk-publish"
+          remote_head="$(git ls-remote --heads origin refs/heads/plesk)"
+          if [ -n "$remote_head" ]; then
+            git fetch --no-tags origin refs/heads/plesk
+            git worktree add --detach "$publish_dir" FETCH_HEAD
+          else
+            git worktree add --detach "$publish_dir" HEAD
+            git -C "$publish_dir" checkout --orphan plesk
+          fi
+          # Replace tracked files only in this temporary publication worktree.
+          git -C "$publish_dir" rm -r -f --ignore-unmatch --quiet .
+          cp -a dist-plesk/. "$publish_dir/"
+          git -C "$publish_dir" config user.name 'github-actions[bot]'
+          git -C "$publish_dir" config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git -C "$publish_dir" add --all
+          if git -C "$publish_dir" diff --cached --quiet; then
+            echo 'Yayin dosyalarinda degisiklik yok.'
+          else
+            git -C "$publish_dir" commit -m "Publish site from $GITHUB_SHA"
+            publish_commit="$(git -C "$publish_dir" rev-parse HEAD)"
+            git push origin "$publish_commit:refs/heads/plesk"
+          fi

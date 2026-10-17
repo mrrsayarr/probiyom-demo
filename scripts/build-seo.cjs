@@ -9,6 +9,8 @@ const root = path.resolve(__dirname, '..');
 const origin = 'https://www.probiyom.com';
 const noOp = () => {};
 const excluded = new Set(['scripts/app.js', 'scripts/router.js', 'scripts/contact-map.js']);
+const forPlesk = process.argv.includes('--plesk');
+const dist = path.join(root, forPlesk ? 'dist-plesk' : 'dist');
 
 async function build() {
   const imageAssets = require('./image-assets.cjs')(root);
@@ -74,10 +76,12 @@ async function build() {
     ...data.blogPosts.map(post => data.SiteRoutes.href('blog/' + data.blogSlug(post)))];
   assert.equal(new Set(routes).size, routes.length, 'Duplicate route: check blog slugs.');
   const aliases = Object.fromEntries(data.blogPosts.map((post, index) => [data.SiteRoutes.href('blog/' + index), data.SiteRoutes.href('blog/' + data.blogSlug(post))]));
-  const output = path.join(root, 'dist', 'seo-pages');
+  // Plesk serves physical directory indexes; Workers use an internal document store.
+  const output = forPlesk ? dist : path.join(dist, 'seo-pages');
+  const manifestFile = forPlesk ? path.join(root, 'state', 'plesk-build.json') : path.join(output, 'manifest.json');
   await fs.mkdir(output, { recursive: true });
   let previous = { routes: [] };
-  try { previous = JSON.parse(await fs.readFile(path.join(output, 'manifest.json'), 'utf8')); } catch (error) {
+  try { previous = JSON.parse(await fs.readFile(manifestFile, 'utf8')); } catch (error) {
     if (error.code !== 'ENOENT') throw error;
   }
   const desired = new Set([...routes, ...Object.keys(aliases)].map(route => route.replace(/\/+$/, '')));
@@ -171,16 +175,24 @@ async function build() {
     await fs.writeFile(file, '<!DOCTYPE html>\n' + document.documentElement.outerHTML, 'utf8');
   }
 
-  await fs.writeFile(path.join(output, 'manifest.json'), JSON.stringify({ routes, aliases }, null, 2) + '\n');
+  await fs.mkdir(path.dirname(manifestFile), { recursive: true });
+  await fs.writeFile(manifestFile, JSON.stringify({ routes, aliases }, null, 2) + '\n');
   for (const [alias, canonical] of Object.entries(aliases)) {
     const file = path.join(output, alias.slice(1), 'index.html');
     await fs.mkdir(path.dirname(file), { recursive: true });
-    await fs.copyFile(path.join(output, canonical.slice(1), 'index.html'), file);
+    if (forPlesk) {
+      // Apache sends a permanent redirect; this also works on plain static hosts.
+      await fs.writeFile(file, '<!DOCTYPE html><html lang="tr"><head><meta charset="UTF-8">' +
+        '<meta name="robots" content="noindex, follow"><link rel="canonical" href="' + origin + canonical + '">' +
+        '<meta http-equiv="refresh" content="0;url=' + canonical + '"><title>Yönlendiriliyor | Probiyom</title>' +
+        '</head><body><a href="' + canonical + '">Yazıya git</a></body></html>');
+    } else {
+      await fs.copyFile(path.join(output, canonical.slice(1), 'index.html'), file);
+    }
   }
   const sitemap = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
     routes.map(route => '  <url><loc>' + origin + route + '</loc></url>').join('\n') + '\n</urlset>\n';
   await fs.writeFile(path.join(root, 'sitemap.xml'), sitemap);
-  const dist = path.join(root, 'dist');
   for (const name of ['data', 'images', 'pages', 'st', 'styles']) await fs.cp(path.join(root, name), path.join(dist, name), { recursive: true, force: true });
   await fs.mkdir(path.join(dist, 'scripts'), { recursive: true });
   for (const name of await fs.readdir(path.join(root, 'scripts'))) {
@@ -197,8 +209,50 @@ async function build() {
     }
   }
   for (const name of ['robots.txt', 'sitemap.xml', 'llms.txt', '_headers', 'google48726a64ae31bd98.html']) await fs.copyFile(path.join(root, name), path.join(dist, name));
-  await fs.copyFile(path.join(output, 'index.html'), path.join(dist, 'index.html'));
-  await fs.copyFile(path.join(output, '404.html'), path.join(dist, '404.html'));
-  console.log('Built ' + routes.length + ' pages, true 404 document, sitemap and dist/ package using Node.js only.');
+  if (forPlesk) {
+    const redirects = Object.entries(aliases).map(([alias, canonical]) =>
+      'RewriteRule ^' + alias.slice(1).replace(/\/$/, '') + '/?$ ' + canonical + ' [R=308,L]');
+    const htaccess = [
+      '# Generated for Apache/Plesk. Serve real pages; never rewrite unknown URLs to the homepage.',
+      'DirectoryIndex index.html',
+      'Options -Indexes',
+      'ErrorDocument 404 /404.html',
+      '',
+      '<IfModule mod_rewrite.c>',
+      'RewriteEngine On',
+      ...redirects,
+      'RewriteCond %{THE_REQUEST} \\s/+[^?\\s]*index\\.html[?\\s] [NC]',
+      'RewriteRule ^(.*/)?index\\.html$ /$1 [R=308,L]',
+      '</IfModule>',
+      '',
+      '<IfModule mod_headers.c>',
+      'Header always set X-Content-Type-Options "nosniff"',
+      'Header always set X-Frame-Options "SAMEORIGIN"',
+      'Header always set Referrer-Policy "strict-origin-when-cross-origin"',
+      '<FilesMatch "\\.(html|txt|xml|json)$">',
+      'Header set Cache-Control "no-cache"',
+      '</FilesMatch>',
+      '<FilesMatch "\\.(css|js|webp|png|jpe?g|svg|woff2)$">',
+      'Header set Cache-Control "public, max-age=604800"',
+      '</FilesMatch>',
+      '<FilesMatch "^(site\\.[a-f0-9]{12}\\.(css|js)|.+-[a-f0-9]{8}-[0-9]+\\.webp)$">',
+      'Header set Cache-Control "public, max-age=31536000, immutable"',
+      '</FilesMatch>',
+      '</IfModule>',
+      '',
+      '<IfModule mod_deflate.c>',
+      'AddOutputFilterByType DEFLATE text/html text/plain text/css application/javascript text/javascript application/json application/xml text/xml image/svg+xml',
+      '</IfModule>',
+      ''
+    ].join('\n');
+    await fs.writeFile(path.join(dist, '.htaccess'), htaccess);
+    await fs.writeFile(path.join(dist, 'pages', '.htaccess'), '<IfModule mod_headers.c>\nHeader always set X-Robots-Tag "noindex, follow"\n</IfModule>\n');
+    assert.equal(await fs.stat(path.join(dist, 'blog', 'index.html')).then(info => info.isFile()), true);
+    assert.equal(await fs.stat(path.join(dist, 'products', 'index.html')).then(info => info.isFile()), true);
+  } else {
+    await fs.copyFile(path.join(output, 'index.html'), path.join(dist, 'index.html'));
+    await fs.copyFile(path.join(output, '404.html'), path.join(dist, '404.html'));
+  }
+  console.log('Built ' + routes.length + ' pages, true 404 document, sitemap and ' + path.basename(dist) + '/ package using Node.js only.');
 }
 build().catch(error => { console.error(error); process.exitCode = 1; });
