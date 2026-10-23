@@ -58,13 +58,13 @@ function Navbar(container) {
   }
 
   function render() {
-    container.innerHTML =
+    if (!container.firstElementChild) container.innerHTML =
       '<nav class="navbar position-relative py-2" aria-label="Main navigation">' +
         '<div class="container d-flex align-items-center justify-content-between">' +
           
           /* Logo */
           '<a href="' + routeHref('home') + '" class="navbar-brand d-flex align-items-center gap-2 text-decoration-none" aria-label="Probiyom ana sayfa">' +
-            '<img src="images/logo.svg" alt="Probiyom logo" width="858" height="770" style="height: 50px; width: auto;">' +
+            '<img src="images/logo-small.webp" alt="Probiyom logo" width="160" height="144" style="height: 50px; width: auto;">' +
             '<span class="fs-6 fw-bold tracking-tight text-white">Probiyom</span>' +
           '</a>' +
 

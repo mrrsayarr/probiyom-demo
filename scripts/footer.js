@@ -9,7 +9,7 @@ function Footer(container) {
     return SiteRoutes.href(route);
   }
 
-  container.innerHTML =
+  if (!container.firstElementChild) container.innerHTML =
     '<div class="footer py-5 text-white-50 position-relative overflow-hidden">' +
       '<div class="container position-relative z-1 footer-container">' +
         '<div class="row gy-4 gx-lg-5 justify-content-between mb-4 mb-md-5 footer-grid">' +
@@ -17,7 +17,7 @@ function Footer(container) {
           /* 1. SÜTUN: Marka & Slogan & Rozet */
           '<div class="col-lg-4 col-md-12 text-center text-lg-start footer-column footer-brand-column">' +
             '<div class="footer-brand d-inline-flex align-items-center gap-2 mb-3 text-white">' +
-              '<img src="images/logo.svg" alt="Probiyom logo" width="858" height="770">' +
+              '<img src="images/logo-small.webp" alt="Probiyom logo" width="160" height="144" loading="lazy" decoding="async">' +
               '<span class="fw-bold fs-4 tracking-tight text-white">Probiyom</span>' +
             '</div>' +
             '<p class="small lh-relaxed mb-3 text-white-50 max-w-sm">' +

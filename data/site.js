@@ -10,7 +10,7 @@ var SiteData = {
     trendyol: "https://ty.gl/s5c7sidzv1w4p",
     storeAnnouncement: {
         enabled: true,
-        image: "images/trendyol-popup.webp?v=20261016-heiq",
+        image: "images/trendyol-popup-fast.webp?v=20261023",
         imageAlt: "Mermer tezgâh üzerinde HeiQ VivoTech ve Synbio temizlik ürünleri"
     },
     lat: 40.992680,

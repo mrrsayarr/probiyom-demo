@@ -3,7 +3,7 @@
    =================================================================== */
 
 (function () {
-  document.addEventListener('DOMContentLoaded', function () {
+  function startApp() {
     /* Render navbar */
     var navContainer = document.getElementById('navbar-container');
     if (navContainer) {
@@ -21,6 +21,21 @@
     if (mainContainer) {
       Router.init(mainContainer);
     }
-    StoreAnnouncement.init();
+    if (window.StoreAnnouncement) window.StoreAnnouncement.init();
+  }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    var styles = document.querySelector('link[data-full-styles]');
+    // The early popup already works. Attach the full interface after its stylesheet is ready.
+    if (styles && styles.media === 'print') {
+      var started = false;
+      function ready() {
+        if (started) return;
+        started = true;
+        startApp();
+      }
+      styles.addEventListener('load', ready, { once: true });
+      styles.addEventListener('error', ready, { once: true });
+    } else startApp();
   });
 })();
