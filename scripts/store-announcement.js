@@ -3,6 +3,8 @@ var StoreAnnouncement = (function () {
   var initialized = false;
   var shown = false;
   var announcementImage;
+  // The mobile image is contained inside a 45svh frame, rather than filling its width.
+  var imageSizes = '(max-width: 639px) min(calc(100vw - 32px), 36svh), 410px';
 
   function init() {
     if (initialized || !SiteData.storeAnnouncement || !SiteData.storeAnnouncement.enabled) return;
@@ -10,11 +12,10 @@ var StoreAnnouncement = (function () {
     announcementImage = new Image(1122, 1402);
     announcementImage.alt = SiteData.storeAnnouncement.imageAlt;
     announcementImage.fetchPriority = 'high';
-    setResponsiveImage(announcementImage, SiteData.storeAnnouncement.image, '(max-width: 639px) calc(100vw - 32px), 410px');
-    Promise.all([
-      new Promise(function (resolve) { setTimeout(resolve, 250); }),
-      announcementImage.decode().catch(function () { /* Keep the store link available if the image fails. */ })
-    ]).then(show);
+    announcementImage.decoding = 'async';
+    setResponsiveImage(announcementImage, SiteData.storeAnnouncement.image, imageSizes);
+    // Dimensions reserve the image space; opening does not need to wait for decoding.
+    show();
   }
 
   function show() {
@@ -40,8 +41,13 @@ var StoreAnnouncement = (function () {
           '<button type="button" class="store-announcement__continue">Siteye devam et</button>' +
         '</div>' +
       '</div>';
-    if (announcementImage.naturalWidth) {
+    if (!announcementImage.complete || announcementImage.naturalWidth) {
       dialog.querySelector('.store-announcement__visual').appendChild(announcementImage);
+      announcementImage.addEventListener('error', function () {
+        var visual = dialog.querySelector('.store-announcement__visual');
+        if (visual) visual.remove();
+        dialog.querySelector('.store-announcement__layout').style.gridTemplateColumns = '1fr';
+      }, { once: true });
     } else {
       dialog.querySelector('.store-announcement__visual').remove();
       dialog.querySelector('.store-announcement__layout').style.gridTemplateColumns = '1fr';
@@ -74,5 +80,5 @@ var StoreAnnouncement = (function () {
     shown = true;
   }
 
-  return { init: init };
+  return { init: init, imageSizes: imageSizes };
 })();

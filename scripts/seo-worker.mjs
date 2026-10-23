@@ -13,7 +13,7 @@ function normalizedAssetPath(pathname) {
 
 function assetResponse(response, pathname) {
   const headers = new Headers(response.headers);
-  const immutable = /^\/(?:scripts|styles)\/site\.[a-f0-9]{12}\./.test(pathname) ||
+  const immutable = /^\/(?:scripts|styles)\/(?:site|store)\.[a-f0-9]{12}\./.test(pathname) ||
     /^\/images\/optimized\/.+-[a-f0-9]{8}-\d+\.webp$/.test(pathname);
   headers.set('Cache-Control', immutable ? 'public, max-age=31536000, immutable' :
     /\.(?:html|txt|xml|json)$/.test(pathname) || pathname.endsWith('/') ? 'no-cache' : 'public, max-age=604800');

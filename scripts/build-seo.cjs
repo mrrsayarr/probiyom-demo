@@ -4,6 +4,7 @@ const path = require('node:path');
 const vm = require('node:vm');
 const assert = require('node:assert/strict');
 const { parseHTML } = require('linkedom');
+const { minify } = require('terser');
 
 const root = path.resolve(__dirname, '..');
 const origin = 'https://www.probiyom.com';
@@ -19,16 +20,18 @@ async function build() {
   const { document: sourceDocument } = parseHTML(shell);
   const scripts = [];
   const runtime = [];
+  let storeCode = '';
   for (const element of sourceDocument.querySelectorAll('script[src]')) {
     const name = element.getAttribute('src').split('?')[0];
     if (/^https?:/.test(name)) continue;
     const code = await fs.readFile(path.join(root, name), 'utf8');
-    runtime.push(code);
+    if (name === 'scripts/store-announcement.js') storeCode = code;
+    else runtime.push(code);
     if (!excluded.has(name)) scripts.push([name, code]);
   }
   const crypto = require('node:crypto');
   const hash = text => crypto.createHash('sha256').update(text).digest('hex').slice(0, 12);
-  const js = runtime.join('\n;\n');
+  const js = (await minify(runtime.join('\n;\n'), { compress: true, mangle: true })).code;
   const jsName = 'scripts/site.' + hash(js) + '.js';
   let css = '';
   for (const link of sourceDocument.querySelectorAll('link[rel="stylesheet"]')) {
@@ -71,6 +74,17 @@ async function build() {
   }
 
   const data = renderContext('/');
+  // Start the existing popup with a small, independent script before SPA hydration.
+  // Keep its configuration and helpers local; the app reuses the same initialized instance.
+  const popupSource = data.SiteData.storeAnnouncement.image.split('?')[0];
+  const popupImages = { [popupSource]: imageAssets[popupSource] };
+  const popupJs = (await minify('(function(){var SiteData=' + JSON.stringify({
+    trendyol: data.SiteData.trendyol, storeAnnouncement: data.SiteData.storeAnnouncement
+  }) + ';var ImageAssets=' + JSON.stringify(popupImages) + ';' +
+    data.escapeAttr.toString() + ';' + data.setResponsiveImage.toString() + ';' + storeCode +
+    ';window.StoreAnnouncement=StoreAnnouncement;StoreAnnouncement.init();})();',
+    { compress: true, mangle: true })).code;
+  const popupName = 'scripts/store.' + hash(popupJs) + '.js';
   const routes = ['/', ...Object.keys(data.SiteRoutes.pages).filter(key => key !== 'home').map(key => data.SiteRoutes.href(key)),
     ...Object.keys(data.GroupSlugToEnum).map(slug => data.SiteRoutes.href('products/' + slug)),
     ...data.blogPosts.map(post => data.SiteRoutes.href('blog/' + data.blogSlug(post)))];
@@ -134,6 +148,9 @@ async function build() {
       if (img.decoding) img.setAttribute('decoding', img.decoding);
     });
     document.querySelectorAll('script[src]').forEach(script => script.remove());
+    const popupScript = document.createElement('script');
+    popupScript.setAttribute('src', popupName);
+    document.body.appendChild(popupScript);
     const bundle = document.createElement('script');
     bundle.setAttribute('src', jsName);
     bundle.setAttribute('defer', '');
@@ -143,7 +160,7 @@ async function build() {
     style.setAttribute('rel', 'stylesheet'); style.setAttribute('href', cssName);
     document.head.appendChild(style);
     document.querySelectorAll('link[rel="preload"][as="image"]').forEach(link => link.remove());
-    if (route === '/') {
+    if (route === '/' && !context.SiteData.storeAnnouncement.enabled) {
       const hero = document.querySelector('.slider-slide img');
       const preload = document.createElement('link');
       preload.setAttribute('rel', 'preload'); preload.setAttribute('as', 'image');
@@ -151,6 +168,10 @@ async function build() {
       preload.setAttribute('imagesrcset', hero.getAttribute('srcset'));
       preload.setAttribute('imagesizes', hero.getAttribute('sizes'));
       preload.setAttribute('fetchpriority', 'high'); document.head.appendChild(preload);
+    }
+    if (route === '/' && context.SiteData.storeAnnouncement.enabled) {
+      // The announcement covers the slider, so its image gets the first download slot.
+      document.querySelector('.slider-slide img').setAttribute('fetchpriority', 'low');
     }
     if (context.SiteData.storeAnnouncement.enabled) {
       const popupSource = context.SiteData.storeAnnouncement.image.split('?')[0];
@@ -160,7 +181,7 @@ async function build() {
       preload.setAttribute('as', 'image');
       preload.setAttribute('href', popupSource);
       if (popupAsset && popupAsset.srcset) preload.setAttribute('imagesrcset', popupAsset.srcset);
-      preload.setAttribute('imagesizes', '(max-width: 639px) calc(100vw - 32px), 410px');
+      preload.setAttribute('imagesizes', context.StoreAnnouncement.imageSizes);
       preload.setAttribute('fetchpriority', 'high');
       document.head.appendChild(preload);
     }
@@ -210,11 +231,12 @@ async function build() {
     if (name.endsWith('.js')) await fs.copyFile(path.join(root, 'scripts', name), path.join(dist, 'scripts', name));
   }
   await fs.writeFile(path.join(dist, jsName), js);
+  await fs.writeFile(path.join(dist, popupName), popupJs);
   await fs.writeFile(path.join(dist, cssName), css);
   // Prune only content-addressed bundles generated by this build script.
   for (const directory of ['styles', 'scripts']) {
     for (const name of await fs.readdir(path.join(dist, directory))) {
-      if (/^site\.[a-f0-9]{12}\.(css|js)$/.test(name) && ![cssName, jsName].includes(directory + '/' + name)) {
+      if (/^(site|store)\.[a-f0-9]{12}\.(css|js)$/.test(name) && ![cssName, jsName, popupName].includes(directory + '/' + name)) {
         await fs.rm(path.join(dist, directory, name));
       }
     }
@@ -246,7 +268,7 @@ async function build() {
       '<FilesMatch "\\.(css|js|webp|png|jpe?g|svg|woff2)$">',
       'Header set Cache-Control "public, max-age=604800"',
       '</FilesMatch>',
-      '<FilesMatch "^(site\\.[a-f0-9]{12}\\.(css|js)|.+-[a-f0-9]{8}-[0-9]+\\.webp)$">',
+      '<FilesMatch "^((site|store)\\.[a-f0-9]{12}\\.(css|js)|.+-[a-f0-9]{8}-[0-9]+\\.webp)$">',
       'Header set Cache-Control "public, max-age=31536000, immutable"',
       '</FilesMatch>',
       '</IfModule>',

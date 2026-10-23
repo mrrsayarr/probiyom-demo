@@ -49,6 +49,13 @@ jobs:
             assert.equal(document.querySelectorAll('meta[name="robots"]').length, 1, route);
             assert.ok(!document.querySelector('meta[name="robots"]').getAttribute('content').includes('noindex'), route);
             assert.equal(document.querySelectorAll('h1').length, 1, route);
+            const bundles = Array.from(document.querySelectorAll('script[src]'));
+            assert.equal(bundles.length, 2, route + ': expected popup and site bundles');
+            assert.match(bundles[0].getAttribute('src'), /^scripts\/store\.[a-f0-9]{12}\.js$/);
+            assert.match(bundles[1].getAttribute('src'), /^scripts\/site\.[a-f0-9]{12}\.js$/);
+            for (const bundle of bundles) {
+              assert.ok(fs.existsSync(path.join('dist-plesk', bundle.getAttribute('src'))), route);
+            }
           }
           assert.ok(fs.existsSync('dist-plesk/.htaccess'));
           assert.ok(fs.existsSync('dist-plesk/404.html'));

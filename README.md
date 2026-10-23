@@ -23,7 +23,7 @@ Farklı bir port için:
 npm start -- 7077
 ```
 
-Derleme Node.js ve `linkedom` kullanır; Chromium, Playwright, Python veya sistem paketi kurulumu gerekmez. Önizleme sunucusu `serve.mjs` dosyasıdır.
+Derleme Node.js, HTML üretimi için `linkedom` ve JavaScript sıkıştırması için `terser` kullanır; Chromium, Playwright, Python veya sistem paketi kurulumu gerekmez. Önizleme sunucusu `serve.mjs` dosyasıdır.
 
 ## Sayfa yapısı
 
@@ -125,6 +125,8 @@ Mağaza bağlantısı `data/site.js` içindeki `trendyol` alanıdır. Popup’ı
 
 Mağaza popup’ı her tam sayfa açılışında veya yenilemede otomatik olarak bir kez görünür; site içi menü geçişlerinde tekrarlanmaz. Görsel `images/trendyol-popup.webp` dosyasından gelir ve mobilde tamamı gösterilir. Mağaza bağlantısı ile görünürlük ayarları `data/site.js` üzerinden yönetilir. İletişim sayfasındaki mağaza duyurusu da korunur.
 
+Yayın derlemesi popup için küçük bir `scripts/store.<hash>.js` dosyası üretir. Popup ve kapatma düğmeleri ana site dosyasının indirilmesini beklemeden çalışır; uygulama aynı popup örneğini kullanır. Her iki JavaScript dosyası sıkıştırılır ve içerik değiştikçe dosya adları yenilenir. Bu dosyaları elle düzenlemeyin; `package.json`, `package-lock.json` ve kaynak değişikliklerini birlikte `main` dalına yükleyin.
+
 ### Görseller
 
 Görselleri uygun boyutta WebP olarak hazırlayın ve içeriği anlatan alternatif metin kullanın. Build, mevcut optimize varyantları `srcset` ile bağlar ve görsel boyutlarını HTML’e ekler; yeni küçük görselleri kendisi üretmez.
@@ -193,6 +195,8 @@ Apache kurallarının uygulanması için Plesk Apache & nginx Settings bölümü
 Yükleme sonrası `/blog/`, `/products/` ve bir blog detay adresini yeni sekmede açıp yenileyin. Olmayan bir adresin HTTP 404 döndürdüğünü kontrol edin.
 
 ## Cloudflare Workers yayını
+
+Plesk için oluşturulan `plesk` dalı yalnızca hazır web dosyaları içerir; Worker yapılandırması ve npm projesi bu dalda bulunmaz. Cloudflare **Settings → Build → Branch control** bölümünde production branch `main` olmalıdır. Yalnızca `main` yayımlanacaksa **Enable Preview Builds** seçeneğini kapatın; açık kalacaksa `plesk` dalını önizleme tetikleyicilerinden hariç tutun. Cloudflare Root directory alanı kaynak projenin kökünü (`/`) göstermelidir. Plesk ise `plesk` dalını kullanmaya devam eder.
 
 Cloudflare’daki Git tabanlı yayında:
 
