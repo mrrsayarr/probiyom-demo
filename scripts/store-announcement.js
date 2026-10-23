@@ -12,7 +12,8 @@ var StoreAnnouncement = (function () {
     announcementImage = new Image(1122, 1402);
     announcementImage.alt = SiteData.storeAnnouncement.imageAlt;
     announcementImage.fetchPriority = 'high';
-    announcementImage.decoding = 'async';
+    // This small opening image is the LCP element: decode it with its first paint.
+    announcementImage.decoding = 'sync';
     setResponsiveImage(announcementImage, SiteData.storeAnnouncement.image, imageSizes);
     // Dimensions reserve the image space; opening does not need to wait for decoding.
     show();
@@ -20,7 +21,16 @@ var StoreAnnouncement = (function () {
 
   function show() {
     if (shown) return;
-    if (document.visibilityState === 'hidden' || document.querySelector('dialog[open], .contact-modal-overlay.is-visible, #app-loader')) {
+    if (document.visibilityState === 'hidden') {
+      // A background tab should open immediately when visited, without a one-second polling delay.
+      document.addEventListener('visibilitychange', function resume() {
+        if (document.visibilityState === 'hidden') return;
+        document.removeEventListener('visibilitychange', resume);
+        show();
+      });
+      return;
+    }
+    if (document.querySelector('dialog[open], .contact-modal-overlay.is-visible, #app-loader')) {
       setTimeout(show, 1000);
       return;
     }

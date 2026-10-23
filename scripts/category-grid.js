@@ -1,5 +1,6 @@
 /* Shared cards. Native links are handled by the router's existing delegation. */
 function CategoryGrid(container) {
+  if (container && container.firstElementChild) return;
   if (!container) return;
   container.innerHTML = ProductCategories.map(function (category) {
     var icon = '<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">';

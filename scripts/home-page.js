@@ -27,7 +27,21 @@ var HomePage = (function () {
       label: 'Probiyotik temizlik teknolojisi'
     }));
     var chart = root.querySelector('[data-pathogen-chart]');
-    if (chart) resources.push(initPathogenChart(root));
+    function activateChart() {
+      chart.replaceChildren();
+      resources.push(initPathogenChart(root));
+    }
+    if (chart && chart.firstElementChild && window.IntersectionObserver) {
+      // Keep the server-rendered chart and its reserved space until it is near the viewport.
+      // Empty SPA templates still initialize immediately, avoiding a delayed height change.
+      var chartObserver = new IntersectionObserver(function (entries) {
+        if (!entries.some(function (entry) { return entry.isIntersecting; })) return;
+        chartObserver.disconnect();
+        activateChart();
+      }, { rootMargin: '300px' });
+      chartObserver.observe(chart);
+      resources.push({ destroy: function () { chartObserver.disconnect(); } });
+    } else if (chart) activateChart();
     return {
       destroy: function () {
         resources.splice(0).forEach(function (resource) {

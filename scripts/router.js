@@ -65,10 +65,6 @@ var Router = (function () {
     var renderedRoute = mainContainer.getAttribute && mainContainer.getAttribute('data-prerender-route');
     if (renderedRoute) mainContainer.removeAttribute('data-prerender-route');
     if (renderedRoute === buildRouteUrl(route)) {
-      if (page === 'home') {
-        var chart = mainContainer.querySelector('[data-pathogen-chart]');
-        if (chart) chart.replaceChildren();
-      }
       currentPage = PageControllers.mount(page, parts[1], mainContainer);
       restoreHashTarget();
       notifyRouteChange();

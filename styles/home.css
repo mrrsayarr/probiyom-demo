@@ -1,5 +1,13 @@
 /* Homepage layout and the opt-in carousel control placement. */
 .home-opening { position: relative; padding-block: 1rem 2.5rem; }
+/* Keep all content searchable while skipping offscreen layout and painting. */
+@supports (content-visibility: auto) {
+  .app-footer { content-visibility: auto; contain-intrinsic-size: auto 550px; }
+  .home-opening ~ .page-section:nth-of-type(n+3) {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 900px;
+  }
+}
 .home-certificates { display: none; }
 @media (min-width: 1200px) {
   .home-certificates {

@@ -23,7 +23,9 @@ Farklı bir port için:
 npm start -- 7077
 ```
 
-Derleme Node.js, HTML üretimi için `linkedom` ve JavaScript sıkıştırması için `terser` kullanır; Chromium, Playwright, Python veya sistem paketi kurulumu gerekmez. Önizleme sunucusu `serve.mjs` dosyasıdır.
+Derleme Node.js ile çalışır: HTML için `linkedom`, JavaScript için `terser`, CSS için `postcss` ve `clean-css`, SVG için `svgo` kullanılır. Chromium, Playwright, Python veya sistem paketi kurulumu gerekmez. Önizleme sunucusu `serve.mjs` dosyasıdır.
+
+Her sayfanın ilk iki bölümünü, menüsünü ve mağaza popup'ını biçimlendiren kritik CSS HTML içine eklenir. Tam stil dosyası arka planda yüklenir; JavaScript kapalıysa `noscript` içindeki normal stil bağlantısı kullanılır. Türkçe Inter karakterleri küçük bir yerel font dosyasından gelir; diğer karakterler için orijinal fontlar korunur. Yavaş ilk ziyarette yazı tipinin geç değişerek sayfayı kaydırmasını önlemek için `font-display: optional` kullanılır. Küçük menü ve altbilgi logoları WebP biçimindedir; orijinal SVG dosyası korunur.
 
 ## Sayfa yapısı
 
@@ -123,9 +125,9 @@ Soru ve cevaplar `data/faqs.js` içinden düzenlenir. İletişim bilgileri ve so
 
 Mağaza bağlantısı `data/site.js` içindeki `trendyol` alanıdır. Popup’ın görünürlüğü, görsel adresi ve alternatif metni aynı dosyadaki `storeAnnouncement` ayarlarından yönetilir.
 
-Mağaza popup’ı her tam sayfa açılışında veya yenilemede otomatik olarak bir kez görünür; site içi menü geçişlerinde tekrarlanmaz. Görsel `images/trendyol-popup.webp` dosyasından gelir ve mobilde tamamı gösterilir. Mağaza bağlantısı ile görünürlük ayarları `data/site.js` üzerinden yönetilir. İletişim sayfasındaki mağaza duyurusu da korunur.
+Mağaza popup’ı her tam sayfa açılışında veya yenilemede otomatik olarak bir kez görünür; site içi menü geçişlerinde tekrarlanmaz. Görsel `images/trendyol-popup-fast.webp` ve daha küçük ekran varyantlarından gelir, mobilde tamamı gösterilir. Önceki orijinal görsel de korunur. Mağaza bağlantısı ile görünürlük ayarları `data/site.js` üzerinden yönetilir. İletişim sayfasındaki mağaza duyurusu da korunur.
 
-Yayın derlemesi popup için küçük bir `scripts/store.<hash>.js` dosyası üretir. Popup ve kapatma düğmeleri ana site dosyasının indirilmesini beklemeden çalışır; uygulama aynı popup örneğini kullanır. Her iki JavaScript dosyası sıkıştırılır ve içerik değiştikçe dosya adları yenilenir. Bu dosyaları elle düzenlemeyin; `package.json`, `package-lock.json` ve kaynak değişikliklerini birlikte `main` dalına yükleyin.
+Yayın derlemesi, popup için sıkıştırılmış küçük başlangıç kodunu HTML'in içine ekler. Popup ve kapatma düğmeleri ek bir JavaScript indirmesini veya ana site dosyasını beklemeden çalışır; uygulama aynı popup örneğini kullanır. Ana JavaScript dosyası da sıkıştırılır ve içeriği değiştikçe dosya adı yenilenir. Üretilen dosyaları elle düzenlemeyin; `package.json`, `package-lock.json` ve kaynak değişikliklerini birlikte `main` dalına yükleyin.
 
 ### Görseller
 
