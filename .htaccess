@@ -28,7 +28,7 @@ Header set Cache-Control "no-cache"
 <FilesMatch "\.(css|js|webp|png|jpe?g|svg|woff2)$">
 Header set Cache-Control "public, max-age=604800"
 </FilesMatch>
-<FilesMatch "^(site\.[a-f0-9]{12}\.(css|js)|.+-[a-f0-9]{8}-[0-9]+\.webp)$">
+<FilesMatch "^((site|store)\.[a-f0-9]{12}\.(css|js)|.+-[a-f0-9]{8}-[0-9]+\.webp)$">
 Header set Cache-Control "public, max-age=31536000, immutable"
 </FilesMatch>
 </IfModule>

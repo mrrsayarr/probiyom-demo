@@ -45,7 +45,7 @@ function ImageSlider(container, slides, durationMs, options) {
       image.alt = slide.alt || '';
       image.loading = index === 0 ? 'eager' : 'lazy';
       image.decoding = 'async';
-      if (index === 0) image.setAttribute('fetchpriority', 'high');
+      if (index === 0) image.setAttribute('fetchpriority', document.querySelector('.store-announcement[open]') ? 'low' : 'high');
       if (index === 0) setResponsiveImage(image, slide.src, '(max-width: 575px) 100vw, (max-width: 1440px) 84vw, 1140px');
       imageContainer.appendChild(image);
 

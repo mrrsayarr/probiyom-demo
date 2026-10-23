@@ -166,6 +166,14 @@ header.app-header, .app-header { position: sticky !important; top: 0 !important;
   box-shadow: 0 10px 30px rgba(0,0,0,0.15); border-color: rgba(255,255,255,0.12);
   padding-left: 1rem !important; padding-right: 1rem !important;
 }
+@media (max-width: 767px) {
+  /* Keep the header's occupied space stable while the floating capsule changes shape. */
+  .app-header, .navbar { min-height: 68px; }
+  .navbar > .container { flex-wrap: nowrap; }
+  .navbar-brand, .navbar-mobile-btn { flex-shrink: 0; white-space: nowrap; }
+  .navbar { transition: transform 360ms cubic-bezier(.22, 1, .36, 1), border-radius 360ms cubic-bezier(.22, 1, .36, 1), box-shadow 360ms ease-out, background-color 240ms ease-out; }
+  .navbar.is-scrolled { width: calc(100% - 16px); padding-left: 0 !important; padding-right: 0 !important; }
+}
 .navbar-brand { color: #fff; transition: opacity 0.2s ease; z-index: 10000 !important; }
 .navbar-links { display: none !important; }
 .navbar-mobile-btn { display: inline-flex !important; }
