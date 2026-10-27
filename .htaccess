@@ -5,6 +5,10 @@ ErrorDocument 404 /404.html
 
 <IfModule mod_rewrite.c>
 RewriteEngine On
+# Direct error-document requests must also return 404; allow internal ErrorDocument rendering.
+RewriteCond %{THE_REQUEST} \s/+404\.html[?\s] [NC]
+RewriteCond %{ENV:REDIRECT_STATUS} ^$
+RewriteRule ^404\.html$ - [R=404,L]
 RewriteRule ^blog/0/?$ /blog/alerji-bebek-ve-evcil-hayvan-dostu-temizlik-guvenli-yasam-alanlari/ [R=308,L]
 RewriteRule ^blog/1/?$ /blog/probiyotik-temizligin-gucu-uzun-sureli-ve-mikrobiyom-dostu-hijyen/ [R=308,L]
 RewriteRule ^blog/2/?$ /blog/temizlikte-enzimler-probiyotiklerin-yerine-gecmez/ [R=308,L]
@@ -15,6 +19,7 @@ RewriteRule ^blog/6/?$ /blog/alerjinize-karsi-yeni-nesil-sinbiyotik-guc/ [R=308,
 RewriteRule ^blog/7/?$ /blog/bir-ciftlikte-hijyen-sadece-temizlik-midir-yoksa-hastaliklari-onleyen-gorunmez-bir-savunma-hatti-mi/ [R=308,L]
 RewriteRule ^blog/8/?$ /blog/endustriyel-su-sistemlerinde-gorunmeyen-maliyet-biyofilm/ [R=308,L]
 RewriteCond %{THE_REQUEST} \s/+[^?\s]*index\.html[?\s] [NC]
+RewriteCond %{REQUEST_FILENAME} -f
 RewriteRule ^(.*/)?index\.html$ /$1 [R=308,L]
 </IfModule>
 
