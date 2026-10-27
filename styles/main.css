@@ -65,6 +65,8 @@ input, select, textarea { font-family: inherit; font-size: inherit; }
 .app-footer { width: 100%; background: linear-gradient(180deg, var(--color-baltic-blue) 0%, #0f172a 100%); border-top: 1px solid rgba(255,255,255,0.08); }
 
 .content-column {
+  /* Keep child margins inside the page, including the mobile opening's negative top margin. */
+  display: flow-root;
   padding-left: clamp(16px, 8vw, 420px);
   padding-right: clamp(16px, 8vw, 420px);
   max-width: 1440px; margin-left: auto; margin-right: auto;

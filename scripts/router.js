@@ -94,6 +94,8 @@ var Router = (function () {
     updateSEO('404 - Sayfa Bulunamadı', 'Aradığınız sayfa bulunamadı.', route || '404');
     var robots = document.querySelector('meta[name="robots"]');
     if (robots) robots.setAttribute('content', 'noindex, follow');
+    var canonical = document.querySelector('link[rel="canonical"]');
+    if (canonical) canonical.remove();
   }
 
   function notifyRouteChange() {
@@ -108,7 +110,7 @@ var Router = (function () {
   }
 
   function navigate(route, options) {
-    var normalized = normalizeRoute(route);
+    var normalized = canonicalRoute(route);
     var nextUrl = buildRouteUrl(normalized);
     var replace = options && options.replace;
 
@@ -185,12 +187,25 @@ var Router = (function () {
     // Existing element IDs are content fragments, not legacy page routes.
     if (document.getElementById(value)) return null;
     value = value.replace(/^\//, '').replace(/\/$/, '');
+    if (!value && hash === '#/') return 'home';
     return Object.prototype.hasOwnProperty.call(SiteRoutes.pages, value.split('/')[0]) ? normalizeRoute(value) : null;
+  }
+
+  function canonicalRoute(route) {
+    var normalized = normalizeRoute(route);
+    var parts = normalized.split('/');
+    if (parts.length === 2 && parts[0] === 'blog' && /^\d+$/.test(parts[1])) {
+      var index = Number(parts[1]);
+      if (Number.isSafeInteger(index) && index < blogPosts.length) {
+        return 'blog/' + blogSlug(blogPosts[index]);
+      }
+    }
+    return normalized;
   }
 
   function normalizeLegacyLocation() {
     var legacyRoute = getLegacyHashRoute();
-    var currentRoute = legacyRoute === null ? getCurrentRoute() : legacyRoute;
+    var currentRoute = canonicalRoute(legacyRoute === null ? getCurrentRoute() : legacyRoute);
     var currentUrl = buildRouteUrl(currentRoute);
     var target = currentUrl + window.location.search + (legacyRoute === null ? window.location.hash : '');
     var currentLocation = window.location.pathname + window.location.search + window.location.hash;

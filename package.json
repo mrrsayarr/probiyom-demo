@@ -4,6 +4,7 @@
   "scripts": {
     "build": "node scripts/build-seo.cjs",
     "build:plesk": "node scripts/build-seo.cjs --plesk",
+    "test:seo": "node scripts/check-seo.cjs",
     "deploy": "npx wrangler deploy",
     "prestart": "npm run build",
     "start": "node serve.mjs"

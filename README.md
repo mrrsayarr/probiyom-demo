@@ -150,6 +150,14 @@ Sayfa konumu bağlantıları yalnızca ürün grubu detaylarında ve blog yazıl
 
 Analytics ve Ads ölçümleri GTM üzerinden çalışır. Aynı ölçüm kodlarını ikinci kez eklemeden önce GTM yapılandırmasını kontrol edin.
 
+### SEO yayın kontrolü
+
+Plesk paketi için `npm run build:plesk` ardından `npm run test:seo` çalıştırın. Worker paketi için `npm run build` ardından `npm run test:seo -- --worker` kullanın. Kontroller; sitemap, robots, canonical, metadata, hazır HTML içeriği, yapılandırılmış veri, iç bağlantılar, varlıklar, eski hash bağlantıları ve Worker HTTP davranışını kapsar. GitHub Actions aynı Plesk kontrolünü çalıştırır; kontrol başarısızsa yayın dalı güncellenmez.
+
+Tercih edilmeyen üç domain sürümünün kalıcı yönlendirmeleri korunmalıdır; bunlar için Search Console'da yönlendirme hatasını kaldırma doğrulaması başlatmayın. `robots.txt` dosyasının indekslenmesi gerekmez. Karşılığı olmayan adresler gerçek 404 dönmelidir; alakasız adresleri ana sayfaya yönlendirmeyin. Eski sayısal blog bağlantıları, tarayıcı içindeki hash geçişlerinde de kalıcı slug'a çevrilir; gerçek içerik fragmentleri korunur.
+
+Node kontrolleri Apache çalıştırmaz. Plesk'e yükleme sonrasında `/404.html` ve bilinmeyen bir adresin GET/HEAD ile 404 döndüğünü, gerçek sayfaların ise 200 döndüğünü ayrıca doğrulayın. Güncellenme tarihi bilinmediğinde sitemap'e yapay `lastmod` eklemeyin.
+
 ## Derleme ve kontrol
 
 ```sh

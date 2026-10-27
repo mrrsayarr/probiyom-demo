@@ -55,6 +55,14 @@ export default {
     const url = new URL(request.url);
     const path = url.pathname;
 
+    // Only normalize the two production hosts; local and preview hosts remain usable.
+    if (['probiyom.com', 'www.probiyom.com'].includes(url.hostname) && url.origin !== 'https://www.probiyom.com') {
+      url.protocol = 'https:';
+      url.host = 'www.probiyom.com';
+      url.port = '';
+      return Response.redirect(url, 301);
+    }
+
     // Asset providers decode paths; apply the private-path guard to that same form.
     const decodedPath = normalizedAssetPath(path);
     // Never expose the generated document store, including percent-encoded aliases.
@@ -85,6 +93,15 @@ export default {
     }
 
     const manifest = await loadManifest(request, env);
+    if (path.endsWith('/index.html')) {
+      const directory = path.slice(0, -'index.html'.length);
+      const destination = Object.hasOwn(manifest.aliases, directory) ? manifest.aliases[directory] :
+        manifest.routes.includes(directory) ? directory : null;
+      if (destination) {
+        url.pathname = destination;
+        return Response.redirect(url, 308);
+      }
+    }
     const canonical = Object.hasOwn(manifest.aliases, pagePath) ? manifest.aliases[pagePath] : null;
     if (canonical) {
       url.pathname = canonical;
