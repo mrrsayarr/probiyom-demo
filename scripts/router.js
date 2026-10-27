@@ -13,6 +13,7 @@ var Router = (function () {
   var pageCache = Object.create(null);
   var pendingPages = Object.create(null);
   var routeVersion = 0;
+  var pageTransition = null;
 
 
 
@@ -33,6 +34,7 @@ var Router = (function () {
   }
 
   function onRoute() {
+    if (pageTransition) { pageTransition.cancel(); pageTransition = null; }
     normalizeLegacyLocation();
     routeVersion += 1;
     var route = getCurrentRoute();
@@ -242,6 +244,7 @@ var Router = (function () {
     if (pageCache[url]) {
       mainContainer.innerHTML = pageCache[url];
       if (callback) callback();
+      animatePageEntry();
       restoreHashTarget();
       notifyRouteChange();
       return;
@@ -252,6 +255,7 @@ var Router = (function () {
         if (requestVersion !== routeVersion) return;
         mainContainer.innerHTML = html;
         if (callback) callback();
+        animatePageEntry();
         restoreHashTarget();
         notifyRouteChange();
       })
@@ -261,6 +265,14 @@ var Router = (function () {
         updateSEO('Sayfa yüklenemedi', 'Sayfa yüklenirken bir hata oluştu.', getCurrentRoute());
         notifyRouteChange();
       });
+  }
+
+  function animatePageEntry() {
+    if (typeof mainContainer.animate !== 'function' || isMotionReduced()) return;
+    // Fade the ready page only: no blank loading interval or layout animation.
+    pageTransition = mainContainer.animate([{ opacity: .82 }, { opacity: 1 }], {
+      duration: 220, easing: 'ease-out'
+    });
   }
 
   function restoreHashTarget() {

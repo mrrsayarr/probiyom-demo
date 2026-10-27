@@ -1,0 +1,129 @@
+[
+  {
+    "width": 390,
+    "fontDelay": 0,
+    "fonts": [
+      {
+        "familyName": "Inter",
+        "postScriptName": "Inter-Bold",
+        "isCustomFont": true,
+        "glyphCount": 44
+      }
+    ],
+    "nav": {
+      "before": {
+        "width": 390,
+        "height": 68
+      },
+      "mid": 376.9375,
+      "after": {
+        "width": 374,
+        "height": 68
+      },
+      "transition": "width 0.36s cubic-bezier(0.22, 1, 0.36, 1), max-width 0.36s cubic-bezier(0.22, 1, 0.36, 1), transform 0.36s cubic-bezier(0.22, 1, 0.36, 1), border-radius 0.36s cubic-bezier(0.22, 1, 0.36, 1), padding 0.36s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.36s ease-out, background-color 0.24s ease-out, border-color 0.24s ease-out"
+    },
+    "slider": {
+      "initial": "matrix(1, 0, 0, 1, 0, 0)",
+      "mid": "matrix(1, 0, 0, 1, -366.665, 0)",
+      "end": "matrix(1, 0, 0, 1, -390, 0)"
+    },
+    "cls": 0.00011709045584045586,
+    "errors": []
+  },
+  {
+    "width": 390,
+    "fontDelay": 1600,
+    "fonts": [
+      {
+        "familyName": "Inter",
+        "postScriptName": "Inter-Bold",
+        "isCustomFont": true,
+        "glyphCount": 44
+      }
+    ],
+    "nav": {
+      "before": {
+        "width": 390,
+        "height": 68
+      },
+      "mid": 376.9375,
+      "after": {
+        "width": 374,
+        "height": 68
+      },
+      "transition": "width 0.36s cubic-bezier(0.22, 1, 0.36, 1), max-width 0.36s cubic-bezier(0.22, 1, 0.36, 1), transform 0.36s cubic-bezier(0.22, 1, 0.36, 1), border-radius 0.36s cubic-bezier(0.22, 1, 0.36, 1), padding 0.36s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.36s ease-out, background-color 0.24s ease-out, border-color 0.24s ease-out"
+    },
+    "slider": {
+      "initial": "matrix(1, 0, 0, 1, 0, 0)",
+      "mid": "matrix(1, 0, 0, 1, -737.213, 0)",
+      "end": "matrix(1, 0, 0, 1, -780, 0)"
+    },
+    "cls": 0.002254558404558405,
+    "errors": []
+  },
+  {
+    "width": 1440,
+    "fontDelay": 0,
+    "fonts": [
+      {
+        "familyName": "Inter",
+        "postScriptName": "Inter-Bold",
+        "isCustomFont": true,
+        "glyphCount": 44
+      }
+    ],
+    "nav": {
+      "before": {
+        "width": 1440,
+        "height": 68
+      },
+      "mid": 1249.59375,
+      "after": {
+        "width": 1200,
+        "height": 68
+      },
+      "transition": "width 0.36s cubic-bezier(0.22, 1, 0.36, 1), max-width 0.36s cubic-bezier(0.22, 1, 0.36, 1), transform 0.36s cubic-bezier(0.22, 1, 0.36, 1), border-radius 0.36s cubic-bezier(0.22, 1, 0.36, 1), padding 0.36s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.36s ease-out, background-color 0.24s ease-out, border-color 0.24s ease-out"
+    },
+    "slider": {
+      "initial": "matrix(1, 0, 0, 1, 0, 0)",
+      "mid": "matrix(1, 0, 0, 1, -1135.35, 0)",
+      "end": "matrix(1, 0, 0, 1, -1207.62, 0)"
+    },
+    "cls": 0.02625828181765207,
+    "errors": []
+  },
+  {
+    "width": 1440,
+    "fontDelay": 1600,
+    "fonts": [
+      {
+        "familyName": "Inter",
+        "postScriptName": "Inter-Bold",
+        "isCustomFont": true,
+        "glyphCount": 44
+      }
+    ],
+    "nav": {
+      "before": {
+        "width": 1440,
+        "height": 68
+      },
+      "mid": 1244.328125,
+      "after": {
+        "width": 1200,
+        "height": 68
+      },
+      "transition": "width 0.36s cubic-bezier(0.22, 1, 0.36, 1), max-width 0.36s cubic-bezier(0.22, 1, 0.36, 1), transform 0.36s cubic-bezier(0.22, 1, 0.36, 1), border-radius 0.36s cubic-bezier(0.22, 1, 0.36, 1), padding 0.36s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.36s ease-out, background-color 0.24s ease-out, border-color 0.24s ease-out"
+    },
+    "slider": {
+      "initial": "matrix(1, 0, 0, 1, 0, 0)",
+      "mid": "matrix(1, 0, 0, 1, -1140.18, 0)",
+      "end": "matrix(1, 0, 0, 1, -1207.62, 0)"
+    },
+    "cls": 0.02609052476503558,
+    "errors": []
+  },
+  {
+    "reducedMotion": "0s"
+  }
+]

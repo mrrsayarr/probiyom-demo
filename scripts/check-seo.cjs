@@ -98,6 +98,12 @@ async function checkRouter() {
     const move = (_state, _title, url) => { context.location = new URL(url, context.location); };
     context.history = { replaceState: move, pushState: move };
     context.PageControllers = { mount: () => ({ destroy() {} }) };
+    const entries = [];
+    let cancelledEntries = 0;
+    document.querySelector('main').animate = (frames, options) => {
+      entries.push({ frames, duration: options.duration });
+      return { cancel() { cancelledEntries += 1; } };
+    };
     vm.createContext(context);
     for (const file of ['site-routes.js', 'helpers.js', 'page-seo.js', 'router.js']) vm.runInContext(fs.readFileSync(path.join(__dirname, file), 'utf8'), context);
     context.Router.init(document.querySelector('main'));
@@ -109,6 +115,10 @@ async function checkRouter() {
     await new Promise(resolve => setImmediate(resolve));
     assert.equal(document.querySelector('link[rel="canonical"]'), null);
     assert.match(document.querySelector('meta[name="robots"]').getAttribute('content'), /noindex/);
+    assert.ok(entries.length > 0, 'Ready SPA pages fade in');
+    assert.equal(entries[0].duration, 220);
+    assert.deepEqual(Object.keys(entries[0].frames[0]), ['opacity'], 'Page entry must not animate layout');
+    assert.ok(cancelledEntries > 0, 'Navigation cancels the previous entry animation');
   }
 }
 
@@ -150,8 +160,51 @@ async function checkWorker() {
   assert.equal((await request('https://preview.workers.dev/about/')).status, 200, 'Preview hosts must remain usable');
 }
 
+function checkSlider() {
+  const { document, Event } = parseHTML('<html><body><div id="slider"></div></body></html>').window;
+  const timers = new Map();
+  let timerId = 0;
+  const context = { document, matchMedia: () => ({ matches: false }),
+    setTimeout: callback => { timers.set(++timerId, callback); return timerId; },
+    clearTimeout: id => timers.delete(id) };
+  context.window = context;
+  vm.createContext(context);
+  for (const file of ['helpers.js', 'slider.js']) vm.runInContext(fs.readFileSync(path.join(__dirname, file), 'utf8'), context);
+  const container = document.querySelector('#slider');
+  const slider = context.ImageSlider(container, [{ src: '/a.webp' }, { src: '/b.webp' }, { src: '/c.webp' }], 7000);
+  const next = () => { const [id, callback] = timers.entries().next().value; timers.delete(id); callback(); };
+  next();
+  assert.equal(container.querySelector('.dock-counter').textContent, '02 / 03');
+  assert.equal(container.querySelectorAll('img')[2].getAttribute('src'), '/c.webp', 'Preload the upcoming image after each transition');
+  next(); next();
+  assert.equal(container.querySelector('.dock-counter').textContent, '01 / 03', 'Autoplay wraps to the first slide');
+  container.querySelector('.dock-btn-pause').dispatchEvent(new Event('click'));
+  assert.equal(timers.size, 0, 'Pause cancels autoplay');
+  container.querySelector('.dock-btn-pause').dispatchEvent(new Event('click'));
+  assert.equal(timers.size, 1, 'Resume schedules exactly one transition');
+  slider.destroy();
+  assert.equal(timers.size, 0, 'Route changes clean up the slider timer');
+}
+
+function checkMotionPreference() {
+  const { document } = parseHTML('<html><body></body></html>');
+  let systemReduced = true;
+  const context = { document, matchMedia: () => ({ matches: systemReduced }) };
+  context.window = context;
+  vm.createContext(context);
+  vm.runInContext(fs.readFileSync(path.join(__dirname, 'helpers.js'), 'utf8'), context);
+  assert.equal(context.isMotionReduced(), true, 'System reduced motion remains the default');
+  document.documentElement.setAttribute('data-motion', 'full');
+  assert.equal(context.isMotionReduced(), false, 'Explicit site choice enables motion');
+  document.documentElement.removeAttribute('data-motion');
+  systemReduced = false;
+  assert.equal(context.isMotionReduced(), false, 'Normal system motion is preserved');
+}
+
 (async () => {
   checkDocuments();
+  checkMotionPreference();
+  checkSlider();
   await checkRouter();
   await checkWorker();
   console.log('PASS: ' + manifest.routes.length + ' pages; sitemap, robots, HTML metadata, schema, assets, internal links, legacy hashes, canonical redirects and true 404 responses (' + path.basename(output) + ').');

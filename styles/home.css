@@ -152,7 +152,8 @@
 
 /* Phone-only opening: full-width artwork and a closer reading section. */
 @media (max-width: 575.98px) {
-  .home-opening { padding-block: 0; margin-top: -1rem; }
+  /* Preserve the artwork's position without collapsing a negative top margin through the page. */
+  .home-opening { padding-block: 0; margin-top: 0; top: -1rem; margin-bottom: -1rem; }
   #home-slider { position: relative; left: 50%; width: 100vw; margin-left: -50vw; }
   #home-slider .slider-wrapper--controls-top-right .slider-frame {
     border: 0; border-radius: 0; box-shadow: none;

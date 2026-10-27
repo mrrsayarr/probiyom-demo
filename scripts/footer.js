@@ -88,11 +88,34 @@ function Footer(container) {
       '</div>' +
     '</div>';
 
+  // Keep the system preference by default; visitors can explicitly enable the site's motion.
+  var motionButton = document.createElement('button');
+  motionButton.type = 'button';
+  motionButton.className = 'footer-top-btn text-white-50 small';
+  motionButton.id = 'motion-preference';
+  var fullMotion = document.documentElement.getAttribute('data-motion') === 'full';
+  motionButton.textContent = fullMotion ? 'Sistem hareket ayarını kullan' : 'Animasyonları aç';
+  motionButton.addEventListener('click', function () {
+    try {
+      if (fullMotion) localStorage.removeItem('probiyom-motion');
+      else localStorage.setItem('probiyom-motion', 'full');
+    } catch (error) {
+      motionButton.textContent = 'Tarayıcı bu tercihin kaydedilmesine izin vermiyor';
+      return;
+    }
+    window.location.reload();
+  });
+  if (typeof navigator !== 'undefined' && (isMotionReduced() || fullMotion)) {
+    var topButton = container.querySelector('#footer-scroll-top');
+    var footerBottom = topButton && topButton.parentElement;
+    if (footerBottom && !container.querySelector('#motion-preference')) footerBottom.appendChild(motionButton);
+  }
+
   /* Sayfayı Yumuşakça En Tepeye Kaydıran Buton Dinleyicisi */
   var scrollTopBtn = container.querySelector('#footer-scroll-top');
   if (scrollTopBtn) {
     scrollTopBtn.addEventListener('click', function () {
-      var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var prefersReducedMotion = isMotionReduced();
       window.scrollTo({ top: 0, behavior: prefersReducedMotion ? 'auto' : 'smooth' });
     });
   }

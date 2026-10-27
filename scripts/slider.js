@@ -9,7 +9,7 @@ function ImageSlider(container, slides, durationMs, options) {
 
   var activeIndex = 0;
   var timer = null;
-  var prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var prefersReducedMotion = isMotionReduced();
   var isPaused = !!prefersReducedMotion;
   var slideElements = [];
   var pauseBtn = null;
@@ -245,6 +245,7 @@ function ImageSlider(container, slides, durationMs, options) {
       if (destroyed || version !== navigationVersion) return;
       activeIndex = idx;
       updateDOM();
+      preloadNextSlide(activeIndex);
       if (!isPaused) scheduleNext();
     }
     if (!image.complete && image.decode) image.decode().catch(function () {}).then(commit);
