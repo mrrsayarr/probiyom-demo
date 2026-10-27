@@ -254,9 +254,9 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .footer-link,
-  .social-icon-btn,
-  .footer-top-btn {
+  html:not([data-motion="full"]) .footer-link,
+  html:not([data-motion="full"]) .social-icon-btn,
+  html:not([data-motion="full"]) .footer-top-btn {
     transition: none !important;
   }
 }

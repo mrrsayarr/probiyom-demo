@@ -4,6 +4,11 @@
 
 (function () {
   function startApp() {
+    try {
+      if (localStorage.getItem('probiyom-motion') === 'full') {
+        document.documentElement.setAttribute('data-motion', 'full');
+      }
+    } catch (error) { /* Storage can be disabled; system preferences still work. */ }
     /* Render navbar */
     var navContainer = document.getElementById('navbar-container');
     if (navContainer) {

@@ -43,7 +43,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .category-grid .category-media img {
+  html:not([data-motion="full"]) .category-grid .category-media img {
     transition: none;
   }
 }

@@ -65,14 +65,14 @@ input, select, textarea { font-family: inherit; font-size: inherit; }
 .app-footer { width: 100%; background: linear-gradient(180deg, var(--color-baltic-blue) 0%, #0f172a 100%); border-top: 1px solid rgba(255,255,255,0.08); }
 
 .content-column {
-  /* Keep child margins inside the page, including the mobile opening's negative top margin. */
-  display: flow-root;
   padding-left: clamp(16px, 8vw, 420px);
   padding-right: clamp(16px, 8vw, 420px);
   max-width: 1440px; margin-left: auto; margin-right: auto;
 }
 
 .page-section { display: flex; flex-direction: column; gap: 2.5rem; padding: 1.5rem 0; }
+/* Keep the about opening's visible spacing inside the section, not above the route container. */
+.content-column > .page-section.py-5.my-3:first-child { margin-top: 0 !important; padding-top: 4rem !important; }
 .section-header { display: flex; flex-direction: column; gap: 1.25rem; }
 .section-header-wide { display: flex; flex-direction: column; gap: 1rem; }
 
@@ -159,7 +159,7 @@ header.app-header, .app-header { position: sticky !important; top: 0 !important;
 .navbar {
   position: relative; top: 0; left: 0; right: 0; width: 100%; max-width: 100%; margin: 0 auto; z-index: 10000 !important;
   padding: 0.85rem 0; background: var(--color-baltic-blue); border: 1px solid transparent; border-radius: 0; transform: translateY(0);
-  transition: width 360ms cubic-bezier(.22, 1, .36, 1), max-width 360ms cubic-bezier(.22, 1, .36, 1), transform 360ms cubic-bezier(.22, 1, .36, 1), border-radius 360ms cubic-bezier(.22, 1, .36, 1), padding 360ms cubic-bezier(.22, 1, .36, 1), box-shadow 360ms ease-out, background-color 240ms ease-out, border-color 240ms ease-out;
+  transition: width 480ms cubic-bezier(.22, .61, .36, 1), max-width 480ms cubic-bezier(.22, .61, .36, 1), transform 480ms cubic-bezier(.22, .61, .36, 1), border-radius 480ms cubic-bezier(.22, .61, .36, 1), padding 480ms cubic-bezier(.22, .61, .36, 1), box-shadow 480ms ease-out, background-color 320ms ease-out, border-color 320ms ease-out;
 }
 .navbar.is-scrolled {
   top: 0; width: 92%; max-width: 1200px; transform: translateY(12px);
@@ -173,7 +173,6 @@ header.app-header, .app-header { position: sticky !important; top: 0 !important;
   .app-header, .navbar { min-height: 68px; }
   .navbar > .container { flex-wrap: nowrap; }
   .navbar-brand, .navbar-mobile-btn { flex-shrink: 0; white-space: nowrap; }
-  .navbar { transition: transform 360ms cubic-bezier(.22, 1, .36, 1), border-radius 360ms cubic-bezier(.22, 1, .36, 1), box-shadow 360ms ease-out, background-color 240ms ease-out; }
   .navbar.is-scrolled { width: calc(100% - 16px); padding-left: 0 !important; padding-right: 0 !important; }
 }
 .navbar-brand { color: #fff; transition: opacity 0.2s ease; z-index: 10000 !important; }
@@ -188,7 +187,7 @@ header.app-header, .app-header { position: sticky !important; top: 0 !important;
 .nav-dropdown:hover .nav-dropdown-arrow, .nav-dropdown:focus-within .nav-dropdown-arrow { transform: rotate(180deg); }
 .nav-dropdown-menu {
   opacity: 0; visibility: hidden; transform: translateY(8px);
-  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease; z-index: 10001 !important;
+  transition: opacity 0.28s ease, transform 0.28s cubic-bezier(.22, .61, .36, 1), visibility 0.28s ease; z-index: 10001 !important;
 }
 .nav-dropdown:hover .nav-dropdown-menu, .nav-dropdown:focus-within .nav-dropdown-menu { opacity: 1; visibility: visible; transform: translateY(0); }
 .nav-dropdown-menu.force-hide { opacity: 0 !important; visibility: hidden !important; transform: translateY(8px) !important; display: none !important; }
@@ -206,15 +205,17 @@ header.app-header, .app-header { position: sticky !important; top: 0 !important;
 .navbar-mobile-btn:hover { background: rgba(255,255,255,0.15) !important; }
 .navbar-mobile-btn:active { transform: scale(0.96); }
 .mobile-menu.is-open { display: block !important; z-index: 10001 !important; }
+.mobile-menu.is-open .mobile-menu-panel { animation: mobileMenuEnter .28s cubic-bezier(.22, .61, .36, 1) both; }
+@keyframes mobileMenuEnter { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: translateY(0); } }
 .mobile-menu-panel .sub-links a { border-left: 2px solid rgba(255,255,255,0.1); color: rgba(255,255,255,0.7) !important; }
 .mobile-menu-panel .sub-links a:hover { color: var(--color-mint-leaf) !important; padding-left: 1.75rem !important; }
 
 /* Keyboard focus and motion preferences */
 :focus-visible { outline: 3px solid var(--color-mint-leaf); outline-offset: 3px; }
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { scroll-behavior: auto !important; animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
-  .science-bg-slide { display: none; animation: none !important; }
-  .science-bg-slide:first-child { display: block; opacity: 1 !important; }
+  html:not([data-motion="full"]) *, html:not([data-motion="full"]) *::before, html:not([data-motion="full"]) *::after { scroll-behavior: auto !important; animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+  html:not([data-motion="full"]) .science-bg-slide { display: none; animation: none !important; }
+  html:not([data-motion="full"]) .science-bg-slide:first-child { display: block; opacity: 1 !important; }
 }
 
 /* Navbar CTA Button */
@@ -473,13 +474,13 @@ header.app-header, .app-header { position: sticky !important; top: 0 !important;
 .faq-answer-inner p { font-size: 0.95rem; line-height: 1.7; color: #475569; }
 @media (max-width: 768px) { .faq-question { font-size: 0.95rem; padding: 1.15rem 1rem !important; } .faq-arrow-container { width: 1.85rem; height: 1.85rem; } }
 
-.site-breadcrumbs { max-width: 1140px; margin: 12px auto 0; padding: 0 24px; font-size: .8rem; color: #52647a; }
+.site-breadcrumbs { max-width: 1140px; margin: 0 auto; padding: 12px 24px 0; font-size: .8rem; color: #52647a; }
 .site-breadcrumbs ol { display: flex; flex-wrap: wrap; gap: 6px 10px; list-style: none; padding: 0; margin: 0; }
 .site-breadcrumbs li { display: inline; overflow-wrap: anywhere; }
 .site-breadcrumbs li + li::before { content: '/'; margin-right: 10px; color: #52647a; }
 .site-breadcrumbs a { color: #22577a; text-decoration: underline; text-underline-offset: 3px; }
 @media (max-width: 767px) {
-  .site-breadcrumbs { margin-top: 8px; padding: 0 20px; font-size: .7rem; line-height: 1.5; }
+  .site-breadcrumbs { padding: 8px 20px 0; font-size: .7rem; line-height: 1.5; }
   .site-breadcrumbs ol { gap: 3px 6px; }
   .site-breadcrumbs li + li::before { margin-right: 6px; }
 }
@@ -709,6 +710,6 @@ html, body { overflow-x: clip !important; }
 .faq-answer-inner p { max-width: 75ch; }
 @media (max-width: 768px) { .faq-answer-inner { margin-inline: 16px; } }
 @media (prefers-reduced-motion: reduce) {
-  .fab-brand-frame { animation: none !important; opacity: 0; transform: none; }
-  .fab-brand-frame:first-child { opacity: 1; }
+  html:not([data-motion="full"]) .fab-brand-frame { animation: none !important; opacity: 0; transform: none; }
+  html:not([data-motion="full"]) .fab-brand-frame:first-child { opacity: 1; }
 }

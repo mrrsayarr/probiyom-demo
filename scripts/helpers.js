@@ -2,6 +2,12 @@
    Utility helpers – must load before any component that renders HTML
    =================================================================== */
 
+// An explicit site choice may override the system's reduced-motion preference.
+function isMotionReduced() {
+  return document.documentElement.getAttribute('data-motion') !== 'full' &&
+    !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+}
+
 function responsiveImageAttributes(src, sizes) {
   var item = typeof ImageAssets !== 'undefined' && ImageAssets[src.split('?')[0]];
   if (!item) return '';

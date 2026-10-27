@@ -256,8 +256,8 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .pathogen-chart__filter,
-  .pathogen-chart__point {
+  html:not([data-motion="full"]) .pathogen-chart__filter,
+  html:not([data-motion="full"]) .pathogen-chart__point {
     transition: none;
   }
 }
