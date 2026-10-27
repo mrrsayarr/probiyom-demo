@@ -2,7 +2,7 @@
    Utility helpers – must load before any component that renders HTML
    =================================================================== */
 
-// An explicit site choice may override the system's reduced-motion preference.
+// The HTML shell selects full motion consistently, without a per-browser saved preference.
 function isMotionReduced() {
   return document.documentElement.getAttribute('data-motion') !== 'full' &&
     !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);

@@ -187,18 +187,20 @@ function checkSlider() {
 }
 
 function checkMotionPreference() {
-  const { document } = parseHTML('<html><body></body></html>');
+  const { document } = parseHTML(fs.readFileSync(path.join(root, 'index.html'), 'utf8'));
   let systemReduced = true;
   const context = { document, matchMedia: () => ({ matches: systemReduced }) };
   context.window = context;
   vm.createContext(context);
   vm.runInContext(fs.readFileSync(path.join(__dirname, 'helpers.js'), 'utf8'), context);
-  assert.equal(context.isMotionReduced(), true, 'System reduced motion remains the default');
-  document.documentElement.setAttribute('data-motion', 'full');
-  assert.equal(context.isMotionReduced(), false, 'Explicit site choice enables motion');
-  document.documentElement.removeAttribute('data-motion');
+  assert.equal(document.documentElement.getAttribute('data-motion'), 'full', 'Full motion is the published default');
+  assert.equal(context.isMotionReduced(), false, 'Full motion works even when the browser requests reduced motion');
   systemReduced = false;
   assert.equal(context.isMotionReduced(), false, 'Normal system motion is preserved');
+  for (const file of ['app.js', 'footer.js']) {
+    const code = fs.readFileSync(path.join(__dirname, file), 'utf8');
+    assert.ok(!code.includes('probiyom-motion') && !code.includes('motion-preference'), 'No motion switch or saved browser preference: ' + file);
+  }
 }
 
 (async () => {
