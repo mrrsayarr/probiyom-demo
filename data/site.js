@@ -13,6 +13,20 @@ var SiteData = {
         image: "images/trendyol-popup-fast.webp?v=20261023",
         imageAlt: "Mermer tezgâh üzerinde HeiQ VivoTech ve Synbio temizlik ürünleri"
     },
+    eventAnnouncement: {
+        enabled: true,
+        endsAt: "2026-11-08T00:00:00+03:00",
+        image: "images/clean-eurasia-desktop.webp",
+        mobileImage: "images/clean-eurasia-mobile.webp",
+        imageAlt: "Probiyom Clean Eurasia Fuarı, Hall 11, Stand C16 A",
+        brand: "Probiyom × Clean Eurasia",
+        title: "Clean Eurasia’da buluşalım!",
+        description: "Sizi Clean Eurasia Uluslararası Temizlik ve Hijyen Fuarı’nda standımıza bekliyoruz.",
+        dateLabel: "5–7 Kasım 2026",
+        location: "İstanbul Fuar Merkezi · Hall 11 · Stand C16 A",
+        linkLabel: "Ücretsiz Katılım Bileti",
+        link: "https://clean-eurasia.expokayit.com/?token=4bfdd0714988c122aa91866e5c403b1c2a1a"
+    },
     lat: 40.992680,
     lon: 29.068512,
 };
