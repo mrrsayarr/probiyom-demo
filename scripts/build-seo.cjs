@@ -91,10 +91,13 @@ async function build() {
   // Keep its configuration and helpers local; the app reuses the same initialized instance.
   const popupSource = data.SiteData.storeAnnouncement.image.split('?')[0];
   const popupImages = { [popupSource]: imageAssets[popupSource] };
+  for (const image of [data.SiteData.eventAnnouncement?.image, data.SiteData.eventAnnouncement?.mobileImage]) {
+    if (image) popupImages[image] = imageAssets[image];
+  }
   const popupJs = (await minify('(function(){var SiteData=' + JSON.stringify({
-    trendyol: data.SiteData.trendyol, storeAnnouncement: data.SiteData.storeAnnouncement
+    trendyol: data.SiteData.trendyol, storeAnnouncement: data.SiteData.storeAnnouncement, eventAnnouncement: data.SiteData.eventAnnouncement
   }) + ';var ImageAssets=' + JSON.stringify(popupImages) + ';' +
-    data.escapeAttr.toString() + ';' + data.setResponsiveImage.toString() + ';' + storeCode +
+    data.escapeHtml.toString() + ';' + data.escapeAttr.toString() + ';' + data.setResponsiveImage.toString() + ';' + storeCode +
     ';window.StoreAnnouncement=StoreAnnouncement;StoreAnnouncement.init();})();',
     { compress: true, mangle: true })).code;
   const routes = ['/', ...Object.keys(data.SiteRoutes.pages).filter(key => key !== 'home').map(key => data.SiteRoutes.href(key)),
@@ -197,7 +200,9 @@ async function build() {
       // The announcement covers the slider, so its image gets the first download slot.
       document.querySelector('.slider-slide img').setAttribute('fetchpriority', 'low');
     }
-    if (context.SiteData.storeAnnouncement.enabled) {
+    // A dated campaign selects its responsive image at runtime, including after expiry.
+    // Do not preload the saved store artwork while that campaign is configured.
+    if (context.SiteData.storeAnnouncement.enabled && !context.SiteData.eventAnnouncement?.enabled) {
       const popupSource = context.SiteData.storeAnnouncement.image.split('?')[0];
       const popupAsset = imageAssets[popupSource];
       const preload = document.createElement('link');

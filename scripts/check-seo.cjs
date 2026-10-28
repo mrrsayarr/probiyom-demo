@@ -186,6 +186,22 @@ function checkSlider() {
   assert.equal(timers.size, 0, 'Route changes clean up the slider timer');
 }
 
+function checkAnnouncementCampaign() {
+  const context = {};
+  vm.createContext(context);
+  for (const file of ['data/site.js', 'scripts/store-announcement.js']) {
+    vm.runInContext(fs.readFileSync(path.join(root, file), 'utf8'), context);
+  }
+  const select = context.StoreAnnouncement.getAnnouncement;
+  assert.equal(select(Date.parse('2026-11-07T23:59:59+03:00')), context.SiteData.eventAnnouncement, 'Fair stays active through November 7 in Istanbul');
+  assert.equal(select(Date.parse('2026-11-08T00:00:00+03:00')), context.SiteData.storeAnnouncement, 'Saved Trendyol announcement returns on November 8');
+  context.SiteData.eventAnnouncement.enabled = false;
+  assert.equal(select(Date.parse('2026-11-01T12:00:00+03:00')), context.SiteData.storeAnnouncement, 'Campaign can be disabled independently');
+  for (const image of [context.SiteData.eventAnnouncement.image, context.SiteData.eventAnnouncement.mobileImage, context.SiteData.storeAnnouncement.image.split('?')[0]]) {
+    assert.ok(fs.existsSync(path.join(output, image)), 'Published announcement artwork: ' + image);
+  }
+}
+
 function checkMotionPreference() {
   const { document } = parseHTML(fs.readFileSync(path.join(root, 'index.html'), 'utf8'));
   let systemReduced = true;
@@ -205,6 +221,7 @@ function checkMotionPreference() {
 
 (async () => {
   checkDocuments();
+  checkAnnouncementCampaign();
   checkMotionPreference();
   checkSlider();
   await checkRouter();
