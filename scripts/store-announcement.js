@@ -37,7 +37,7 @@ var StoreAnnouncement = (function () {
       announcementVisual.appendChild(mobile);
       announcementVisual.appendChild(announcementImage);
     }
-    setResponsiveImage(announcementImage, announcement.image, announcement.mobileImage ? '(max-width: 639px) min(calc(100vw - 32px), 45svh), 960px' : imageSizes);
+    setResponsiveImage(announcementImage, announcement.image, announcement.mobileImage ? '(max-width: 991px) calc(100vw - 32px), 960px' : imageSizes);
     // Dimensions reserve the image space; opening does not need to wait for decoding.
     show();
   }
