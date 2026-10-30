@@ -1,7 +1,7 @@
 /* Route metadata and structured data, independent of page rendering. */
 var PageSEO = (function () {
   var SITE_ORIGIN = 'https://www.probiyom.com';
-  var DEFAULT_IMAGE = SITE_ORIGIN + '/images/homepage_sliders/hp_1.webp';
+  var DEFAULT_IMAGE = SITE_ORIGIN + '/images/homepage_sliders/slide-01.webp';
 
   function absoluteUrl(path) {
     if (!path) return SITE_ORIGIN + '/';
