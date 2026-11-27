@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Probiyom Satış Teklifi Oluşturucu</title>
 <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
 <title>Probiyom Satış Teklifi Oluşturucu</title>
 <link rel="icon" type="image/svg+xml" href="../images/logo.svg">
@@ -136,6 +137,9 @@ a{color:var(--teal-600);}
 }
 .add-btn:hover{background:var(--green-600);}
 .add-btn:disabled{background:var(--line); cursor:default;}
+.cat-row.in-cart .name, .cat-row.in-cart .meta, .cat-row.in-cart .price{opacity:.5;}
+.cat-row.in-cart .add-btn{background:var(--line); color:var(--ink-soft);}
+.cat-row.in-cart .add-btn:hover{background:var(--green-500); color:#fff;}
 
 .upload-row{display:flex; align-items:center; gap:10px; margin-top:12px; padding-top:12px; border-top:1px dashed var(--line);}
 .upload-row label.file-btn{
@@ -471,7 +475,23 @@ button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-
 
   <div class="panel">
     <h2><span class="num">4</span> Kayıtlı Teklifler<span class="count-badge" id="savedCount">0</span></h2>
-    <p class="sub">Teklifi kaydedin, listeden tekrar açıp revize edin ve isterseniz üzerine tekrar kaydedin. (Kayıtlar bu cihazdaki tarayıcıda saklanır; diğer cihazlarla paylaşılmaz. Tarayıcı verileri silinirse kayıtlar da silinir.)</p>
+    <p class="sub">Teklifi kaydedin, listeden tekrar açıp revize edin ve isterseniz üzerine tekrar kaydedin. (Bu yayınlanan link üzerinden kullanırken kayıtlar bu artifact'a özel olarak saklanır; dosyayı yerel/indirilmiş halde açtığınızda ise yalnızca o tarayıcıya özel saklanır.)</p>
+    <details id="serverBox" style="margin-bottom:12px; border:1px solid var(--line); border-radius:10px; padding:10px 12px; background:var(--paper);">
+      <summary style="cursor:pointer; font-size:13px; font-weight:700; color:var(--teal-700);">☁ Ortak Sunucu Ayarları</summary>
+      <p class="sub" style="margin:8px 0 10px;">Kayıtlı teklifleri ortak bir sunucuda tutmak için sunucuya yüklediğiniz <b>api.php</b> dosyasının tam adresini yazın (örn. https://www.probiyom.com/st/api.php). Boş bırakırsanız kayıtlar eskisi gibi yerel tutulur.</p>
+      <div class="field-row">
+        <div class="field"><label>Sunucu Adresi (api.php linki)</label><input type="text" id="serverUrl" placeholder="https://www.probiyom.com/st/api.php"></div>
+        <div class="field"><label>Erişim Anahtarı (api.php'de belirlediyseniz)</label><input type="password" id="serverKey" placeholder="opsiyonel" autocomplete="off"></div>
+      </div>
+      <div style="display:flex; gap:8px; flex-wrap:wrap; align-items:center;">
+        <button class="export-btn pdf" id="btnServerSave" style="padding:8px 12px; font-size:12.5px;">Kaydet ve Bağlan</button>
+        <button class="export-btn" id="btnServerTest" style="padding:8px 12px; font-size:12.5px; background:var(--line-soft); color:var(--ink);">Bağlantıyı Test Et</button>
+        <button class="export-btn" id="btnServerMigrate" style="padding:8px 12px; font-size:12.5px; background:var(--line-soft); color:var(--ink);" title="Bu tarayıcıdaki / Claude veritabanındaki mevcut teklifleri sunucuya kopyalar">Mevcut Kayıtları Sunucuya Aktar</button>
+        <button class="export-btn" id="btnServerRemove" style="padding:8px 12px; font-size:12.5px; background:var(--line-soft); color:#c0492f;">Sunucuyu Kaldır</button>
+      </div>
+      <div class="export-msg" id="serverMsg" style="margin-top:8px;"></div>
+    </details>
+    <div style="font-size:11.5px; color:var(--ink-soft); margin-bottom:8px;" id="storageLabel"></div>
     <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin-bottom:12px;">
       <button class="export-btn pdf" id="btnSaveTeklif">💾 Bu Teklifi Kaydet</button>
       <button class="export-btn" id="btnNewTeklif" style="background:var(--line-soft); color:var(--ink);">+ Yeni Teklif</button>
@@ -589,15 +609,48 @@ async function ensureDb(){
   return dbNamespace;
 }
 
-// Returns an array of {id, data} records, newest first.
-async function dbListRecords(){
-  const db = await ensureDb();
-  if(db){
-    try{
-      const snap = await db.collection(DB_COLLECTION).orderBy('savedAt','desc').limit(200).get();
-      return snap.docs.map(d=>({id:d.id, data:d.data()}));
-    }catch(e){ return []; }
-  }
+/* ---------- Optional shared server (api.php) ----------
+   When a server address is saved in the settings box, all saved quotes live on
+   that server (shared by everyone who uses the same address). Otherwise the
+   Claude db / this browser's localStorage are used as before. */
+const SERVER_CFG_KEY = 'probiyom_server_cfg';
+let lastDbError = '';
+
+function getServerCfg(){
+  try{
+    const c = JSON.parse(localStorage.getItem(SERVER_CFG_KEY) || '{}');
+    return {url:String(c.url||'').trim(), key:String(c.key||'')};
+  }catch(e){ return {url:'', key:''}; }
+}
+function setServerCfg(url, key){
+  try{ localStorage.setItem(SERVER_CFG_KEY, JSON.stringify({url:String(url||'').trim(), key:key||''})); return true; }
+  catch(e){ return false; }
+}
+function clearServerCfg(){ try{ localStorage.removeItem(SERVER_CFG_KEY); }catch(e){} }
+function serverMode(){ return !!getServerCfg().url; }
+
+async function serverCall(action, opts){
+  opts = opts || {};
+  const cfg = getServerCfg();
+  let endpoint;
+  try { endpoint = new URL(cfg.url); } catch(e) { throw new Error('Geçersiz sunucu adresi.'); }
+  if(endpoint.protocol !== 'https:' || endpoint.username || endpoint.password || endpoint.hash) throw new Error('Sunucu adresi HTTPS olmalıdır.');
+  let url = cfg.url + (cfg.url.indexOf('?')>-1 ? '&' : '?') + 'action=' + encodeURIComponent(action);
+  if(opts.id) url += '&id=' + encodeURIComponent(opts.id);
+  const headers = {};
+  if(cfg.key) headers['X-Api-Key'] = cfg.key;
+  const init = {method: opts.body ? 'POST' : 'GET', headers, redirect:'error'};
+  if(opts.body){ headers['Content-Type'] = 'application/json'; init.body = JSON.stringify(opts.body); }
+  let res;
+  try{ res = await fetch(url, init); }
+  catch(e){ throw new Error('Sunucuya ulaşılamadı. Adresi kontrol edin. (Not: claude.ai üzerinde yayınlanan sayfa dış sunucuya bağlanamaz; HTML dosyasını bilgisayarınızda veya kendi sunucunuzda açın.)'); }
+  let json = null;
+  try{ json = await res.json(); }catch(e){}
+  if(!res.ok || !json || json.ok === false) throw new Error((json && json.error) || ('Sunucu hatası ('+res.status+')'));
+  return json;
+}
+
+function localListRecords(){
   const out = [];
   try{
     for(let i=0;i<localStorage.length;i++){
@@ -610,7 +663,30 @@ async function dbListRecords(){
   out.sort((a,b)=>String(b.data.savedAt||'').localeCompare(String(a.data.savedAt||'')));
   return out;
 }
+
+// Returns an array of {id, data} records, newest first.
+// source 'local' = ignore the server and read the Claude db / this browser (used for migration).
+async function dbListRecords(source){
+  lastDbError = '';
+  if(serverMode() && source !== 'local'){
+    try{ const j = await serverCall('list'); return j.records || []; }
+    catch(e){ lastDbError = e.message; return []; }
+  }
+  const db = await ensureDb();
+  if(db){
+    try{
+      const snap = await db.collection(DB_COLLECTION).orderBy('savedAt','desc').limit(200).get();
+      return snap.docs.map(d=>({id:d.id, data:d.data()}));
+    }catch(e){ return []; }
+  }
+  return localListRecords();
+}
 async function dbGetRecord(id){
+  lastDbError = '';
+  if(serverMode()){
+    try{ const j = await serverCall('get', {id}); return j.record ? j.record.data : null; }
+    catch(e){ lastDbError = e.message; return null; }
+  }
   const db = await ensureDb();
   if(db){
     try{ const snap = await db.collection(DB_COLLECTION).doc(id).get(); return snap.exists ? snap.data() : null; }
@@ -619,6 +695,11 @@ async function dbGetRecord(id){
   try{ const raw = localStorage.getItem(DB_PREFIX+id); return raw ? JSON.parse(raw) : null; }catch(e){ return null; }
 }
 async function dbSaveRecord(id, data){
+  lastDbError = '';
+  if(serverMode()){
+    try{ await serverCall('save', {body:{id, data}}); return true; }
+    catch(e){ lastDbError = e.message; return false; }
+  }
   const db = await ensureDb();
   if(db){
     try{ await db.collection(DB_COLLECTION).doc(id).set(data); return true; }catch(e){ return false; }
@@ -626,6 +707,11 @@ async function dbSaveRecord(id, data){
   try{ localStorage.setItem(DB_PREFIX+id, JSON.stringify(data)); return true; }catch(e){ return false; }
 }
 async function dbDeleteRecord(id){
+  lastDbError = '';
+  if(serverMode()){
+    try{ await serverCall('delete', {body:{id}}); return true; }
+    catch(e){ lastDbError = e.message; return false; }
+  }
   const db = await ensureDb();
   if(db){
     try{ await db.collection(DB_COLLECTION).doc(id).delete(); return true; }catch(e){ return false; }
@@ -672,7 +758,7 @@ function populateGroupFilter(){
   const sel = $('groupFilter');
   const groups = Array.from(new Set(catalog.map(p=>p.group))).filter(Boolean);
   sel.innerHTML = '<option value="">Tüm Kategoriler</option>' +
-    groups.map(g=>`<option value="${g}">${GROUP_LABELS[g]||g}</option>`).join('');
+    groups.map(g=>`<option value="${escapeAttr(g)}">${escapeHtml(GROUP_LABELS[g]||g)}</option>`).join('');
 }
 
 function renderCatalog(){
@@ -693,23 +779,22 @@ function renderCatalog(){
 
   list.innerHTML = filtered.map(p=>{
     const priceDisp = currency==='TRY' ? (p.priceExcl*getKur()) : p.priceExcl;
-    const inCart = cart.some(c=>c.code===p.code);
+    const inCartN = cart.filter(c=>c.code===p.code).length;
     return `
-    <div class="cat-row">
+    <div class="cat-row${inCartN>0?' in-cart':''}">
       <div class="info">
         <div class="name">${escapeHtml(p.name)}</div>
-        <div class="meta">${escapeHtml(p.code||'')} · ${escapeHtml(p.unit||'')} · Koli: ${p.cartonQty||1} adet
-          <span class="group-pill">${GROUP_LABELS[p.group]||p.group||''}</span>
+        <div class="meta">${escapeHtml(p.code||'')} · ${escapeHtml(p.unit||'')} · Koli: ${escapeHtml(p.cartonQty||1)} adet
+          <span class="group-pill">${escapeHtml(GROUP_LABELS[p.group]||p.group||'')}</span>
         </div>
       </div>
       <div class="price">${money(priceDisp, currency)}<small>/adet KDV hariç</small></div>
-      <button class="add-btn" data-code="${escapeAttr(p.code)}" ${inCart?'disabled':''}>${inCart?'✓':'+'}</button>
+      <button class="add-btn" data-code="${escapeAttr(p.code)}" title="${inCartN>0 ? 'Listede '+inCartN+' satır var — yeni satır eklemek için tıklayın' : 'Listeye ekle'}">${inCartN>0 ? (inCartN>1 ? '✓'+inCartN : '✓') : '+'}</button>
     </div>`;
   }).join('');
 
   list.querySelectorAll('.add-btn').forEach(btn=>{
     btn.addEventListener('click', ()=>{
-      if(btn.disabled) return;
       addToCart(btn.getAttribute('data-code'));
     });
   });
@@ -724,8 +809,8 @@ function escapeAttr(s){ return escapeHtml(s); }
 function addToCart(code){
   const p = catalog.find(x=>x.code===code);
   if(!p) return;
-  if(cart.some(c=>c.code===code)) return;
   cart.push({
+    lid: genId(),
     code:p.code, name:p.name, unit:p.unit, cartonQty:p.cartonQty||1,
     priceExcl:p.priceExcl, priceIncl:p.priceIncl,
     qtyType: 'adet',
@@ -734,8 +819,8 @@ function addToCart(code){
   });
   renderAll();
 }
-function removeFromCart(code){
-  cart = cart.filter(c=>c.code!==code);
+function removeFromCart(lid){
+  cart = cart.filter(c=>c.lid!==lid);
   renderAll();
 }
 
@@ -774,11 +859,11 @@ function renderCart(){
     const pct = lineDiscountPct(item);
     const net = lineTotalEUR(item)*kur;
     return `
-    <div class="cart-item" data-code="${escapeAttr(item.code)}">
+    <div class="cart-item" data-lid="${escapeAttr(item.lid)}">
       <div class="top">
         <div>
           <div class="name">${escapeHtml(item.name)}</div>
-          <div class="code">${escapeHtml(item.code||'')} · Koli: ${item.cartonQty} adet</div>
+          <div class="code">${escapeHtml(item.code||'')} · Koli: ${escapeHtml(item.cartonQty)} adet</div>
         </div>
         <button class="remove" data-act="remove">Kaldır ✕</button>
       </div>
@@ -787,37 +872,37 @@ function renderCart(){
           <option value="adet" ${item.qtyType==='adet'?'selected':''}>Adet</option>
           <option value="koli" ${item.qtyType==='koli'?'selected':''}>Koli</option>
         </select>
-        <input type="number" min="1" step="1" value="${item.qty}" data-act="qty" title="Miktar">
+        <input type="number" min="1" step="1" value="${escapeAttr(item.qty)}" data-act="qty" title="Miktar">
         <input type="number" min="0" max="100" step="0.5" value="${escapeAttr(item.discount)}" data-act="discount" placeholder="İnd %" title="Ürün indirimi %" style="width:64px;">
-        <div class="unit-price">${money(unitPrice,currency)}/${item.qtyType}</div>
+        <div class="unit-price">${money(unitPrice,currency)}/${escapeHtml(item.qtyType)}</div>
         <div class="line-total">${pct>0?`<span style="text-decoration:line-through; font-weight:500; color:var(--ink-soft); font-size:11px; margin-right:5px;">${money(gross,currency)}</span>`:''}${money(net,currency)}</div>
       </div>
     </div>`;
   }).join('');
 
   wrap.querySelectorAll('.cart-item').forEach(row=>{
-    const code = row.getAttribute('data-code');
-    row.querySelector('[data-act="remove"]').addEventListener('click', ()=>removeFromCart(code));
+    const lid = row.getAttribute('data-lid');
+    row.querySelector('[data-act="remove"]').addEventListener('click', ()=>removeFromCart(lid));
     row.querySelector('[data-act="qtytype"]').addEventListener('change', (e)=>{
-      const it = cart.find(c=>c.code===code); it.qtyType = e.target.value; renderCart(); renderTotals();
+      const it = cart.find(c=>c.lid===lid); it.qtyType = e.target.value; renderCart(); renderTotals();
     });
     row.querySelector('[data-act="qty"]').addEventListener('input', (e)=>{
-      const it = cart.find(c=>c.code===code);
+      const it = cart.find(c=>c.lid===lid);
       let v = parseInt(e.target.value,10); if(!isFinite(v)||v<1) v=1;
-      it.qty = v; updateRowDisplay(code); renderTotals();
+      it.qty = v; updateRowDisplay(lid); renderTotals();
     });
     row.querySelector('[data-act="discount"]').addEventListener('input', (e)=>{
-      const it = cart.find(c=>c.code===code);
+      const it = cart.find(c=>c.lid===lid);
       it.discount = e.target.value;
-      updateRowDisplay(code); renderTotals();
+      updateRowDisplay(lid); renderTotals();
     });
   });
 }
 
-function updateRowDisplay(code){
-  const item = cart.find(c=>c.code===code);
+function updateRowDisplay(lid){
+  const item = cart.find(c=>c.lid===lid);
   if(!item) return;
-  const row = document.querySelector('#cartList .cart-item[data-code="'+CSS.escape(code)+'"]');
+  const row = document.querySelector('#cartList .cart-item[data-lid="'+CSS.escape(lid)+'"]');
   if(!row) return;
   const kur = currency==='TRY' ? getKur() : 1;
   const unitPrice = lineUnitPriceEUR(item)*kur;
@@ -1122,7 +1207,7 @@ function applyState(state){
   $('indirimYuzde').value = state.indirimYuzde || '';
   $('indirimTutar').value = state.indirimTutar || '';
   $('dosyaAdi').value = state.dosyaAdi || 'probiyom_teklif';
-  cart = Array.isArray(state.cart) ? state.cart.map(it=>({...it})) : [];
+  cart = Array.isArray(state.cart) ? state.cart.map(it=>({...it, lid: it.lid || genId()})) : [];
   currency = state.currency === 'TRY' ? 'TRY' : 'EUR';
   $('btnEUR').classList.toggle('active', currency==='EUR');
   $('btnTRY').classList.toggle('active', currency==='TRY');
@@ -1186,7 +1271,7 @@ async function saveCurrentTeklif(){
       showDbMsg('Teklif kaydedildi: '+(state.teklifNo||currentRecordId), true);
       await refreshSavedList();
     } else {
-      showDbMsg('Teklif kaydedilemedi.', false);
+      showDbMsg('Teklif kaydedilemedi. '+lastDbError, false);
     }
   } finally {
     btn.disabled = false;
@@ -1195,7 +1280,7 @@ async function saveCurrentTeklif(){
 
 async function loadTeklif(id){
   const state = await dbGetRecord(id);
-  if(!state){ showDbMsg('Teklif bulunamadı.', false); return; }
+  if(!state){ showDbMsg('Teklif bulunamadı. '+lastDbError, false); return; }
   applyState(state);
   showDbMsg('Teklif yüklendi: '+(state.teklifNo||id), true);
   window.scrollTo({top:0, behavior:'smooth'});
@@ -1226,7 +1311,7 @@ async function saveAsNewTeklif(id, btnEl){
       await refreshSavedList();
       window.scrollTo({top:0, behavior:'smooth'});
     } else {
-      showDbMsg('Farklı kaydedilemedi.', false);
+      showDbMsg('Farklı kaydedilemedi. '+lastDbError, false);
     }
   } finally {
     if(btnEl) btnEl.disabled = false;
@@ -1264,8 +1349,65 @@ async function deleteTeklif(id){
     await refreshSavedList();
     showDbMsg('Teklif silindi.', true);
   } else {
-    showDbMsg('Teklif silinemedi.', false);
+    showDbMsg('Teklif silinemedi. '+lastDbError, false);
   }
+}
+
+function updateStorageLabel(){
+  const el = $('storageLabel'); if(!el) return;
+  const cfg = getServerCfg();
+  if(cfg.url){
+    let host = cfg.url; try{ host = new URL(cfg.url).host; }catch(e){}
+    el.textContent = '☁ Depolama: ortak sunucu (' + host + ')';
+  } else if(dbNamespace){
+    el.textContent = 'Depolama: Claude veritabanı (yalnızca bu yayınlanan link)';
+  } else {
+    el.textContent = 'Depolama: yalnızca bu tarayıcı';
+  }
+}
+function showServerMsg(msg, ok){
+  const el = $('serverMsg'); if(!el) return;
+  el.textContent = msg; el.className = 'export-msg ' + (ok?'ok':'err');
+}
+async function saveServerSettings(){
+  const url = $('serverUrl').value.trim();
+  if(!url){ showServerMsg('Önce sunucu adresini (api.php linkini) yazın.', false); return; }
+  try { const u = new URL(url); if(u.protocol !== 'https:' || u.username || u.password || u.hash) throw 0; } catch(e) { showServerMsg('Geçerli bir HTTPS adresi girin.', false); return; }
+  setServerCfg(url, $('serverKey').value);
+  showServerMsg('Bağlanılıyor…', true);
+  try{
+    const j = await serverCall('ping');
+    showServerMsg('Bağlandı ✓ — sunucuda '+(j.count!=null?j.count:0)+' teklif var.', true);
+  }catch(e){ showServerMsg(e.message, false); }
+  await refreshSavedList();
+}
+async function testServer(){
+  const url = $('serverUrl').value.trim();
+  if(!url){ showServerMsg('Önce sunucu adresini yazın.', false); return; }
+  const prev = getServerCfg();
+  setServerCfg(url, $('serverKey').value);
+  try{
+    const j = await serverCall('ping');
+    showServerMsg('Bağlantı başarılı ✓ — sunucuda '+(j.count!=null?j.count:0)+' teklif var.', true);
+  }catch(e){ showServerMsg(e.message, false); }
+  if(prev.url) setServerCfg(prev.url, prev.key); else clearServerCfg();
+}
+function removeServerSettings(){
+  clearServerCfg();
+  $('serverUrl').value = ''; $('serverKey').value = '';
+  showServerMsg('Sunucu bağlantısı kaldırıldı; yerel kayıtlar kullanılıyor.', true);
+  refreshSavedList();
+}
+async function migrateToServer(){
+  if(!serverMode()){ showServerMsg('Önce sunucuya bağlanın (Kaydet ve Bağlan).', false); return; }
+  const local = await dbListRecords('local');
+  if(local.length===0){ showServerMsg('Aktarılacak yerel kayıt bulunamadı.', false); return; }
+  let ok = 0, fail = 0;
+  for(const r of local){
+    try{ await serverCall('save', {body:{id:r.id, data:r.data, createOnly:true}}); ok++; }catch(e){ fail++; lastDbError = e.message; }
+  }
+  showServerMsg(ok+' teklif sunucuya aktarıldı'+(fail?(', '+fail+' hata: '+lastDbError):'.'), fail===0);
+  await refreshSavedList();
 }
 
 async function refreshSavedList(){
@@ -1273,6 +1415,8 @@ async function refreshSavedList(){
   const emptyEl = $('savedEmpty');
   if(!listEl) return;
   const records = await dbListRecords();
+  if(lastDbError) showDbMsg(lastDbError, false);
+  updateStorageLabel();
 
   listEl.querySelectorAll('.cat-row').forEach(n=>n.remove());
   $('savedCount').textContent = records.length;
@@ -1296,13 +1440,13 @@ async function refreshSavedList(){
       '<div style="display:flex; gap:6px; flex-shrink:0;">'+
         '<button class="add-btn" data-act="load" title="Yükle">↺</button>'+
         '<button class="add-btn" data-act="saveas" title="Farklı Kaydet (yeni teklif no ile ayrı bir kayıt oluşturur)" style="background:var(--line-soft); color:var(--ink);">⎘</button>'+
-        '<button class="add-btn" data-act="delete" title="Sil" style="background:#c0492f;">✕</button>'+
+        (serverMode() ? '' : '<button class="add-btn" data-act="delete" title="Sil" style="background:#c0492f;">✕</button>')+
       '</div>';
     row.querySelector('[data-act="load"]').addEventListener('click', ()=>loadTeklif(id));
     const saveAsBtn = row.querySelector('[data-act="saveas"]');
     saveAsBtn.addEventListener('click', ()=>saveAsNewTeklif(id, saveAsBtn));
     const delBtn = row.querySelector('[data-act="delete"]');
-    delBtn.addEventListener('click', ()=>requestDeleteConfirm(id, delBtn));
+    if(delBtn) delBtn.addEventListener('click', ()=>requestDeleteConfirm(id, delBtn));
     listEl.appendChild(row);
   });
 }
@@ -1727,6 +1871,13 @@ function init(){
   $('btnEUR').addEventListener('click', ()=>setCurrency('EUR'));
   $('btnTRY').addEventListener('click', ()=>setCurrency('TRY'));
   $('btnSaveHtml').addEventListener('click', saveHtmlWithCatalog);
+  const scfg = getServerCfg();
+  $('serverUrl').value = scfg.url; $('serverKey').value = scfg.key;
+  if(!scfg.url) $('serverBox').open = true;
+  $('btnServerSave').addEventListener('click', saveServerSettings);
+  $('btnServerTest').addEventListener('click', testServer);
+  $('btnServerMigrate').addEventListener('click', migrateToServer);
+  $('btnServerRemove').addEventListener('click', removeServerSettings);
   $('fileInput').addEventListener('change', (e)=>{
     if(e.target.files && e.target.files[0]) handleFile(e.target.files[0]);
   });
@@ -1759,7 +1910,7 @@ try{
 }catch(e){
   // Surface init failures instead of leaving a silently blank catalog.
   const list = document.getElementById('catalogList');
-  if(list) list.innerHTML = '<div class="cart-empty">Uygulama yüklenirken bir hata oluştu: '+String(e && e.message || e)+'</div>';
+  if(list) list.innerHTML = '<div class="cart-empty">Uygulama yüklenirken bir hata oluştu: '+escapeHtml(String(e && e.message || e))+'</div>';
 }
 })();
 </script>
