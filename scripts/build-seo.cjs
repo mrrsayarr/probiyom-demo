@@ -247,7 +247,14 @@ async function build() {
   const sitemap = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
     routes.map(route => '  <url><loc>' + origin + route + '</loc></url>').join('\n') + '\n</urlset>\n';
   await fs.writeFile(path.join(root, 'sitemap.xml'), sitemap);
-  for (const name of ['data', 'images', 'pages', 'st', 'styles']) await fs.cp(path.join(root, name), path.join(dist, name), { recursive: true, force: true });
+  for (const name of ['data', 'images', 'pages', 'st', 'styles']) {
+    await fs.cp(path.join(root, name), path.join(dist, name), {
+      recursive: true,
+      force: true,
+      // The Worker serves static files and would expose the PHP source.
+      filter: source => forPlesk || path.extname(source).toLowerCase() !== '.php',
+    });
+  }
   // Keep the original source SVG; only the published copy is optimized.
   const logo = optimizeSvg(await fs.readFile(path.join(root, 'images/logo.svg'), 'utf8'), { multipass: true });
   assert.ok(logo.data.includes('viewBox='), 'Preserve the logo coordinate system');
